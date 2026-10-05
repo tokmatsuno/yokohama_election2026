@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="2026年横浜市長選挙（10月18日投開票）の非公式投票ナビ。争点診断、演説カレンダー、郵便番号で投票所検索、選挙割マップ。">
+<title>わたし挑戦！横浜市長選｜2026年10月18日投開票</title>
+<style>[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@700;900&display=swap">
+<style>
+/* Layout: harbor-signage app — a countdown masthead, then five tool tabs, each a working panel with its map/list side by side on desktop, stacked on phones */
+:root{
+  --bg:#EEF3F6; --surface:#FFFFFF; --sunk:#E3EBF0; --ink:#0F1F2C; --muted:#566878; --line:#CBD7E0;
+  --sea:#0A5A8A; --sea-ink:#FFFFFF; --sea-soft:#D6E8F3; --mark:#F2B705; --mark-ink:#2A2000;
+  --good:#1F8A4C; --warn:#B26A00; --off:#8696A3;
+  --land:#DCE5EB; --land-hi:#BFD9EA; --water:#E7EEF3;
+  --c1:#C8384F; --c2:#D98A1B; --c3:#00808F; --c4:#3A5FA0; --c5:#7B55A8; --c6:#2E8B57; --c7:#9A5B2E;
+  --f-display:"Zen Maru Gothic","Hiragino Sans","Noto Sans JP",sans-serif;
+  --f-body:"Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif;
+  --r:10px; --pin-ink:#FFFFFF;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1620; --surface:#12202C; --sunk:#0E1B26; --ink:#E4EDF3; --muted:#93A6B5; --line:#24384A;
+  --sea:#5DB3E8; --sea-ink:#04131E; --sea-soft:#163447; --mark:#FFC83A; --mark-ink:#1E1600;
+  --good:#4CC27F; --warn:#E5A23A; --off:#6C7E8C;
+  --land:#1A2C3A; --land-hi:#1F4A66; --water:#0E1B26;
+  --c1:#F06B80; --c2:#F2AE4B; --c3:#3EC3CF; --c4:#7EA2E6; --c5:#B590E0; --c6:#5CC48A; --c7:#D49460; --pin-ink:#0B1620;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1620; --surface:#12202C; --sunk:#0E1B26; --ink:#E4EDF3; --muted:#93A6B5; --line:#24384A;
+  --sea:#5DB3E8; --sea-ink:#04131E; --sea-soft:#163447; --mark:#FFC83A; --mark-ink:#1E1600;
+  --good:#4CC27F; --warn:#E5A23A; --off:#6C7E8C;
+  --land:#1A2C3A; --land-hi:#1F4A66; --water:#0E1B26;
+  --c1:#F06B80; --c2:#F2AE4B; --c3:#3EC3CF; --c4:#7EA2E6; --c5:#B590E0; --c6:#5CC48A; --c7:#D49460; --pin-ink:#0B1620;
+  color-scheme:dark}
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:var(--f-body);font-size:15px;line-height:1.7;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:16px;padding-block:0 64px}
+a{color:var(--sea)}
+h1,h2,h3{text-wrap:balance;line-height:1.3;margin:0}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--mark);outline-offset:2px}
+.tnum{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.label{font-size:12px;letter-spacing:.08em;color:var(--muted);font-weight:700}
+
+/* masthead */
+.mast{padding-block:28px 20px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end}
+.mast .kicker{font-size:13px;font-weight:700;color:var(--sea);letter-spacing:.06em}
+.mast h1{font-family:var(--f-display);font-weight:900;font-size:clamp(30px,6vw,52px);letter-spacing:.02em;margin-top:4px}
+.mast h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--mark) 62%,var(--mark) 92%,transparent 92%);padding-inline:2px}
+.mast p{margin:6px 0 0;color:var(--muted);max-width:56ch}
+.count{background:var(--sea);color:var(--sea-ink);border-radius:var(--r);padding:14px 18px;min-width:220px}
+.count .big{font-family:var(--f-display);font-weight:900;font-size:48px;line-height:1}
+.count .big small{font-family:var(--f-body);font-size:16px;font-weight:700;margin-left:4px}
+.count .sub{font-size:13px;opacity:.9}
+.count .live{display:inline-block;margin-top:8px;background:var(--mark);color:var(--mark-ink);font-weight:700;font-size:12px;padding:2px 8px;border-radius:99px}
+@media (max-width:640px){.mast{grid-template-columns:1fr}.count{min-width:0}}
+
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:20px}
+.facts div{background:var(--surface);padding:12px 14px}
+.facts b{display:block;font-family:var(--f-display);font-weight:700;font-size:24px;line-height:1.2}
+.facts span{font-size:12.5px;color:var(--muted)}
+@media (max-width:640px){.facts{grid-template-columns:1fr}.facts div{display:flex;gap:12px;align-items:baseline}.facts b{font-size:20px;min-width:5.5em}}
+
+/* tabs */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);padding-block:8px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line);margin-bottom:20px}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:8px 14px;cursor:pointer;font-weight:700;font-size:14px;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+nav.tabs button .n{font-family:var(--f-display);font-weight:700;margin-right:6px;color:var(--sea)}
+nav.tabs button[aria-selected="true"] .n{color:var(--mark)}
+section.panel{display:grid;gap:18px}
+.ph{display:grid;gap:4px}
+.ph h2{font-family:var(--f-display);font-weight:700;font-size:26px}
+.ph p{margin:0;color:var(--muted);max-width:64ch}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:820px){.split{grid-template-columns:1fr}}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--sea);background:var(--sea);color:var(--sea-ink);border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--sea)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.note{font-size:12.5px;color:var(--muted);border-left:3px solid var(--line);padding-left:10px}
+.chip{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:1px 9px;border:1px solid var(--line);background:var(--sunk);white-space:nowrap}
+.chip.ok{background:var(--good);border-color:var(--good);color:var(--surface)}
+.chip.wait{color:var(--warn);border-color:var(--warn);background:transparent}
+.chip.off{color:var(--off);background:transparent}
+.chip.mark{background:var(--mark);border-color:var(--mark);color:var(--mark-ink)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;flex:none}
+
+/* quiz */
+.qwrap{display:grid;gap:14px}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.progress{height:6px;background:var(--sunk);border-radius:99px;overflow:hidden;flex:1}
+.progress i{display:block;height:100%;background:var(--sea);transition:width .3s}
+.qcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.qcard .qn{font-family:var(--f-display);font-size:14px;color:var(--sea)}
+.qcard h3{font-size:20px;margin:6px 0 4px}
+.qcard .bg{font-size:13px;color:var(--muted);margin:0 0 14px}
+.scale{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.scale button{border:1px solid var(--line);background:var(--sunk);border-radius:8px;padding:10px 4px;cursor:pointer;font-size:13px;font-weight:700;line-height:1.3}
+.scale button[aria-pressed="true"]{background:var(--sea);border-color:var(--sea);color:var(--sea-ink)}
+@media (max-width:520px){.scale{grid-template-columns:1fr}.scale button{text-align:left;padding:10px 12px}}
+.qfoot{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.imp{display:flex;gap:8px;align-items:center;font-size:13px;cursor:pointer}
+.imp input{width:18px;height:18px;accent-color:var(--sea)}
+.results{display:grid;gap:10px}
+.res{display:grid;grid-template-columns:7.5em minmax(0,1fr) 3.6em;gap:10px;align-items:center}
+.res .nm{font-weight:700;line-height:1.25}
+.res .nm small{display:block;font-weight:400;color:var(--muted);font-size:11.5px}
+.bar{height:22px;background:var(--sunk);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:6px;transition:width .6s}
+.res .pc{font-family:var(--f-display);font-size:20px;text-align:right}
+.top{border:2px solid var(--mark);border-radius:var(--r);padding:16px;background:var(--surface)}
+.top .label{color:var(--ink)}
+.top h3{font-family:var(--f-display);font-weight:700;font-size:28px;margin:4px 0}
+details{border-top:1px solid var(--line);padding-top:8px}
+details summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto}
+.tbl table{border-collapse:collapse;width:100%;min-width:640px;font-size:13px}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.tbl th{font-size:12px;color:var(--muted)}
+
+/* map */
+.map{background:var(--water);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;position:relative}
+.map svg{display:block;width:100%;height:auto;max-height:560px}
+.map .ward{fill:var(--land);stroke:var(--surface);stroke-width:2.5;transition:fill .2s}
+.map .ward.hi{fill:var(--land-hi)}
+.map .wl{font-size:26px;fill:var(--muted);font-family:var(--f-body);font-weight:700;pointer-events:none;text-anchor:middle}
+.map .pin{stroke:var(--surface);stroke-width:3;cursor:pointer}
+.map .pin.ring{fill:transparent!important;stroke-width:4}
+.map .pin:hover,.map .pin.sel{stroke:var(--ink)}
+.mapcap{font-size:13px;padding:8px 12px;border-top:1px solid var(--line);background:var(--surface);min-height:2.6em}
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12.5px}
+.legend label{display:flex;gap:5px;align-items:center;cursor:pointer}
+
+/* calendar */
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal .dh{font-size:12px;text-align:center;color:var(--muted);font-weight:700}
+.cal button.day{min-height:68px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:5px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:3px}
+.cal button.day.past{opacity:.55}
+.cal button.day.today{border:2px solid var(--sea)}
+.cal button.day.sel{background:var(--sea-soft)}
+.cal button.day.ev{background:var(--mark);border-color:var(--mark);color:var(--mark-ink)}
+.cal .dn{font-family:var(--f-display);font-size:16px;line-height:1}
+.cal .tg{font-size:10.5px;font-weight:700;line-height:1.2}
+.cal .dots{display:flex;flex-wrap:wrap;gap:2px;margin-top:auto}
+.cal .dots .dot{width:8px;height:8px}
+.cal .blank{min-height:68px}
+.evlist{display:grid;gap:8px}
+.ev{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:start;border-bottom:1px solid var(--line);padding-bottom:8px}
+.ev .t{font-family:var(--f-display);font-size:15px;min-width:3.2em}
+.ev .x{border:0;background:none;color:var(--muted);cursor:pointer;font-size:12px;text-decoration:underline}
+form.add{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+form.add label{display:grid;gap:2px;font-size:12px;color:var(--muted);font-weight:700}
+form.add input,form.add select{border:1px solid var(--line);background:var(--sunk);border-radius:6px;padding:7px 8px;font-size:14px;min-width:0;width:100%}
+form.add .full{grid-column:1/-1}
+.cands{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.cand{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;display:grid;gap:4px;font-size:13px}
+.cand h3{font-size:16px;display:flex;gap:8px;align-items:center}
+.cand .lk{display:flex;flex-wrap:wrap;gap:4px 10px}
+
+/* lookup */
+.zip{display:flex;gap:8px;flex-wrap:wrap}
+.zip input{font-family:var(--f-display);font-size:24px;letter-spacing:.08em;width:9.5em;max-width:100%;border:2px solid var(--line);border-radius:8px;padding:6px 12px;background:var(--surface)}
+.zip input:focus{border-color:var(--sea)}
+.wardsel{border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--surface)}
+.place{display:grid;gap:4px;padding:12px 0;border-bottom:1px solid var(--line)}
+.place:last-child{border-bottom:0}
+.place h3{font-size:16px}
+.place .meta{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px;color:var(--muted)}
+.big-ward{font-family:var(--f-display);font-size:34px;line-height:1.1}
+
+/* plan */
+.plancard{background:var(--sea);color:var(--sea-ink);border-radius:var(--r);padding:20px;display:grid;gap:6px}
+.plancard .label{color:inherit;opacity:.85}
+.plancard .when{font-family:var(--f-display);font-size:30px;line-height:1.2}
+.plancard .where{font-size:18px;font-weight:700}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opts button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:13px;font-weight:700}
+.opts button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.check{display:grid;gap:8px}
+.check label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.check input{width:18px;height:18px;margin-top:3px;accent-color:var(--sea);flex:none}
+.feedbar{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.live-dot{width:9px;height:9px;border-radius:50%;background:var(--good);box-shadow:0 0 0 0 var(--good);animation:pulse 2s infinite}
+.live-dot.off{background:var(--off);animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent)}100%{box-shadow:0 0 0 8px transparent}}
+.ev.done{opacity:.6}
+.ev .t small{display:block;font-size:11px;color:var(--muted);font-family:var(--f-body)}
+.ev button.go{border:1px solid var(--sea);background:transparent;color:var(--sea);border-radius:99px;padding:3px 10px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.ev button.go.on{background:var(--mark);border-color:var(--mark);color:var(--mark-ink)}
+.up-d{margin-bottom:-6px}
+@media (prefers-reduced-motion:reduce){.live-dot{animation:none}}
+.food-h{font-family:var(--f-display);font-weight:700;font-size:20px}
+.radar{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.radar svg{display:block;width:100%;height:auto;max-height:440px}
+.rd-bg{fill:var(--water)}.rd-ring{fill:none;stroke:var(--line);stroke-width:3;stroke-dasharray:10 8}
+.rd-ax{stroke:var(--line);stroke-width:2}.rd-l{font-size:30px;fill:var(--muted);font-family:var(--f-body)}.rd-n{font-size:28px;fill:var(--muted);font-weight:700;font-family:var(--f-body)}
+.rd-pin{cursor:pointer}.rd-pin circle{stroke:var(--surface);stroke-width:5}.rd-pin.on circle{stroke:var(--ink)}
+.rd-num{font-size:34px;font-weight:700;fill:var(--pin-ink);text-anchor:middle;font-family:var(--f-body);pointer-events:none}
+.rd-c rect{fill:var(--ink)}.rd-c text{fill:var(--bg);font-size:32px;font-weight:700;text-anchor:middle;font-family:var(--f-display)}
+.rd-empty{padding:40px 16px;text-align:center}
+.foodlist{display:grid;gap:4px;align-content:start}
+.fd{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;text-align:left;border:1px solid transparent;background:transparent;border-radius:8px;padding:6px 8px;cursor:pointer;width:100%}
+.fd:hover{background:var(--sunk)}.fd.on{border-color:var(--sea);background:var(--sea-soft)}
+.fd .fn{width:24px;height:24px;border-radius:50%;color:var(--pin-ink);font-weight:700;font-size:13px;display:grid;place-items:center}
+.fd .fb{display:grid;line-height:1.35;min-width:0}.fd .fb b{overflow-wrap:anywhere}
+.fd-m{text-align:right;line-height:1.3}
+.linkbtn{border:0;background:none;color:var(--sea);font:inherit;font-size:13px;font-weight:700;cursor:pointer;padding:0}
+.routeline{fill:none;stroke:var(--ink);stroke-width:5;stroke-dasharray:14 10;stroke-linecap:round}
+.rtno rect{fill:var(--ink)}.rtno text{fill:var(--bg);font-size:20px;font-weight:700;text-anchor:middle;font-family:var(--f-body)}
+.timeline{display:grid;gap:0}
+.stop{display:grid;grid-template-columns:3.4em 14px minmax(0,1fr);gap:10px;align-items:start;padding:6px 0}
+.st-t{font-family:var(--f-display);font-weight:700;font-size:16px}
+.st-dot{width:14px;height:14px;border-radius:50%;margin-top:5px;box-shadow:0 0 0 3px var(--surface),0 0 0 4px var(--line)}
+.stop.vote b{background:linear-gradient(transparent 60%,var(--mark) 60%)}
+.leg{display:grid;grid-template-columns:3.4em 14px minmax(0,1fr);gap:10px;padding:2px 0}
+.leg .leg-line{grid-column:2;justify-self:center;width:2px;background:repeating-linear-gradient(var(--muted) 0 4px,transparent 4px 8px);min-height:44px}
+.leg>div{grid-column:3}
+.warnt{color:var(--warn);font-weight:700}
+form.routeform{grid-template-columns:minmax(0,1fr) auto}
+@media (max-width:560px){form.routeform{grid-template-columns:1fr}}
+.askai{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;background:var(--sea-soft);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin-bottom:20px}
+.askai h2{font-family:var(--f-display);font-weight:700;font-size:22px;margin:2px 0 4px}
+.askai p{margin:0 0 10px;max-width:52ch}
+.qchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.qchip{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer;text-align:left;line-height:1.4}
+.qchip:hover{border-color:var(--sea)}
+@media (max-width:720px){.askai{grid-template-columns:1fr}}
+.byline{display:grid;gap:4px;padding-bottom:12px;margin-bottom:6px;border-bottom:1px solid var(--line);color:var(--ink);font-size:14px}
+.byline p{margin:0}
+.bl-cta{font-family:var(--f-display);font-weight:700;font-size:18px}
+footer{margin-top:40px;font-size:12.5px;color:var(--muted);display:grid;gap:6px;border-top:1px solid var(--line);padding-top:16px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:99px;font-size:14px;font-weight:700;z-index:50}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div>
+      <div class="kicker">2026 横浜市長選挙 ｜ 10月18日（日）投開票</div>
+      <h1>わたし挑戦！<em>横浜市長選</em></h1>
+      <p>考えの近い候補を知って、演説を聞きに行って、自分の投票所を確かめる。投票日までに必要なことを、ここで全部。</p>
+    </div>
+    <div class="count" id="count" aria-live="polite"></div>
+  </header>
+
+  <div class="facts">
+    <div><b class="tnum">41.6%</b><span>前回（2025年8月）の投票率。半分以上の人が投票していません</span></div>
+    <div><b class="tnum">約314万人</b><span>横浜市の有権者数。あなたもその一人です</span></div>
+    <div><b class="tnum">489円</b><span>有権者1人あたりの選挙費用（総額約15.4億円）。使わないともったいない</span></div>
+  </div>
+
+
+  <section class="askai" aria-labelledby="askaiH">
+    <div class="askai-main">
+      <div class="label">候補者の主張を、AIに聞いてみる</div>
+      <h2 id="askaiH">横浜市長選 各候補の主張まとめ</h2>
+      <p class="small">ネット討論会や第一声の動画、選挙管理委員会の情報を読み込ませたノートブックです。気になることを話し言葉で質問すると、出典つきで答えてくれます。</p>
+      <div class="row"><a class="btn" href="https://notebook.google.com/notebook/4c97a2ca-9a88-40bd-ab62-50b3ad83bb3b" target="_blank" rel="noopener">ノートブックを開く ↗</a><span class="small muted">Googleアカウントでログインして使います</span></div>
+    </div>
+    <div class="askai-q">
+      <div class="label">たとえば、こう聞いてみる（押すとコピー）</div>
+      <div class="qchips" id="aiChips"></div>
+    </div>
+  </section>
+  <nav class="tabs" role="tablist" aria-label="機能">
+    <button role="tab" data-tab="quiz"><span class="n">1</span>考えの近い候補</button>
+    <button role="tab" data-tab="rally"><span class="n">2</span>演説を聞きに行く</button>
+    <button role="tab" data-tab="place"><span class="n">3</span>投票所を調べる</button>
+    <button role="tab" data-tab="wari"><span class="n">4</span>選挙割マップ</button>
+    <button role="tab" data-tab="plan"><span class="n">5</span>投票プラン</button>
+  </nav>
+
+  <!-- 1 QUIZ -->
+  <section class="panel" id="quiz" role="tabpanel">
+    <div class="ph"><h2>9つの争点で、考えの近い候補をさがす</h2>
+      <p>各候補の公式サイト・政策資料・報道から読み取った立場と、あなたの答えを比べます。答えにくい問いは「わからない」で飛ばせます。</p></div>
+    <div id="quizBody"></div>
+  </section>
+
+  <!-- 2 RALLY -->
+  <section class="panel" id="rally" role="tabpanel" hidden>
+    <div class="ph"><h2>候補者の声を、直接聞きに行く</h2>
+      <p>各陣営の発表や有志の街宣マップから演説予定を自動で集めています。気になる演説は「聞きに行く」を押すと、カレンダーに印がつきます。</p></div>
+    <div class="feedbar small" id="feedStatus"></div>
+    <div class="card" id="upnext" style="display:grid;gap:8px"></div>
+    <div class="card" id="routeBox" style="display:grid;gap:12px"></div>
+    <div class="split">
+      <div class="card" style="display:grid;gap:12px">
+        <div class="row" style="justify-content:space-between"><b>2026年10月</b>
+          <span class="legend small"><span><span class="chip mark">黄</span> 聞きに行く日</span><span><span class="chip">期</span> 期日前投票</span></span></div>
+        <div class="cal" id="cal"></div>
+        <div id="dayInfo"></div>
+      </div>
+      <div style="display:grid;gap:12px">
+        <div class="map" id="rallyMap"></div>
+        <div class="legend" id="rallyLegend"></div>
+      </div>
+    </div>
+    <div class="card" style="display:grid;gap:10px">
+      <b>載っていない演説を自分で登録する</b>
+      <form class="add" id="addForm">
+        <label>候補者<select id="fCand" required></select></label>
+        <label>日付<select id="fDate" required></select></label>
+        <label>時刻<input id="fTime" type="time" value="17:30" required></label>
+        <label>区<select id="fWard" required></select></label>
+        <label class="full">場所<input id="fPlace" type="text" placeholder="例：横浜駅西口 高島屋前" required maxlength="60"></label>
+        <label class="full">情報元（任意）<input id="fSrc" type="url" placeholder="https://x.com/..." maxlength="200"></label>
+        <div class="full row"><button class="btn" type="submit">聞きに行く予定に追加</button><span class="small muted">地図には区の中心付近に表示します</span></div>
+      </form>
+    </div>
+    <div>
+      <div class="row" style="justify-content:space-between;margin-bottom:8px"><b>各候補の発信先</b><a class="small" href="https://yokohama-rally-map.base44.app/" target="_blank" rel="noopener">有志の街宣マップ ↗</a></div>
+      <div class="cands" id="candLinks"></div>
+    </div>
+  </section>
+
+  <!-- 3 PLACE -->
+  <section class="panel" id="place" role="tabpanel" hidden>
+    <div class="ph"><h2>郵便番号で、あなたの投票所を調べる</h2>
+      <p>期日前投票は<strong>住んでいる区の</strong>期日前投票所でしかできません。入場整理券（はがき）がなくても投票できます。</p></div>
+    <div class="split">
+      <div style="display:grid;gap:14px">
+        <div class="card" style="display:grid;gap:10px">
+          <label class="label" for="zipIn">郵便番号（7桁）</label>
+          <div class="zip"><input id="zipIn" inputmode="numeric" autocomplete="postal-code" placeholder="231-0017" maxlength="8"><button class="btn" id="zipBtn" type="button">調べる</button></div>
+          <div class="row small muted"><span>または区を選ぶ</span><select class="wardsel" id="wardSel" aria-label="区を選ぶ"></select></div>
+          <div id="zipMsg" class="small"></div>
+        </div>
+        <div class="card" id="placeOut"></div>
+      </div>
+      <div style="display:grid;gap:10px">
+        <div class="map" id="placeMap"></div>
+        <p class="note">位置はおおよそです。行く前に「地図で開く」で確認してください。</p>
+      </div>
+    </div>
+    <div class="card" id="foodBox"></div>
+  </section>
+
+  <!-- 4 WARI -->
+  <section class="panel" id="wari" role="tabpanel" hidden>
+    <div class="ph"><h2>投票したら、ちょっとお得に</h2>
+      <p>「選挙割（センキョ割）」は、投票済証明書や投票所の看板写真を見せると特典がもらえる民間の取り組みです。証明書は投票所の係員に頼むともらえます（発行の有無は投票所で確認を）。</p></div>
+    <div class="split">
+      <div class="card" id="wariList"></div>
+      <div style="display:grid;gap:10px">
+        <div class="map" id="wariMap"></div>
+        <div class="legend small"><span class="row" style="gap:6px"><svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="var(--c3)"/></svg>店舗の場所</span><span class="row" style="gap:6px"><svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="none" stroke="var(--c3)" stroke-width="2"/></svg>区内（場所はおおよそ）</span></div>
+        <p class="note">選挙管理委員会は選挙割に関与していません。特典の内容・期間は各店舗の最新情報を確認してください。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 PLAN -->
+  <section class="panel" id="plan" role="tabpanel" hidden>
+    <div class="ph"><h2>いつ、どこで投票するか決めておく</h2>
+      <p>「行けたら行く」は行かない。日時と場所を先に決めた人ほど、実際に投票しています。</p></div>
+    <div class="split">
+      <div class="card" style="display:grid;gap:14px">
+        <div><div class="label">いつ行く？</div><div class="opts" id="pDate"></div></div>
+        <div><div class="label">何時ごろ？</div><div class="opts" id="pTime"></div></div>
+        <div><div class="label">どこで？</div><div class="opts" id="pWhere"></div><p class="small muted" id="pWhereNote" style="margin:6px 0 0"></p></div>
+        <div><div class="label">だれと？</div><div class="opts" id="pWho"></div></div>
+      </div>
+      <div style="display:grid;gap:12px">
+        <div class="plancard" id="planCard"></div>
+        <div class="row"><button class="btn" id="copyPlan" type="button">予定をコピー</button><a class="btn ghost" id="sharePlan" href="#" target="_blank" rel="noopener">Xで投票宣言</a></div>
+        <div class="card" id="planFood" style="display:grid;gap:6px" hidden></div>
+        <div class="card check" id="checklist"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="byline">
+      <p class="bl-cta">10月18日（日）の横浜市長選挙に、投票しよう。</p>
+      <p>このアプリはマツノトキヒトがつくりました。お役に立てれば何よりです。</p>
+      <p>応援のメッセージは <a href="https://www.facebook.com/tokmatsuno/" target="_blank" rel="noopener">Facebook @tokmatsuno</a> までお寄せください。</p>
+    </div>
+    <div><b>このアプリについて</b>　有志による非公式の情報ナビです。特定の候補者・政党を支持するものではありません。候補者の掲載は五十音順です。</div>
+    <div>候補者の立場は2026年10月6日時点の公開情報をもとに整理したもので、要約や推定（「推定」と表示）を含みます。最終的には必ず<a href="https://www.city.yokohama.lg.jp/city-info/senkyo/data/mayor/20261018_shicho.html" target="_blank" rel="noopener">横浜市選挙管理委員会</a>の選挙公報や各候補の発信で確かめてください。</div>
+    <div>地図：国土数値情報（行政区域）を加工。郵便番号：日本郵便 郵便番号データ（jp-zipcode-lookup 経由）。</div>
+  </footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ===================== DATA（編集しやすいようにここにまとめています） ===================== */
+const ELECTION = { day:"2026-10-18", open:"07:00", close:"20:00", earlyFrom:"2026-10-05", earlyTo:"2026-10-17", notice:"2026-10-04" };
+
+// 五十音順。color は表示用（政党色とは無関係）
+const CANDS = [
+ {id:"asaka",   name:"浅賀 由香", kana:"あさか ゆか", age:46, tag:"日本共産党 公認", bio:"日本共産党神奈川県委員会副委員長。元システムエンジニア", slogan:"横浜の豊かさを市民の豊かさへ", color:"--c1",
+  links:{site:"https://newyokohama.com/", x:"https://x.com/asakayuka", ig:"https://www.instagram.com/asaka_yuka_official/", sched:"https://www.jcp.or.jp/enzetu/"}, policy:"https://newyokohama.com/cms/wp-content/themes/newyokohama/assets/pdf/20261005.pdf"},
+ {id:"nakatani",name:"中谷 一馬", kana:"なかたに かずま", age:43, tag:"無所属・立憲民主党県連 推薦", bio:"前衆議院議員（3期）、元神奈川県議会議員", slogan:"壁をこえた先に、あたたかい横浜を。", color:"--c2",
+  links:{site:"https://atatakaiyokohama.jp/", x:"https://x.com/kazuma_nakatani", yt:"https://www.youtube.com/channel/UCui38F56oQntB2yqqK1nxlw"}, policy:"https://atatakaiyokohama.jp/policy/"},
+ {id:"harasawa",name:"原沢 敦美", kana:"はらさわ あつみ", age:59, tag:"無所属・自民／維新／国民 推薦、公明 支持", bio:"弁護士。元日本航空勤務", slogan:"あなたの笑顔のために〜横浜を、もっと前へ〜", color:"--c3",
+  links:{site:"https://harasawa-atsumi.jp/", x:"https://x.com/harasawa_atsumi", ig:"https://www.instagram.com/harasawa_atsumi"}, policy:"https://harasawa-atsumi.jp/"},
+ {id:"fukuyama",name:"福山 敦士", kana:"ふくやま あつし", age:37, tag:"無所属・参政党 推薦", bio:"会社経営者。元サイバーエージェント", slogan:"市民のための政治を取り戻す", color:"--c4",
+  links:{site:"https://fukuyama.monster/", x:"https://x.com/2980a24t", ig:"https://www.instagram.com/fukuyama18atsushi/"}, policy:"https://www.jichiscope.com/yokohama/senkyo-2026/fukuyama"},
+ {id:"fujikawa",name:"藤川 祥子", kana:"ふじかわ さちこ", age:51, tag:"無所属", bio:"市民団体代表。鶴見区在住", slogan:"市民が主役の市政", color:"--c5",
+  links:{site:"https://sachiko-fujikawa.com/", x:"https://x.com/tsurumi_fuji", sched:"https://note.com/tsurumi_fujikawa", ig:"https://www.instagram.com/sachiko_fujikawa"}, policy:"https://sachiko-fujikawa.com/policy/"},
+ {id:"yamanaka",name:"山中 竹春", kana:"やまなか たけはる", age:54, tag:"無所属（前市長）", bio:"前横浜市長（2021〜2026年9月）。当選した場合の任期は2029年8月まで", slogan:"ずっと住みたいヨコハマ 生活者目線の「継続」", color:"--c6",
+  links:{site:"https://takeharu-yamanaka.yokohama/", ig:"https://www.instagram.com/yamanakatakeharu_staff/", th:"https://www.threads.net/@yamanakatakeharu_staff"}, policy:"https://takeharu-yamanaka.yokohama/policy.html"},
+ {id:"yamamoto",name:"山本 理顕", kana:"やまもと りけん", age:81, tag:"無所属", bio:"建築家。2024年プリツカー建築賞", slogan:"安全で快適な住宅に住む権利の保障", color:"--c7",
+  links:{x:"https://x.com/RikenYamamoto"}, policy:"https://www.jichiscope.com/yokohama/senkyo-2026/yamamoto"},
+];
+
+// 立場: [スコア(-2〜+2 / null=不明), 確度(1=明記, 0.5=推定), 根拠の要約]
+const QS = [
+ {q:"保育料や給食費の無償化は、所得制限を設けずに広げるべきだ", bg:"子育て支援をどこまで広げるか、その財源をどう考えるかの問題です。",
+  pos:{fujikawa:[2,1,"保育料・幼稚園無償化、小中学校給食の無償化"], yamanaka:[1,1,"中学校給食費・医療費など子育て負担の軽減を継続"], nakatani:[2,1,"第2子以降の保育料ゼロ（所得制限なし）、給食費ゼロ"], harasawa:[-1,.5,"「必要な人に必要な支援」「負担を将来世代へ先送りしない」"], fukuyama:[2,1,"0〜2歳の保育料を第1子から無償化（所得制限なし）"], yamamoto:[null,0,"記載なし"], asaka:[2,1,"保育料・中学校給食の無償化"]}},
+ {q:"中学校給食は、配達（デリバリー）方式から、学校で調理する方式へ切り替えるべきだ", bg:"横浜市は2026年4月から、配達弁当方式で中学校の全員給食を始めました。",
+  pos:{fujikawa:[2,1,"自校調理方式"], yamanaka:[-1,.5,"デリバリー方式の全員給食を実施（切替への反対表明は見当たらず）"], nakatani:[null,0,"給食費ゼロ（調理方式への言及なし）"], harasawa:[0,.5,"全員給食を「検証」"], fukuyama:[1,1,"自校・親子・ミックス方式へ段階的に移行"], yamamoto:[null,0,"記載なし"], asaka:[2,1,"学校調理方式を基本に転換"]}},
+ {q:"家賃など住まいの費用が上がっている。市が家賃補助などで、住宅費の負担を積極的に軽くするべきだ", bg:"市内では家賃や住宅価格の上昇が続き、子育て世帯や若い世代の住まい選びが難しくなっています。",
+  pos:{fujikawa:[2,1,"水道料金・保育料・住宅費の負担軽減"], yamanaka:[null,0,"公開資料に記載なし"], nakatani:[1,1,"住居確保給付金などを活用した家賃・転居支援の利用促進、断熱改修支援"], harasawa:[null,0,"公開資料に記載なし"], fukuyama:[1,.5,"市営住宅の空室を若者・子育て世帯に活用"], yamamoto:[1,.5,"「すべての市民は安全で快適な住宅に住む権利をもつ」"], asaka:[2,1,"「住まいは人権」。家賃補助制度の創設、市営住宅の増設"]}},
+ {q:"大型開発や企業への補助金を見直し、その分を暮らしや福祉に回すべきだ", bg:"税金を経済の成長に使うか、日々の生活の支援に使うか。配分の考え方の問題です。",
+  pos:{fujikawa:[2,1,"税金はまず家計・子育て・福祉に"], yamanaka:[-1,.5,"歳出改革で財源を確保しつつ、TECH HUB・上瀬谷などを推進"], nakatani:[null,0,"記載なし（スタートアップ支援は掲げる）"], harasawa:[-2,.5,"企業誘致、規制改革と民間活力で「稼ぐ横浜」"], fukuyama:[-1,.5,"市民税に頼らず、企業誘致・営業局で独自財源"], yamamoto:[0,.5,"観光収入を約1兆円へ"], asaka:[2,1,"大型開発・企業立地補助金を見直し、暮らしへ配分"]}},
+ {q:"市役所は民間の経営手法を取り入れ、外郭団体の整理や民間委託を進めるべきだ", bg:"行政の効率化と、公共サービスを市が直接担うことのバランスの問題です。",
+  pos:{fujikawa:[-1,.5,"情報公開の徹底・内部通報制度を重視"], yamanaka:[1,1,"データ活用・歳出改革（645億円を創出と主張）"], nakatani:[1,.5,"AIによる行政の構造改革"], harasawa:[1,1,"規制改革と民間活力の活用"], fukuyama:[2,1,"市役所に「営業局」新設、外郭団体の抜本見直し"], yamamoto:[null,0,"記載なし"], asaka:[-2,1,"PFIを検証し、直営への回帰も"]}},
+ {q:"駅前などの高層マンション建設や大型再開発は抑えて、今の街並みや住環境を守ることを優先すべきだ", bg:"再開発でタワーマンションが増える一方、日当たりや景観、学校・保育の不足などを心配する声もあります。",
+  pos:{fujikawa:[1,.5,"民設民営の大型開発計画を市民参加で見直す"], yamanaka:[-1,.5,"水際空間・拠点の整備を推進"], nakatani:[0,.5,"駅周辺・生活拠点の再編と、郊外住宅地・商店街の再生"], harasawa:[null,0,"公開資料に記載なし"], fukuyama:[null,0,"公開資料に記載なし"], yamamoto:[2,1,"超高層マンション建設で「街と経済が壊された」と批判。町内会単位の「地域社会圏」"], asaka:[1,.5,"大型開発・企業立地補助金の見直し"]}},
+ {q:"これまでの市政の方針は、基本的に引き継ぐべきだ", bg:"今回は前市長の辞職に伴う選挙です。前職を含む7人が立候補しています。",
+  pos:{fujikawa:[-2,1,"「閉ざされた市政を変える」"], yamanaka:[2,1,"生活者目線の「継続」"], nakatani:[null,0,"明示的な評価は見当たらず"], harasawa:[-1,1,"「停滞した市政を前に進める」「立て直す」"], fukuyama:[0,1,"子育て政策は一定評価、ガバナンスは不足と指摘"], yamamoto:[null,0,"六大事業・みなとみらいを批判。前市政の評価は不明"], asaka:[-1,.5,"市政運営のあり方を批判"]}},
+ {q:"山下ふ頭（山下公園の隣の港湾エリア）の再開発は、市がまとめてきた計画を基本に進めるべきだ", bg:"山下ふ頭をどう生まれ変わらせるか、進め方が論点の一つになっています。",
+  pos:{fujikawa:[-2,1,"民設民営の方針を市民参加で見直す"], yamanaka:[2,1,"「世界級の水際空間」として再開発を迅速に推進"], nakatani:[0,1,"市民や港湾関係者の意見を踏まえて再開発"], harasawa:[null,0,"公開資料に記載なし"], fukuyama:[null,0,"クルーズ船誘致・新モビリティで活用（計画への賛否は不明）"], yamamoto:[-1,.5,"各国文化の「世界町家」と滞在型観光拠点を提案"], asaka:[-2,1,"市民と共に決める。常設型住民投票条例"]}},
+ {q:"市は国や米軍に対して、市内の米軍施設の返還を強く求めるべきだ", bg:"市内には瑞穂ふ頭（ノース・ドック）などの米軍施設があります。",
+  pos:{fujikawa:[2,1,"ノース・ドックの早期返還"], yamanaka:[null,0,"公約に記載なし"], nakatani:[null,0,"公約に記載なし"], harasawa:[null,0,"公約に記載なし"], fukuyama:[null,0,"公約に記載なし"], yamamoto:[null,0,"公約に記載なし"], asaka:[2,1,"米軍施設の全面返還、揚陸艇部隊の配備撤回"]}},
+];
+const SCALE = [[2,"そう思う"],[1,"どちらかと言えばそう思う"],[-1,"どちらかと言えばそう思わない"],[-2,"そう思わない"],[null,"わからない"]];
+
+const WARDS = ["鶴見区","神奈川区","西区","中区","南区","港南区","保土ケ谷区","旭区","磯子区","金沢区","港北区","緑区","青葉区","都筑区","戸塚区","栄区","泉区","瀬谷区"];
+const TOJITSU_BASE = "https://www.city.yokohama.lg.jp/city-info/senkyo/data/touhyoujo/tojitsu/";
+const TOJITSU = {"鶴見区":"20261018turumi.html","神奈川区":"20261018kanagawa.html","西区":"20261018nishi.html","中区":"20261018naka.html","南区":"20261018minami.html","港南区":"2026108konan.html","保土ケ谷区":"20261018hodogaya.html","旭区":"20261018asahi.html","磯子区":"20261018isogo.html","金沢区":"20261018kanazawa.html","港北区":"20261018kohoku.html","緑区":"20261018midori.html","青葉区":"202601018aoba.html","都筑区":"20261018tuduki.html","戸塚区":"20261018totuka.html","栄区":"20261018sakae.html","泉区":"20261018izumi.html","瀬谷区":"20261018seya.html"};
+const CITY_PAGE = "https://www.city.yokohama.lg.jp/city-info/senkyo/data/mayor/20261018_shicho.html";
+
+// 期日前投票所（全38か所）出典：横浜市選挙管理委員会。座標はおおよそ
+const EARLY = [
+ ["鶴見区","鶴見区役所 1階区民ホール","鶴見区鶴見中央3-20-1","08:30",35.5089,139.6826],
+ ["鶴見区","鶴見中央コミュニティハウス","鶴見区鶴見中央1-31-2 シークレイン2階","09:30",35.5065,139.6800],
+ ["神奈川区","神奈川区役所 本館2階中会議室","神奈川区広台太田町3-8","08:30",35.4757,139.6297],
+ ["神奈川区","神大寺地区センター 2階中会議室","神奈川区神大寺2-28-18","09:30",35.4890,139.6130],
+ ["西区","西区役所 1階1AB会議室","西区中央1-5-10","08:30",35.4622,139.6195],
+ ["西区","西公会堂 2階1号会議室","西区岡野1-6-41","09:30",35.4614,139.6188],
+ ["中区","中区役所 6階602会議室","中区日本大通35","08:30",35.4443,139.6419],
+ ["中区","本牧地区センター 2階中・小会議室","中区本牧原16-1","09:30",35.4155,139.6595],
+ ["南区","南区役所 1階多目的ホール","南区浦舟町2-33","08:30",35.4360,139.6232],
+ ["南区","大岡地区センター 2階大会議室","南区大岡1-14-1","09:30",35.4240,139.6010],
+ ["港南区","港南区役所 1階区民ホール","港南区港南4-2-10","08:30",35.3913,139.5912],
+ ["港南区","港南台214ビル 4階406号室","港南区港南台3-3-1","09:30",35.3780,139.5770],
+ ["保土ケ谷区","保土ケ谷区役所 本館地下1階会議室","保土ケ谷区川辺町2-9","08:30",35.4561,139.5955],
+ ["保土ケ谷区","イコットハウス","保土ケ谷区月見台37","09:30",35.4492,139.5987],
+ ["旭区","旭区役所 地下1階会議室","旭区鶴ケ峰1-4-12","08:30",35.4740,139.5440],
+ ["旭区","旭区民文化センター サンハート","旭区二俣川1-3 二俣川ライフ5階","09:30",35.4630,139.5320],
+ ["磯子区","磯子区役所 1階区民ホール","磯子区磯子3-5-1","08:30",35.4025,139.6180],
+ ["磯子区","はまぎんこども宇宙科学館 1階会議室","磯子区洋光台5-2-1","09:30",35.3755,139.5945],
+ ["金沢区","金沢区役所 1階1号会議室","金沢区泥亀2-9-1","08:30",35.3380,139.6245],
+ ["金沢区","金沢スポーツセンター 第2体育室","金沢区長浜106-8","09:30",35.3500,139.6300],
+ ["港北区","港北公会堂 2階1号会議室","港北区大豆戸町26-1（区役所向かい）","08:30",35.5170,139.6345],
+ ["港北区","港北区民文化センター ミズキーホール","港北区綱島東1-9-10 新綱島スクエア4階","09:30",35.5375,139.6355],
+ ["港北区","トレッサ横浜 北棟2階東側通路","港北区師岡町700","10:00",35.5250,139.6450,"2026-10-15"],
+ ["緑区","緑区役所 1階イベントスペース","緑区寺山町118","08:30",35.5140,139.5395],
+ ["緑区","長津田消防出張所 訓練室","緑区長津田2-10-4","09:30",35.5330,139.4950],
+ ["青葉区","青葉区役所 1階区民ホール","青葉区市ケ尾町31-4","08:30",35.5525,139.5425],
+ ["青葉区","山内地区センター 1階レクリエーションホール","青葉区あざみ野2-3-2","09:30",35.5685,139.5535],
+ ["都筑区","都筑区役所 1階区民ホール","都筑区茅ケ崎中央32-1","08:30",35.5450,139.5710],
+ ["都筑区","JA横浜 都筑中川支店 2階支店会議室","都筑区中川中央1-26-6","09:30",35.5475,139.5770],
+ ["都筑区","ららぽーと横浜 2階フードコート横","都筑区池辺町4035-1","10:00",35.5175,139.5585,"2026-10-15"],
+ ["戸塚区","戸塚区総合庁舎 3階区民広間","戸塚区戸塚町16-17","08:30",35.4000,139.5320],
+ ["戸塚区","西武東戸塚S.C. 7階ファーストブリッジ","戸塚区品濃町537-1","10:00",35.4180,139.5610],
+ ["栄区","栄区役所 新館1階健康相談室A","栄区桂町303-19","08:30",35.3640,139.5540],
+ ["栄区","イトーヨーカドー桂台店 2階コミュニティプラザ桂台","栄区桂台中15-1","10:00",35.3610,139.5690],
+ ["泉区","泉区役所 1階区民ホール","泉区和泉中央北5-1-1","08:30",35.4180,139.4880],
+ ["泉区","立場地区センター 2階中・小会議室","泉区中田北1-9-14","09:30",35.4172,139.5008],
+ ["瀬谷区","瀬谷区役所 5階会議室","瀬谷区二ツ橋町190","08:30",35.4705,139.4890],
+ ["瀬谷区","瀬谷区民文化センター あじさいプラザ","瀬谷区瀬谷4-4-10 ライブゲート瀬谷3階","09:30",35.4665,139.4985],
+].map(r=>({ward:r[0],name:r[1],addr:"横浜市"+r[2],open:r[3],close:"20:00",lat:r[4],lng:r[5],from:r[6]||ELECTION.earlyFrom,to:ELECTION.earlyTo}));
+
+// 内蔵の演説データ（ネットに繋がらない時の予備）。普段は自動収集フィードで上書きされます
+const SEED_FEED = {"updatedAt": "2026-10-06T01:10:00+09:00", "sources": ["各陣営の発表（note・政党サイト）", "有志の街宣マップ（公式発表ベース）", "報道"], "rows": [{"id": "m-35a1", "c": "nakatani", "d": "2026-10-06", "t": "18:00", "e": "20:00", "p": "戸塚駅（西口・東口）", "w": "戸塚区", "lat": 35.4004, "lng": 139.5343, "s": "s", "via": "map"}, {"id": "m-35a2", "c": "nakatani", "d": "2026-10-06", "t": "10:30", "e": "11:30", "p": "港南台駅", "w": "港南区", "lat": 35.3752, "lng": 139.5762, "s": "s", "via": "map"}, {"id": "m-35a3", "c": "nakatani", "d": "2026-10-06", "t": "08:30", "e": "", "p": "大船駅 笠間口", "w": "栄区", "lat": 35.3535, "lng": 139.5311, "s": "s", "via": "map"}, {"id": "m-35a4", "c": "harasawa", "d": "2026-10-06", "t": "18:30", "e": "", "p": "大倉山駅", "w": "港北区", "lat": 35.5224, "lng": 139.6298, "s": "s", "via": "map"}, {"id": "m-35a5", "c": "harasawa", "d": "2026-10-06", "t": "07:00", "e": "", "p": "青葉台駅（駅立ち）", "w": "青葉区", "lat": 35.5429, "lng": 139.5174, "s": "s", "via": "map"}, {"id": "m-35a6", "c": "harasawa", "d": "2026-10-06", "t": "08:00", "e": "", "p": "青葉台駅", "w": "青葉区", "lat": 35.5429, "lng": 139.5174, "s": "s", "via": "map"}, {"id": "m-35a7", "c": "fukuyama", "d": "2026-10-06", "t": "08:00", "e": "", "p": "金沢八景駅", "w": "金沢区", "lat": 35.3312, "lng": 139.6202, "s": "s", "via": "map"}, {"id": "m-35a8", "c": "asaka", "d": "2026-10-06", "t": "12:00", "e": "14:00", "p": "日吉駅（ミニ赤テント）", "w": "港北区", "lat": 35.5539, "lng": 139.6469, "s": "s", "via": "map"}, {"id": "m-35a9", "c": "asaka", "d": "2026-10-07", "t": "12:00", "e": "14:00", "p": "青葉台駅（ミニ赤テント）", "w": "青葉区", "lat": 35.5429, "lng": 139.5174, "s": "s", "via": "map"}, {"id": "m-35b0", "c": "asaka", "d": "2026-10-08", "t": "12:00", "e": "14:00", "p": "十日市場駅 南口（ミニ赤テント）", "w": "緑区", "lat": 35.5263, "lng": 139.5167, "s": "s", "via": "map"}, {"id": "m-35b1", "c": "yamamoto", "d": "2026-10-08", "t": "18:00", "e": "", "p": "横浜開港記念会館（講演会）", "w": "中区", "lat": 35.4503, "lng": 139.6342, "s": "s", "via": "map"}, {"id": "m-35b2", "c": "asaka", "d": "2026-10-09", "t": "13:00", "e": "14:00", "p": "上大岡駅（ミニ赤テント）", "w": "港南区", "lat": 35.4094, "lng": 139.5966, "s": "s", "via": "map"}, {"id": "m-35b3", "c": "nakatani", "d": "2026-10-11", "t": "10:00", "e": "11:00", "p": "大船駅", "w": "栄区", "lat": 35.3535, "lng": 139.5311, "s": "s", "via": "map"}, {"id": "m-r01", "c": "fukuyama", "d": "2026-10-05", "t": "10:00", "e": "12:00", "p": "鶴見駅 東口", "w": "鶴見区", "lat": 35.5084, "lng": 139.6761, "s": "r", "via": "map"}, {"id": "m-r02", "c": "fukuyama", "d": "2026-10-05", "t": "12:30", "e": "", "p": "上大岡駅", "w": "港南区", "lat": 35.4094, "lng": 139.5966, "s": "r", "via": "map"}, {"id": "m-r03", "c": "fukuyama", "d": "2026-10-05", "t": "08:00", "e": "", "p": "横浜駅 きた東口", "w": "西区", "lat": 35.4662, "lng": 139.6227, "s": "r", "via": "map"}, {"id": "m-r04", "c": "yamanaka", "d": "2026-10-05", "t": "17:00", "e": "18:00", "p": "横浜駅 西口", "w": "西区", "lat": 35.4662, "lng": 139.6227, "s": "r", "via": "map", "n": "目撃情報"}, {"id": "m-r05", "c": "harasawa", "d": "2026-10-05", "t": "07:00", "e": "", "p": "桜木町駅（駅立ち）", "w": "中区", "lat": 35.4511, "lng": 139.6309, "s": "r", "via": "map"}, {"id": "m-r06", "c": "harasawa", "d": "2026-10-05", "t": "10:30", "e": "", "p": "根岸駅", "w": "磯子区", "lat": 35.4159, "lng": 139.636, "s": "r", "via": "map"}, {"id": "m-r07", "c": "harasawa", "d": "2026-10-05", "t": "11:15", "e": "", "p": "ブララ杉田", "w": "磯子区", "lat": 35.3836, "lng": 139.6163, "s": "r", "via": "map"}, {"id": "m-r08", "c": "harasawa", "d": "2026-10-05", "t": "11:45", "e": "", "p": "らびすた新杉田", "w": "磯子区", "lat": 35.3857, "lng": 139.6192, "s": "r", "via": "map"}, {"id": "m-r09", "c": "harasawa", "d": "2026-10-05", "t": "14:00", "e": "", "p": "能見台駅", "w": "金沢区", "lat": 35.3605, "lng": 139.6292, "s": "r", "via": "map"}, {"id": "m-r10", "c": "nakatani", "d": "2026-10-05", "t": "10:15", "e": "12:30", "p": "センター北駅", "w": "都筑区", "lat": 35.5535, "lng": 139.5785, "s": "r", "via": "map"}, {"id": "m-r11", "c": "nakatani", "d": "2026-10-05", "t": "15:00", "e": "16:00", "p": "中山駅（南口・北口）", "w": "緑区", "lat": 35.5147, "lng": 139.5397, "s": "r", "via": "map"}, {"id": "m-r12", "c": "nakatani", "d": "2026-10-05", "t": "18:00", "e": "20:00", "p": "鴨居駅（南口・北口）", "w": "緑区", "lat": 35.511, "lng": 139.5671, "s": "r", "via": "map"}, {"id": "c-f01", "c": "fujikawa", "d": "2026-10-04", "t": "10:30", "e": "", "p": "鶴見駅 東口（第一声）", "w": "鶴見区", "lat": 35.5085, "lng": 139.6768, "s": "r", "via": "camp", "src": "https://note.com/tsurumi_fujikawa/n/n490807a3ad20"}, {"id": "c-f02", "c": "fujikawa", "d": "2026-10-04", "t": "15:00", "e": "", "p": "東神奈川駅 西口・六角橋商店街", "w": "神奈川区", "lat": 35.4785, "lng": 139.6327, "s": "r", "via": "camp", "src": "https://note.com/tsurumi_fujikawa/n/nae937828b684"}, {"id": "c-f03", "c": "fujikawa", "d": "2026-10-04", "t": "18:00", "e": "", "p": "横浜駅 西口（高島屋付近）", "w": "西区", "lat": 35.4655, "lng": 139.6215, "s": "r", "via": "camp", "src": "https://note.com/tsurumi_fujikawa/n/n94bbbaaf0e13"}, {"id": "c-f04", "c": "fujikawa", "d": "2026-10-05", "t": "09:00", "e": "09:30", "p": "鴨居駅 南口", "w": "緑区", "lat": 35.51, "lng": 139.567, "s": "r", "via": "camp", "n": "応援弁士", "src": "https://note.com/tsurumi_fujikawa/n/n896175cd5b04"}, {"id": "c-f05", "c": "fujikawa", "d": "2026-10-05", "t": "13:00", "e": "13:30", "p": "十日市場駅 南口", "w": "緑区", "lat": 35.5263, "lng": 139.5167, "s": "r", "via": "camp", "n": "応援弁士", "src": "https://note.com/tsurumi_fujikawa/n/n896175cd5b04"}, {"id": "c-f06", "c": "fujikawa", "d": "2026-10-05", "t": "17:30", "e": "18:00", "p": "長津田駅 北口", "w": "緑区", "lat": 35.532, "lng": 139.495, "s": "r", "via": "camp", "n": "応援弁士", "src": "https://note.com/tsurumi_fujikawa/n/n9215f14fecf6"}, {"id": "c-a01", "c": "asaka", "d": "2026-10-04", "t": "11:30", "e": "", "p": "横浜駅 相鉄口（第一声）", "w": "西区", "lat": 35.4662, "lng": 139.6207, "s": "r", "via": "camp", "src": "https://www.jcp.or.jp/enzetu/"}, {"id": "n-h01", "c": "harasawa", "d": "2026-10-04", "t": "", "e": "", "p": "横浜地裁前（第一声）", "w": "中区", "lat": 35.4466, "lng": 139.6425, "s": "r", "via": "news", "src": "https://tokyo-sports.co.jp/articles/-/405513"}]};
+
+// 選挙割。status: "now"=今回の選挙で確認済み / "past"=過去の選挙で実施（今回は未確認）
+const WARI = [
+ {name:"ノジマ（神奈川県内全店）",ward:null,status:"now",benefit:"1,145円分（いい横浜）ポイント還元",cond:"税込2,000円以上の購入／ノジマモバイル会員／1人1回／投票済証明書か投票所の看板写真を提示",period:"10/5〜10/31",src:"https://prtimes.jp/main/html/rd/p/000000115.000163436.html"},
+ {name:"RAKU SPA BAY 横浜",ward:"神奈川区",lat:35.4720,lng:139.6290,status:"past",benefit:"大人フリータイム5%OFF（過去）",cond:"2025年市長選・2026年2月衆院選で実施",src:"https://stores.senkyowari.com/shops/F0MIg2TWy0FxZbZ8U1P1p/"},
+ {name:"極楽湯 横浜芹が谷店",ward:"港南区",lat:35.4045,lng:139.5730,status:"past",benefit:"大人入館料10%OFF（過去）",cond:"2025年市長選・2026年2月衆院選で実施",src:"https://stores.senkyowari.com/shops/fGeQChPAYiF6SfMM_7970/"},
+ {name:"焼肉ワミン 横浜店",ward:"西区",lat:35.4660,lng:139.6200,status:"past",benefit:"会計5%OFF（過去）",cond:"2024年衆院選・2025年参院選などで実施",src:"https://stores.senkyowari.com/shops/h_3kffurM_KYgShmVzc8E/"},
+ {name:"ラウンドワン 横浜駅西口店",ward:"西区",lat:35.4672,lng:139.6190,status:"past",benefit:"各種300円引き（過去）",cond:"2026年2月衆院選で実施",src:"https://asahi-sanpo.com/yokohama-senkyowari-2026/"},
+ {name:"猿田彦珈琲 神奈川県立図書館店",ward:"西区",lat:35.4500,lng:139.6282,status:"past",benefit:"ドリンク100円引き（過去）",cond:"2026年2月衆院選で実施",src:"https://asahi-sanpo.com/yokohama-senkyowari-2026/"},
+ {name:"CoffeeKOBAN",ward:"神奈川区",approx:true,status:"past",benefit:"500円以上で100円引き（過去）",cond:"2026年2月衆院選で実施",src:"https://asahi-sanpo.com/yokohama-senkyowari-2026/"},
+ {name:"とんかつ六角橋",ward:"神奈川区",approx:true,status:"past",benefit:"ドリンク無料 など（過去）",cond:"2026年2月衆院選で実施",src:"https://asahi-sanpo.com/yokohama-senkyowari-2026/"},
+ {name:"釜利谷米店",ward:"金沢区",approx:true,status:"past",benefit:"1,500円以上で2合サービス（過去）",cond:"2026年2月衆院選で実施",src:"https://asahi-sanpo.com/yokohama-senkyowari-2026/"},
+ {name:"元気通り本店",ward:"磯子区",approx:true,status:"past",benefit:"5%OFF（過去）",cond:"2026年2月衆院選で実施",src:"https://asahi-sanpo.com/yokohama-senkyowari-2026/"},
+];
+
+const ZIP = {"2200000":[2,""],"2200001":[2,"北軽井沢"],"2200002":[2,"南軽井沢"],"2200003":[2,"楠町"],"2200004":[2,"北幸"],"2200005":[2,"南幸"],"2200006":[2,"宮ケ谷"],"2200011":[2,"高島"],"2200012":[2,"みなとみらい"],"2200013":[2,"緑町"],"2200021":[2,"桜木町"],"2200022":[2,"花咲町"],"2200023":[2,"平沼"],"2200024":[2,"西平沼町"],"2200031":[2,"宮崎町"],"2200032":[2,"老松町"],"2200033":[2,"東ケ丘"],"2200034":[2,"赤門町"],"2200035":[2,"霞ケ丘"],"2200041":[2,"戸部本町"],"2200042":[2,"戸部町"],"2200043":[2,"御所山町"],"2200044":[2,"紅葉ケ丘"],"2200045":[2,"伊勢町"],"2200046":[2,"西戸部町"],"2200051":[2,"中央"],"2200052":[2,"西前町"],"2200053":[2,"藤棚町"],"2200054":[2,"境之谷"],"2200055":[2,"浜松町"],"2200061":[2,"久保町"],"2200062":[2,"東久保町"],"2200063":[2,"元久保町"],"2200071":[2,"浅間台"],"2200072":[2,"浅間町"],"2200073":[2,"岡野"],"2200074":[2,"南浅間町"],"2206000":[2,"みなとみらいクイーンズタワーＡ"],"2206001":[2,"みなとみらいクイーンズタワーＡ"],"2206002":[2,"みなとみらいクイーンズタワーＡ"],"2206003":[2,"みなとみらいクイーンズタワーＡ"],"2206004":[2,"みなとみらいクイーンズタワーＡ"],"2206005":[2,"みなとみらいクイーンズタワーＡ"],"2206006":[2,"みなとみらいクイーンズタワーＡ"],"2206007":[2,"みなとみらいクイーンズタワーＡ"],"2206008":[2,"みなとみらいクイーンズタワーＡ"],"2206009":[2,"みなとみらいクイーンズタワーＡ"],"2206010":[2,"みなとみらいクイーンズタワーＡ"],"2206011":[2,"みなとみらいクイーンズタワーＡ"],"2206012":[2,"みなとみらいクイーンズタワーＡ"],"2206013":[2,"みなとみらいクイーンズタワーＡ"],"2206014":[2,"みなとみらいクイーンズタワーＡ"],"2206015":[2,"みなとみらいクイーンズタワーＡ"],"2206016":[2,"みなとみらいクイーンズタワーＡ"],"2206017":[2,"みなとみらいクイーンズタワーＡ"],"2206018":[2,"みなとみらいクイーンズタワーＡ"],"2206019":[2,"みなとみらいクイーンズタワーＡ"],"2206020":[2,"みなとみらいクイーンズタワーＡ"],"2206021":[2,"みなとみらいクイーンズタワーＡ"],"2206022":[2,"みなとみらいクイーンズタワーＡ"],"2206023":[2,"みなとみらいクイーンズタワーＡ"],"2206024":[2,"みなとみらいクイーンズタワーＡ"],"2206025":[2,"みなとみらいクイーンズタワーＡ"],"2206026":[2,"みなとみらいクイーンズタワーＡ"],"2206027":[2,"みなとみらいクイーンズタワーＡ"],"2206028":[2,"みなとみらいクイーンズタワーＡ"],"2206029":[2,"みなとみらいクイーンズタワーＡ"],"2206030":[2,"みなとみらいクイーンズタワーＡ"],"2206031":[2,"みなとみらいクイーンズタワーＡ"],"2206032":[2,"みなとみらいクイーンズタワーＡ"],"2206033":[2,"みなとみらいクイーンズタワーＡ"],"2206034":[2,"みなとみらいクイーンズタワーＡ"],"2206035":[2,"みなとみらいクイーンズタワーＡ"],"2206036":[2,"みなとみらいクイーンズタワーＡ"],"2206037":[2,"みなとみらいクイーンズタワーＡ"],"2206038":[2,"みなとみらいクイーンズタワーＡ"],"2206039":[2,"みなとみらいクイーンズタワーＡ"],"2206040":[2,"みなとみらいクイーンズタワーＡ"],"2206041":[2,"みなとみらいクイーンズタワーＡ"],"2206042":[2,"みなとみらいクイーンズタワーＡ"],"2206043":[2,"みなとみらいクイーンズタワーＡ"],"2206044":[2,"みなとみらいクイーンズタワーＡ"],"2206045":[2,"みなとみらいクイーンズタワーＡ"],"2206046":[2,"みなとみらいクイーンズタワーＡ"],"2206047":[2,"みなとみらいクイーンズタワーＡ"],"2206048":[2,"みなとみらいクイーンズタワーＡ"],"2206049":[2,"みなとみらいクイーンズタワーＡ"],"2206050":[2,"みなとみらいクイーンズタワーＡ"],"2206051":[2,"みなとみらいクイーンズタワーＡ"],"2206052":[2,"みなとみらいクイーンズタワーＡ"],"2206053":[2,"みなとみらいクイーンズタワーＡ"],"2206054":[2,"みなとみらいクイーンズタワーＡ"],"2206055":[2,"みなとみらいクイーンズタワーＡ"],"2206056":[2,"みなとみらいクイーンズタワーＡ"],"2206057":[2,"みなとみらいクイーンズタワーＡ"],"2206058":[2,"みなとみらいクイーンズタワーＡ"],"2206059":[2,"みなとみらいクイーンズタワーＡ"],"2206060":[2,"みなとみらいクイーンズタワーＡ"],"2206061":[2,"みなとみらいクイーンズタワーＡ"],"2206062":[2,"みなとみらいクイーンズタワーＡ"],"2206063":[2,"みなとみらいクイーンズタワーＡ"],"2206064":[2,"みなとみらいクイーンズタワーＡ"],"2206065":[2,"みなとみらいクイーンズタワーＡ"],"2206066":[2,"みなとみらいクイーンズタワーＡ"],"2206067":[2,"みなとみらいクイーンズタワーＡ"],"2206068":[2,"みなとみらいクイーンズタワーＡ"],"2206069":[2,"みなとみらいクイーンズタワーＡ"],"2206070":[2,"みなとみらいクイーンズタワーＡ"],"2206071":[2,"みなとみらいクイーンズタワーＡ"],"2206072":[2,"みなとみらいクイーンズタワーＡ"],"2206073":[2,"みなとみらいクイーンズタワーＡ"],"2206074":[2,"みなとみらいクイーンズタワーＡ"],"2206075":[2,"みなとみらいクイーンズタワーＡ"],"2206076":[2,"みなとみらいクイーンズタワーＡ"],"2206077":[2,"みなとみらいクイーンズタワーＡ"],"2206078":[2,"みなとみらいクイーンズタワーＡ"],"2206079":[2,"みなとみらいクイーンズタワーＡ"],"2206080":[2,"みなとみらいクイーンズタワーＡ"],"2206081":[2,"みなとみらいクイーンズタワーＡ"],"2206082":[2,"みなとみらいクイーンズタワーＡ"],"2206083":[2,"みなとみらいクイーンズタワーＡ"],"2206084":[2,"みなとみらいクイーンズタワーＡ"],"2206085":[2,"みなとみらいクイーンズタワーＡ"],"2206086":[2,"みなとみらいクイーンズタワーＡ"],"2206087":[2,"みなとみらいクイーンズタワーＡ"],"2206088":[2,"みなとみらいクイーンズタワーＡ"],"2206089":[2,"みなとみらいクイーンズタワーＡ"],"2206090":[2,"みなとみらいクイーンズタワーＡ"],"2206091":[2,"みなとみらいクイーンズタワーＡ"],"2206092":[2,"みなとみらいクイーンズタワーＡ"],"2206093":[2,"みなとみらいクイーンズタワーＡ"],"2206094":[2,"みなとみらいクイーンズタワーＡ"],"2206095":[2,"みなとみらいクイーンズタワーＡ"],"2206096":[2,"みなとみらいクイーンズタワーＡ"],"2206097":[2,"みなとみらいクイーンズタワーＡ"],"2206098":[2,"みなとみらいクイーンズタワーＡ"],"2206099":[2,"みなとみらいクイーンズタワーＡ"],"2206100":[2,"みなとみらいクイーンズタワーＢ"],"2206101":[2,"みなとみらいクイーンズタワーＢ"],"2206102":[2,"みなとみらいクイーンズタワーＢ"],"2206103":[2,"みなとみらいクイーンズタワーＢ"],"2206104":[2,"みなとみらいクイーンズタワーＢ"],"2206105":[2,"みなとみらいクイーンズタワーＢ"],"2206106":[2,"みなとみらいクイーンズタワーＢ"],"2206107":[2,"みなとみらいクイーンズタワーＢ"],"2206108":[2,"みなとみらいクイーンズタワーＢ"],"2206109":[2,"みなとみらいクイーンズタワーＢ"],"2206110":[2,"みなとみらいクイーンズタワーＢ"],"2206111":[2,"みなとみらいクイーンズタワーＢ"],"2206112":[2,"みなとみらいクイーンズタワーＢ"],"2206113":[2,"みなとみらいクイーンズタワーＢ"],"2206114":[2,"みなとみらいクイーンズタワーＢ"],"2206115":[2,"みなとみらいクイーンズタワーＢ"],"2206116":[2,"みなとみらいクイーンズタワーＢ"],"2206117":[2,"みなとみらいクイーンズタワーＢ"],"2206118":[2,"みなとみらいクイーンズタワーＢ"],"2206119":[2,"みなとみらいクイーンズタワーＢ"],"2206120":[2,"みなとみらいクイーンズタワーＢ"],"2206121":[2,"みなとみらいクイーンズタワーＢ"],"2206122":[2,"みなとみらいクイーンズタワーＢ"],"2206123":[2,"みなとみらいクイーンズタワーＢ"],"2206124":[2,"みなとみらいクイーンズタワーＢ"],"2206125":[2,"みなとみらいクイーンズタワーＢ"],"2206126":[2,"みなとみらいクイーンズタワーＢ"],"2206127":[2,"みなとみらいクイーンズタワーＢ"],"2206128":[2,"みなとみらいクイーンズタワーＢ"],"2206129":[2,"みなとみらいクイーンズタワーＢ"],"2206130":[2,"みなとみらいクイーンズタワーＢ"],"2206131":[2,"みなとみらいクイーンズタワーＢ"],"2206132":[2,"みなとみらいクイーンズタワーＢ"],"2206133":[2,"みなとみらいクイーンズタワーＢ"],"2206134":[2,"みなとみらいクイーンズタワーＢ"],"2206135":[2,"みなとみらいクイーンズタワーＢ"],"2206136":[2,"みなとみらいクイーンズタワーＢ"],"2206137":[2,"みなとみらいクイーンズタワーＢ"],"2206138":[2,"みなとみらいクイーンズタワーＢ"],"2206139":[2,"みなとみらいクイーンズタワーＢ"],"2206140":[2,"みなとみらいクイーンズタワーＢ"],"2206141":[2,"みなとみらいクイーンズタワーＢ"],"2206142":[2,"みなとみらいクイーンズタワーＢ"],"2206143":[2,"みなとみらいクイーンズタワーＢ"],"2206144":[2,"みなとみらいクイーンズタワーＢ"],"2206145":[2,"みなとみらいクイーンズタワーＢ"],"2206146":[2,"みなとみらいクイーンズタワーＢ"],"2206147":[2,"みなとみらいクイーンズタワーＢ"],"2206148":[2,"みなとみらいクイーンズタワーＢ"],"2206149":[2,"みなとみらいクイーンズタワーＢ"],"2206150":[2,"みなとみらいクイーンズタワーＢ"],"2206151":[2,"みなとみらいクイーンズタワーＢ"],"2206152":[2,"みなとみらいクイーンズタワーＢ"],"2206153":[2,"みなとみらいクイーンズタワーＢ"],"2206154":[2,"みなとみらいクイーンズタワーＢ"],"2206155":[2,"みなとみらいクイーンズタワーＢ"],"2206156":[2,"みなとみらいクイーンズタワーＢ"],"2206157":[2,"みなとみらいクイーンズタワーＢ"],"2206158":[2,"みなとみらいクイーンズタワーＢ"],"2206159":[2,"みなとみらいクイーンズタワーＢ"],"2206160":[2,"みなとみらいクイーンズタワーＢ"],"2206161":[2,"みなとみらいクイーンズタワーＢ"],"2206162":[2,"みなとみらいクイーンズタワーＢ"],"2206163":[2,"みなとみらいクイーンズタワーＢ"],"2206164":[2,"みなとみらいクイーンズタワーＢ"],"2206165":[2,"みなとみらいクイーンズタワーＢ"],"2206166":[2,"みなとみらいクイーンズタワーＢ"],"2206167":[2,"みなとみらいクイーンズタワーＢ"],"2206168":[2,"みなとみらいクイーンズタワーＢ"],"2206169":[2,"みなとみらいクイーンズタワーＢ"],"2206170":[2,"みなとみらいクイーンズタワーＢ"],"2206171":[2,"みなとみらいクイーンズタワーＢ"],"2206172":[2,"みなとみらいクイーンズタワーＢ"],"2206173":[2,"みなとみらいクイーンズタワーＢ"],"2206174":[2,"みなとみらいクイーンズタワーＢ"],"2206175":[2,"みなとみらいクイーンズタワーＢ"],"2206176":[2,"みなとみらいクイーンズタワーＢ"],"2206177":[2,"みなとみらいクイーンズタワーＢ"],"2206178":[2,"みなとみらいクイーンズタワーＢ"],"2206179":[2,"みなとみらいクイーンズタワーＢ"],"2206180":[2,"みなとみらいクイーンズタワーＢ"],"2206181":[2,"みなとみらいクイーンズタワーＢ"],"2206182":[2,"みなとみらいクイーンズタワーＢ"],"2206183":[2,"みなとみらいクイーンズタワーＢ"],"2206184":[2,"みなとみらいクイーンズタワーＢ"],"2206185":[2,"みなとみらいクイーンズタワーＢ"],"2206186":[2,"みなとみらいクイーンズタワーＢ"],"2206187":[2,"みなとみらいクイーンズタワーＢ"],"2206188":[2,"みなとみらいクイーンズタワーＢ"],"2206189":[2,"みなとみらいクイーンズタワーＢ"],"2206190":[2,"みなとみらいクイーンズタワーＢ"],"2206191":[2,"みなとみらいクイーンズタワーＢ"],"2206192":[2,"みなとみらいクイーンズタワーＢ"],"2206193":[2,"みなとみらいクイーンズタワーＢ"],"2206194":[2,"みなとみらいクイーンズタワーＢ"],"2206195":[2,"みなとみらいクイーンズタワーＢ"],"2206196":[2,"みなとみらいクイーンズタワーＢ"],"2206197":[2,"みなとみらいクイーンズタワーＢ"],"2206198":[2,"みなとみらいクイーンズタワーＢ"],"2206199":[2,"みなとみらいクイーンズタワーＢ"],"2206200":[2,"みなとみらいクイーンズタワーＣ"],"2206201":[2,"みなとみらいクイーンズタワーＣ"],"2206202":[2,"みなとみらいクイーンズタワーＣ"],"2206203":[2,"みなとみらいクイーンズタワーＣ"],"2206204":[2,"みなとみらいクイーンズタワーＣ"],"2206205":[2,"みなとみらいクイーンズタワーＣ"],"2206206":[2,"みなとみらいクイーンズタワーＣ"],"2206207":[2,"みなとみらいクイーンズタワーＣ"],"2206208":[2,"みなとみらいクイーンズタワーＣ"],"2206209":[2,"みなとみらいクイーンズタワーＣ"],"2206210":[2,"みなとみらいクイーンズタワーＣ"],"2206211":[2,"みなとみらいクイーンズタワーＣ"],"2206212":[2,"みなとみらいクイーンズタワーＣ"],"2206213":[2,"みなとみらいクイーンズタワーＣ"],"2206214":[2,"みなとみらいクイーンズタワーＣ"],"2206215":[2,"みなとみらいクイーンズタワーＣ"],"2206216":[2,"みなとみらいクイーンズタワーＣ"],"2206217":[2,"みなとみらいクイーンズタワーＣ"],"2206218":[2,"みなとみらいクイーンズタワーＣ"],"2206219":[2,"みなとみらいクイーンズタワーＣ"],"2206220":[2,"みなとみらいクイーンズタワーＣ"],"2206221":[2,"みなとみらいクイーンズタワーＣ"],"2206222":[2,"みなとみらいクイーンズタワーＣ"],"2206223":[2,"みなとみらいクイーンズタワーＣ"],"2206224":[2,"みなとみらいクイーンズタワーＣ"],"2206225":[2,"みなとみらいクイーンズタワーＣ"],"2206226":[2,"みなとみらいクイーンズタワーＣ"],"2206227":[2,"みなとみらいクイーンズタワーＣ"],"2206228":[2,"みなとみらいクイーンズタワーＣ"],"2206229":[2,"みなとみらいクイーンズタワーＣ"],"2206230":[2,"みなとみらいクイーンズタワーＣ"],"2206231":[2,"みなとみらいクイーンズタワーＣ"],"2206232":[2,"みなとみらいクイーンズタワーＣ"],"2206233":[2,"みなとみらいクイーンズタワーＣ"],"2206234":[2,"みなとみらいクイーンズタワーＣ"],"2206235":[2,"みなとみらいクイーンズタワーＣ"],"2206236":[2,"みなとみらいクイーンズタワーＣ"],"2206237":[2,"みなとみらいクイーンズタワーＣ"],"2206238":[2,"みなとみらいクイーンズタワーＣ"],"2206239":[2,"みなとみらいクイーンズタワーＣ"],"2206240":[2,"みなとみらいクイーンズタワーＣ"],"2206241":[2,"みなとみらいクイーンズタワーＣ"],"2206242":[2,"みなとみらいクイーンズタワーＣ"],"2206243":[2,"みなとみらいクイーンズタワーＣ"],"2206244":[2,"みなとみらいクイーンズタワーＣ"],"2206245":[2,"みなとみらいクイーンズタワーＣ"],"2206246":[2,"みなとみらいクイーンズタワーＣ"],"2206247":[2,"みなとみらいクイーンズタワーＣ"],"2206248":[2,"みなとみらいクイーンズタワーＣ"],"2206249":[2,"みなとみらいクイーンズタワーＣ"],"2206250":[2,"みなとみらいクイーンズタワーＣ"],"2206251":[2,"みなとみらいクイーンズタワーＣ"],"2206252":[2,"みなとみらいクイーンズタワーＣ"],"2206253":[2,"みなとみらいクイーンズタワーＣ"],"2206254":[2,"みなとみらいクイーンズタワーＣ"],"2206255":[2,"みなとみらいクイーンズタワーＣ"],"2206256":[2,"みなとみらいクイーンズタワーＣ"],"2206257":[2,"みなとみらいクイーンズタワーＣ"],"2206258":[2,"みなとみらいクイーンズタワーＣ"],"2206259":[2,"みなとみらいクイーンズタワーＣ"],"2206260":[2,"みなとみらいクイーンズタワーＣ"],"2206261":[2,"みなとみらいクイーンズタワーＣ"],"2206262":[2,"みなとみらいクイーンズタワーＣ"],"2206263":[2,"みなとみらいクイーンズタワーＣ"],"2206264":[2,"みなとみらいクイーンズタワーＣ"],"2206265":[2,"みなとみらいクイーンズタワーＣ"],"2206266":[2,"みなとみらいクイーンズタワーＣ"],"2206267":[2,"みなとみらいクイーンズタワーＣ"],"2206268":[2,"みなとみらいクイーンズタワーＣ"],"2206269":[2,"みなとみらいクイーンズタワーＣ"],"2206270":[2,"みなとみらいクイーンズタワーＣ"],"2206271":[2,"みなとみらいクイーンズタワーＣ"],"2206272":[2,"みなとみらいクイーンズタワーＣ"],"2206273":[2,"みなとみらいクイーンズタワーＣ"],"2206274":[2,"みなとみらいクイーンズタワーＣ"],"2206275":[2,"みなとみらいクイーンズタワーＣ"],"2206276":[2,"みなとみらいクイーンズタワーＣ"],"2206277":[2,"みなとみらいクイーンズタワーＣ"],"2206278":[2,"みなとみらいクイーンズタワーＣ"],"2206279":[2,"みなとみらいクイーンズタワーＣ"],"2206280":[2,"みなとみらいクイーンズタワーＣ"],"2206281":[2,"みなとみらいクイーンズタワーＣ"],"2206282":[2,"みなとみらいクイーンズタワーＣ"],"2206283":[2,"みなとみらいクイーンズタワーＣ"],"2206284":[2,"みなとみらいクイーンズタワーＣ"],"2206285":[2,"みなとみらいクイーンズタワーＣ"],"2206286":[2,"みなとみらいクイーンズタワーＣ"],"2206287":[2,"みなとみらいクイーンズタワーＣ"],"2206288":[2,"みなとみらいクイーンズタワーＣ"],"2206289":[2,"みなとみらいクイーンズタワーＣ"],"2206290":[2,"みなとみらいクイーンズタワーＣ"],"2206291":[2,"みなとみらいクイーンズタワーＣ"],"2206292":[2,"みなとみらいクイーンズタワーＣ"],"2206293":[2,"みなとみらいクイーンズタワーＣ"],"2206294":[2,"みなとみらいクイーンズタワーＣ"],"2206295":[2,"みなとみらいクイーンズタワーＣ"],"2206296":[2,"みなとみらいクイーンズタワーＣ"],"2206297":[2,"みなとみらいクイーンズタワーＣ"],"2206298":[2,"みなとみらいクイーンズタワーＣ"],"2206299":[2,"みなとみらいクイーンズタワーＣ"],"2208100":[2,"みなとみらいランドマークタワー"],"2208101":[2,"みなとみらいランドマークタワー"],"2208102":[2,"みなとみらいランドマークタワー"],"2208103":[2,"みなとみらいランドマークタワー"],"2208104":[2,"みなとみらいランドマークタワー"],"2208105":[2,"みなとみらいランドマークタワー"],"2208106":[2,"みなとみらいランドマークタワー"],"2208107":[2,"みなとみらいランドマークタワー"],"2208108":[2,"みなとみらいランドマークタワー"],"2208109":[2,"みなとみらいランドマークタワー"],"2208110":[2,"みなとみらいランドマークタワー"],"2208111":[2,"みなとみらいランドマークタワー"],"2208112":[2,"みなとみらいランドマークタワー"],"2208113":[2,"みなとみらいランドマークタワー"],"2208114":[2,"みなとみらいランドマークタワー"],"2208115":[2,"みなとみらいランドマークタワー"],"2208116":[2,"みなとみらいランドマークタワー"],"2208117":[2,"みなとみらいランドマークタワー"],"2208118":[2,"みなとみらいランドマークタワー"],"2208119":[2,"みなとみらいランドマークタワー"],"2208120":[2,"みなとみらいランドマークタワー"],"2208121":[2,"みなとみらいランドマークタワー"],"2208122":[2,"みなとみらいランドマークタワー"],"2208123":[2,"みなとみらいランドマークタワー"],"2208124":[2,"みなとみらいランドマークタワー"],"2208125":[2,"みなとみらいランドマークタワー"],"2208126":[2,"みなとみらいランドマークタワー"],"2208127":[2,"みなとみらいランドマークタワー"],"2208128":[2,"みなとみらいランドマークタワー"],"2208129":[2,"みなとみらいランドマークタワー"],"2208130":[2,"みなとみらいランドマークタワー"],"2208131":[2,"みなとみらいランドマークタワー"],"2208132":[2,"みなとみらいランドマークタワー"],"2208133":[2,"みなとみらいランドマークタワー"],"2208134":[2,"みなとみらいランドマークタワー"],"2208135":[2,"みなとみらいランドマークタワー"],"2208136":[2,"みなとみらいランドマークタワー"],"2208137":[2,"みなとみらいランドマークタワー"],"2208138":[2,"みなとみらいランドマークタワー"],"2208139":[2,"みなとみらいランドマークタワー"],"2208140":[2,"みなとみらいランドマークタワー"],"2208141":[2,"みなとみらいランドマークタワー"],"2208142":[2,"みなとみらいランドマークタワー"],"2208143":[2,"みなとみらいランドマークタワー"],"2208144":[2,"みなとみらいランドマークタワー"],"2208145":[2,"みなとみらいランドマークタワー"],"2208146":[2,"みなとみらいランドマークタワー"],"2208147":[2,"みなとみらいランドマークタワー"],"2208148":[2,"みなとみらいランドマークタワー"],"2208149":[2,"みなとみらいランドマークタワー"],"2208150":[2,"みなとみらいランドマークタワー"],"2208151":[2,"みなとみらいランドマークタワー"],"2208152":[2,"みなとみらいランドマークタワー"],"2208153":[2,"みなとみらいランドマークタワー"],"2208154":[2,"みなとみらいランドマークタワー"],"2208155":[2,"みなとみらいランドマークタワー"],"2208156":[2,"みなとみらいランドマークタワー"],"2208157":[2,"みなとみらいランドマークタワー"],"2208158":[2,"みなとみらいランドマークタワー"],"2208159":[2,"みなとみらいランドマークタワー"],"2208160":[2,"みなとみらいランドマークタワー"],"2208161":[2,"みなとみらいランドマークタワー"],"2208162":[2,"みなとみらいランドマークタワー"],"2208163":[2,"みなとみらいランドマークタワー"],"2208164":[2,"みなとみらいランドマークタワー"],"2208165":[2,"みなとみらいランドマークタワー"],"2208166":[2,"みなとみらいランドマークタワー"],"2208167":[2,"みなとみらいランドマークタワー"],"2208168":[2,"みなとみらいランドマークタワー"],"2208169":[2,"みなとみらいランドマークタワー"],"2208170":[2,"みなとみらいランドマークタワー"],"2208171":[2,"みなとみらいランドマークタワー"],"2208172":[2,"みなとみらいランドマークタワー"],"2208173":[2,"みなとみらいランドマークタワー"],"2208174":[2,"みなとみらいランドマークタワー"],"2208175":[2,"みなとみらいランドマークタワー"],"2208176":[2,"みなとみらいランドマークタワー"],"2208177":[2,"みなとみらいランドマークタワー"],"2208178":[2,"みなとみらいランドマークタワー"],"2208179":[2,"みなとみらいランドマークタワー"],"2208180":[2,"みなとみらいランドマークタワー"],"2208181":[2,"みなとみらいランドマークタワー"],"2208182":[2,"みなとみらいランドマークタワー"],"2208183":[2,"みなとみらいランドマークタワー"],"2208184":[2,"みなとみらいランドマークタワー"],"2208185":[2,"みなとみらいランドマークタワー"],"2208186":[2,"みなとみらいランドマークタワー"],"2208187":[2,"みなとみらいランドマークタワー"],"2208188":[2,"みなとみらいランドマークタワー"],"2208189":[2,"みなとみらいランドマークタワー"],"2208190":[2,"みなとみらいランドマークタワー"],"2208191":[2,"みなとみらいランドマークタワー"],"2208192":[2,"みなとみらいランドマークタワー"],"2208193":[2,"みなとみらいランドマークタワー"],"2208194":[2,"みなとみらいランドマークタワー"],"2208195":[2,"みなとみらいランドマークタワー"],"2208196":[2,"みなとみらいランドマークタワー"],"2208197":[2,"みなとみらいランドマークタワー"],"2208198":[2,"みなとみらいランドマークタワー"],"2208199":[2,"みなとみらいランドマークタワー"],"2210000":[1,""],"2210001":[1,"西寺尾"],"2210002":[1,"大口通"],"2210003":[1,"大口仲町"],"2210004":[1,"西大口"],"2210005":[1,"松見町"],"2210011":[1,"神之木台"],"2210012":[1,"子安台"],"2210013":[1,"新子安"],"2210014":[1,"入江"],"2210015":[1,"神之木町"],"2210021":[1,"子安通"],"2210022":[1,"守屋町"],"2210023":[1,"宝町"],"2210024":[1,"恵比須町"],"2210031":[1,"新浦島町"],"2210032":[1,"出田町"],"2210033":[1,"鈴繁町"],"2210034":[1,"瑞穂町"],"2210035":[1,"星野町"],"2210036":[1,"千若町"],"2210041":[1,"亀住町"],"2210042":[1,"浦島町"],"2210043":[1,"新町"],"2210044":[1,"東神奈川"],"2210045":[1,"神奈川"],"2210046":[1,"神奈川本町"],"2210051":[1,"幸ケ谷"],"2210052":[1,"栄町"],"2210053":[1,"橋本町"],"2210054":[1,"山内町"],"2210055":[1,"大野町"],"2210056":[1,"金港町"],"2210057":[1,"青木町"],"2210061":[1,"七島町"],"2210062":[1,"浦島丘"],"2210063":[1,"立町"],"2210064":[1,"鳥越"],"2210065":[1,"白楽"],"2210071":[1,"白幡仲町"],"2210072":[1,"白幡東町"],"2210073":[1,"白幡南町"],"2210074":[1,"白幡西町"],"2210075":[1,"白幡上町"],"2210076":[1,"白幡町"],"2210077":[1,"白幡向町"],"2210801":[1,"神大寺"],"2210802":[1,"六角橋"],"2210803":[1,"中丸"],"2210804":[1,"栗田谷"],"2210811":[1,"斎藤分町"],"2210812":[1,"平川町"],"2210813":[1,"二本榎"],"2210814":[1,"旭ケ丘"],"2210821":[1,"富家町"],"2210822":[1,"西神奈川"],"2210823":[1,"二ツ谷町"],"2210824":[1,"広台太田町"],"2210825":[1,"反町"],"2210831":[1,"上反町"],"2210832":[1,"桐畑"],"2210833":[1,"高島台"],"2210834":[1,"台町"],"2210835":[1,"鶴屋町"],"2210841":[1,"松本町"],"2210842":[1,"泉町"],"2210843":[1,"松ケ丘"],"2210844":[1,"沢渡"],"2210851":[1,"三ツ沢中町"],"2210852":[1,"三ツ沢下町"],"2210853":[1,"三ツ沢東町"],"2210854":[1,"三ツ沢南町"],"2210855":[1,"三ツ沢西町"],"2210856":[1,"三ツ沢上町"],"2210862":[1,"三枚町"],"2210863":[1,"羽沢町"],"2210864":[1,"菅田町"],"2210865":[1,"片倉"],"2210866":[1,"羽沢南"],"2220000":[10,""],"2220001":[10,"樽町"],"2220002":[10,"師岡町"],"2220003":[10,"大曽根"],"2220004":[10,"大曽根台"],"2220011":[10,"菊名"],"2220012":[10,"富士塚"],"2220013":[10,"錦が丘"],"2220021":[10,"篠原北"],"2220022":[10,"篠原東"],"2220023":[10,"仲手原"],"2220024":[10,"篠原台町"],"2220025":[10,"篠原西町"],"2220026":[10,"篠原町"],"2220032":[10,"大豆戸町"],"2220033":[10,"新横浜"],"2220034":[10,"岸根町"],"2220035":[10,"鳥山町"],"2220036":[10,"小机町"],"2220037":[10,"大倉山"],"2230051":[10,"箕輪町"],"2230052":[10,"綱島東"],"2230053":[10,"綱島西"],"2230054":[10,"綱島台"],"2230055":[10,"綱島上町"],"2230056":[10,"新吉田町"],"2230057":[10,"新羽町"],"2230058":[10,"新吉田東"],"2230059":[10,"北新横浜"],"2230061":[10,"日吉"],"2230062":[10,"日吉本町"],"2230063":[10,"高田町"],"2230064":[10,"下田町"],"2230065":[10,"高田東"],"2230066":[10,"高田西"],"2240000":[13,""],"2240001":[13,"中川"],"2240003":[13,"中川中央"],"2240004":[13,"荏田東町"],"2240006":[13,"荏田東"],"2240007":[13,"荏田南"],"2240008":[13,"荏田南町"],"2240011":[13,"牛久保町"],"2240012":[13,"牛久保"],"2240013":[13,"すみれが丘"],"2240014":[13,"牛久保東"],"2240015":[13,"牛久保西"],"2240016":[13,"あゆみが丘"],"2240021":[13,"北山田"],"2240023":[13,"東山田"],"2240024":[13,"東山田町"],"2240025":[13,"早渕"],"2240026":[13,"南山田町"],"2240027":[13,"大棚町"],"2240028":[13,"大棚西"],"2240029":[13,"南山田"],"2240031":[13,"茅ケ崎町"],"2240032":[13,"茅ケ崎中央"],"2240033":[13,"茅ケ崎東"],"2240034":[13,"勝田町"],"2240035":[13,"新栄町"],"2240036":[13,"勝田南"],"2240037":[13,"茅ケ崎南"],"2240041":[13,"仲町台"],"2240042":[13,"大熊町"],"2240043":[13,"折本町"],"2240044":[13,"川向町"],"2240045":[13,"東方町"],"2240046":[13,"桜並木"],"2240051":[13,"富士見が丘"],"2240052":[13,"二の丸"],"2240053":[13,"池辺町"],"2240054":[13,"佐江戸町"],"2240055":[13,"加賀原"],"2240056":[13,"川和台"],"2240057":[13,"川和町"],"2240061":[13,"大丸"],"2240062":[13,"葛が谷"],"2240063":[13,"長坂"],"2240064":[13,"平台"],"2240065":[13,"高山"],"2240066":[13,"見花山"],"2250001":[12,"美しが丘西"],"2250002":[12,"美しが丘"],"2250003":[12,"新石川"],"2250004":[12,"元石川町"],"2250005":[12,"荏子田"],"2250011":[12,"あざみ野"],"2250012":[12,"あざみ野南"],"2250013":[12,"荏田町"],"2250014":[12,"荏田西"],"2250015":[12,"荏田北"],"2250016":[12,"みすずが丘"],"2250021":[12,"すすき野"],"2250022":[12,"黒須田"],"2250023":[12,"大場町"],"2250024":[12,"市ケ尾町"],"2250025":[12,"鉄町"],"2250026":[12,"もみの木台"],"2260000":[11,""],"2260001":[11,"東本郷町"],"2260002":[11,"東本郷"],"2260003":[11,"鴨居"],"2260004":[11,"鴨居町"],"2260005":[11,"竹山"],"2260006":[11,"白山"],"2260012":[11,"上山"],"2260013":[11,"寺山町"],"2260014":[11,"台村町"],"2260015":[11,"三保町"],"2260016":[11,"霧が丘"],"2260017":[11,"新治町"],"2260018":[11,"長津田みなみ台"],"2260019":[11,"中山"],"2260021":[11,"北八朔町"],"2260022":[11,"青砥町"],"2260023":[11,"小山町"],"2260024":[11,"西八朔町"],"2260025":[11,"十日市場町"],"2260026":[11,"長津田町"],"2260027":[11,"長津田"],"2260028":[11,"いぶき野"],"2260029":[11,"森の台"],"2270000":[12,""],"2270031":[12,"寺家町"],"2270032":[12,"成合町"],"2270033":[12,"鴨志田町"],"2270034":[12,"桂台"],"2270035":[12,"すみよし台"],"2270036":[12,"奈良町"],"2270037":[12,"緑山"],"2270038":[12,"奈良"],"2270041":[12,"上谷本町"],"2270042":[12,"下谷本町"],"2270043":[12,"藤が丘"],"2270044":[12,"もえぎ野"],"2270045":[12,"若草台"],"2270046":[12,"たちばな台"],"2270047":[12,"みたけ台"],"2270048":[12,"柿の木台"],"2270051":[12,"千草台"],"2270052":[12,"梅が丘"],"2270053":[12,"さつきが丘"],"2270054":[12,"しらとり台"],"2270055":[12,"つつじが丘"],"2270061":[12,"桜台"],"2270062":[12,"青葉台"],"2270063":[12,"榎が丘"],"2270064":[12,"田奈町"],"2270065":[12,"恩田町"],"2270066":[12,"あかね台"],"2270067":[12,"松風台"],"2300000":[0,""],"2300001":[0,"矢向"],"2300002":[0,"江ケ崎町"],"2300003":[0,"尻手"],"2300004":[0,"元宮"],"2300011":[0,"上末吉"],"2300012":[0,"下末吉"],"2300013":[0,"三ツ池公園"],"2300014":[0,"諏訪坂"],"2300015":[0,"寺谷"],"2300016":[0,"東寺尾北台"],"2300017":[0,"東寺尾中台"],"2300018":[0,"東寺尾東台"],"2300021":[0,"市場上町"],"2300022":[0,"市場東中町"],"2300023":[0,"市場西中町"],"2300024":[0,"市場下町"],"2300025":[0,"市場大和町"],"2300026":[0,"市場富士見町"],"2300027":[0,"菅沢町"],"2300031":[0,"平安町"],"2300032":[0,"大東町"],"2300033":[0,"朝日町"],"2300034":[0,"寛政町"],"2300035":[0,"安善町"],"2300036":[0,"浜町"],"2300037":[0,"向井町"],"2300038":[0,"栄町通"],"2300041":[0,"潮田町"],"2300042":[0,"仲通"],"2300043":[0,"汐入町"],"2300044":[0,"弁天町"],"2300045":[0,"末広町"],"2300046":[0,"小野町"],"2300047":[0,"下野谷町"],"2300048":[0,"本町通"],"2300051":[0,"鶴見中央"],"2300052":[0,"生麦"],"2300053":[0,"大黒町"],"2300054":[0,"大黒ふ頭"],"2300055":[0,"扇島"],"2300061":[0,"佃野町"],"2300062":[0,"豊岡町"],"2300063":[0,"鶴見"],"2300071":[0,"駒岡"],"2300072":[0,"梶山"],"2300073":[0,"獅子ケ谷"],"2300074":[0,"北寺尾"],"2300075":[0,"上の宮"],"2300076":[0,"馬場"],"2300077":[0,"東寺尾"],"2300078":[0,"岸谷"],"2310000":[3,""],"2310001":[3,"新港"],"2310002":[3,"海岸通"],"2310003":[3,"北仲通"],"2310004":[3,"元浜町"],"2310005":[3,"本町"],"2310006":[3,"南仲通"],"2310007":[3,"弁天通"],"2310011":[3,"太田町"],"2310012":[3,"相生町"],"2310013":[3,"住吉町"],"2310014":[3,"常盤町"],"2310015":[3,"尾上町"],"2310016":[3,"真砂町"],"2310017":[3,"港町"],"2310021":[3,"日本大通"],"2310022":[3,"横浜公園"],"2310023":[3,"山下町"],"2310024":[3,"吉浜町"],"2310025":[3,"松影町"],"2310026":[3,"寿町"],"2310027":[3,"扇町"],"2310028":[3,"翁町"],"2310031":[3,"万代町"],"2310032":[3,"不老町"],"2310033":[3,"長者町"],"2310034":[3,"三吉町"],"2310035":[3,"千歳町"],"2310036":[3,"山田町"],"2310037":[3,"富士見町"],"2310038":[3,"山吹町"],"2310041":[3,"吉田町"],"2310042":[3,"福富町西通"],"2310043":[3,"福富町仲通"],"2310044":[3,"福富町東通"],"2310045":[3,"伊勢佐木町"],"2310046":[3,"末広町"],"2310047":[3,"羽衣町"],"2310048":[3,"蓬莱町"],"2310051":[3,"赤門町"],"2310052":[3,"英町"],"2310053":[3,"初音町"],"2310054":[3,"黄金町"],"2310055":[3,"末吉町"],"2310056":[3,"若葉町"],"2310057":[3,"曙町"],"2310058":[3,"弥生町"],"2310061":[3,"内田町"],"2310062":[3,"桜木町"],"2310063":[3,"花咲町"],"2310064":[3,"野毛町"],"2310065":[3,"宮川町"],"2310066":[3,"日ノ出町"],"2310801":[3,"新山下"],"2310802":[3,"小港町"],"2310803":[3,"本牧十二天"],"2310804":[3,"本牧宮原"],"2310805":[3,"和田山"],"2310806":[3,"本牧町"],"2310811":[3,"本牧ふ頭"],"2310812":[3,"錦町"],"2310813":[3,"かもめ町"],"2310814":[3,"豊浦町"],"2310815":[3,"千鳥町"],"2310816":[3,"南本牧"],"2310821":[3,"本牧原"],"2310822":[3,"本牧元町"],"2310823":[3,"本牧大里町"],"2310824":[3,"本牧三之谷"],"2310825":[3,"本牧間門"],"2310826":[3,"本牧荒井"],"2310827":[3,"本牧和田"],"2310831":[3,"矢口台"],"2310832":[3,"本牧緑ケ丘"],"2310833":[3,"本牧満坂"],"2310834":[3,"池袋"],"2310835":[3,"根岸加曽台"],"2310836":[3,"根岸町"],"2310837":[3,"滝之上"],"2310838":[3,"豆口台"],"2310839":[3,"仲尾台"],"2310841":[3,"妙香寺台"],"2310842":[3,"上野町"],"2310843":[3,"本郷町"],"2310844":[3,"西之谷町"],"2310845":[3,"立野"],"2310846":[3,"大和町"],"2310847":[3,"竹之丸"],"2310848":[3,"鷺山"],"2310849":[3,"麦田町"],"2310851":[3,"山元町"],"2310852":[3,"西竹之丸"],"2310853":[3,"根岸台"],"2310854":[3,"根岸旭台"],"2310855":[3,"寺久保"],"2310856":[3,"簑沢"],"2310857":[3,"塚越"],"2310858":[3,"大芝台"],"2310859":[3,"大平町"],"2310861":[3,"元町"],"2310862":[3,"山手町"],"2310863":[3,"諏訪町"],"2310864":[3,"千代崎町"],"2310865":[3,"北方町"],"2310866":[3,"柏葉"],"2310867":[3,"打越"],"2310868":[3,"石川町"],"2320000":[4,""],"2320001":[4,"伏見町"],"2320002":[4,"三春台"],"2320003":[4,"西中町"],"2320004":[4,"前里町"],"2320005":[4,"白金町"],"2320006":[4,"南太田"],"2320007":[4,"清水ケ丘"],"2320008":[4,"庚台"],"2320011":[4,"日枝町"],"2320012":[4,"南吉田町"],"2320013":[4,"山王町"],"2320014":[4,"吉野町"],"2320015":[4,"共進町"],"2320016":[4,"宮元町"],"2320017":[4,"宿町"],"2320018":[4,"花之木町"],"2320021":[4,"真金町"],"2320022":[4,"高根町"],"2320023":[4,"白妙町"],"2320024":[4,"浦舟町"],"2320025":[4,"高砂町"],"2320026":[4,"二葉町"],"2320027":[4,"新川町"],"2320031":[4,"永楽町"],"2320032":[4,"万世町"],"2320033":[4,"中村町"],"2320034":[4,"唐沢"],"2320035":[4,"平楽"],"2320036":[4,"山谷"],"2320037":[4,"八幡町"],"2320041":[4,"睦町"],"2320042":[4,"堀ノ内町"],"2320043":[4,"蒔田町"],"2320044":[4,"榎町"],"2320045":[4,"東蒔田町"],"2320051":[4,"井土ケ谷上町"],"2320052":[4,"井土ケ谷中町"],"2320053":[4,"井土ケ谷下町"],"2320054":[4,"大橋町"],"2320055":[4,"中島町"],"2320056":[4,"通町"],"2320057":[4,"若宮町"],"2320061":[4,"大岡"],"2320062":[4,"中里町"],"2320063":[4,"中里"],"2320064":[4,"別所"],"2320065":[4,"別所中里台"],"2320066":[4,"六ツ川"],"2320067":[4,"弘明寺町"],"2320071":[4,"永田北"],"2320072":[4,"永田東"],"2320073":[4,"永田南"],"2320074":[4,"永田山王台"],"2320075":[4,"永田みなみ台"],"2320076":[4,"永田台"],"2330000":[5,""],"2330001":[5,"上大岡東"],"2330002":[5,"上大岡西"],"2330003":[5,"港南"],"2330004":[5,"港南中央通"],"2330005":[5,"東芹が谷"],"2330006":[5,"芹が谷"],"2330007":[5,"大久保"],"2330008":[5,"最戸"],"2330011":[5,"東永谷"],"2330012":[5,"上永谷"],"2330013":[5,"丸山台"],"2330014":[5,"上永谷町"],"2330015":[5,"日限山"],"2330016":[5,"下永谷"],"2340051":[5,"日野"],"2340052":[5,"笹下"],"2340053":[5,"日野中央"],"2340054":[5,"港南台"],"2340055":[5,"日野南"],"2340056":[5,"野庭町"],"2350000":[8,""],"2350001":[8,"上町"],"2350002":[8,"馬場町"],"2350003":[8,"坂下町"],"2350004":[8,"下町"],"2350005":[8,"東町"],"2350006":[8,"鳳町"],"2350007":[8,"西町"],"2350008":[8,"原町"],"2350011":[8,"丸山"],"2350012":[8,"滝頭"],"2350013":[8,"広地町"],"2350014":[8,"中浜町"],"2350015":[8,"久木町"],"2350016":[8,"磯子"],"2350017":[8,"新磯子町"],"2350018":[8,"新森町"],"2350019":[8,"磯子台"],"2350021":[8,"岡村"],"2350022":[8,"汐見台"],"2350023":[8,"森"],"2350024":[8,"森が丘"],"2350031":[8,"新中原町"],"2350032":[8,"新杉田町"],"2350033":[8,"杉田"],"2350034":[8,"杉田坪呑"],"2350035":[8,"田中"],"2350036":[8,"中原"],"2350041":[8,"栗木"],"2350042":[8,"上中里町"],"2350043":[8,"氷取沢町"],"2350044":[8,"峰町"],"2350045":[8,"洋光台"],"2360000":[9,""],"2360001":[9,"昭和町"],"2360002":[9,"鳥浜町"],"2360003":[9,"幸浦"],"2360004":[9,"福浦"],"2360005":[9,"並木"],"2360006":[9,"八景島"],"2360007":[9,"白帆"],"2360011":[9,"長浜"],"2360012":[9,"柴町"],"2360013":[9,"海の公園"],"2360014":[9,"寺前"],"2360015":[9,"金沢町"],"2360016":[9,"谷津町"],"2360017":[9,"西柴"],"2360021":[9,"泥亀"],"2360022":[9,"町屋町"],"2360023":[9,"平潟町"],"2360024":[9,"乙舳町"],"2360025":[9,"野島町"],"2360026":[9,"柳町"],"2360027":[9,"瀬戸"],"2360028":[9,"洲崎町"],"2360031":[9,"六浦"],"2360032":[9,"六浦町"],"2360033":[9,"東朝比奈"],"2360034":[9,"朝比奈町"],"2360035":[9,"大道"],"2360036":[9,"みず木町"],"2360037":[9,"六浦東"],"2360038":[9,"六浦南"],"2360041":[9,"釜利谷町"],"2360042":[9,"釜利谷東"],"2360043":[9,"大川"],"2360044":[9,"高舟台"],"2360045":[9,"釜利谷南"],"2360046":[9,"釜利谷西"],"2360051":[9,"富岡東"],"2360052":[9,"富岡西"],"2360053":[9,"能見台通"],"2360054":[9,"堀口"],"2360055":[9,"片吹"],"2360056":[9,"能見台森"],"2360057":[9,"能見台"],"2360058":[9,"能見台東"],"2400000":[6,""],"2400001":[6,"川辺町"],"2400002":[6,"宮田町"],"2400003":[6,"天王町"],"2400004":[6,"岩間町"],"2400005":[6,"神戸町"],"2400006":[6,"星川"],"2400007":[6,"明神台"],"2400011":[6,"桜ケ丘"],"2400012":[6,"月見台"],"2400013":[6,"帷子町"],"2400014":[6,"霞台"],"2400015":[6,"岩崎町"],"2400016":[6,"初音ケ丘"],"2400017":[6,"花見台"],"2400021":[6,"保土ケ谷町"],"2400022":[6,"西久保町"],"2400023":[6,"岩井町"],"2400024":[6,"瀬戸ケ谷町"],"2400025":[6,"狩場町"],"2400026":[6,"権太坂"],"2400031":[6,"藤塚町"],"2400032":[6,"法泉"],"2400033":[6,"境木本町"],"2400034":[6,"境木町"],"2400035":[6,"今井町"],"2400036":[6,"新桜ケ丘"],"2400041":[6,"東川島町"],"2400042":[6,"上星川"],"2400043":[6,"坂本町"],"2400044":[6,"仏向町"],"2400045":[6,"川島町"],"2400046":[6,"仏向西"],"2400051":[6,"上菅田町"],"2400052":[6,"西谷町"],"2400053":[6,"新井町"],"2400054":[6,"西谷"],"2400061":[6,"峰沢町"],"2400062":[6,"岡沢町"],"2400063":[6,"鎌谷町"],"2400064":[6,"峰岡町"],"2400065":[6,"和田"],"2400066":[6,"釜台町"],"2400067":[6,"常盤台"],"2410000":[7,""],"2410001":[7,"上白根町"],"2410002":[7,"上白根"],"2410003":[7,"白根町"],"2410004":[7,"中白根"],"2410005":[7,"白根"],"2410011":[7,"川島町"],"2410012":[7,"西川島町"],"2410013":[7,"三反田町"],"2410014":[7,"市沢町"],"2410015":[7,"小高町"],"2410021":[7,"鶴ケ峰本町"],"2410022":[7,"鶴ケ峰"],"2410023":[7,"本宿町"],"2410024":[7,"本村町"],"2410025":[7,"四季美台"],"2410031":[7,"今宿西町"],"2410032":[7,"今宿東町"],"2410033":[7,"今川町"],"2410034":[7,"今宿南町"],"2410801":[7,"若葉台"],"2410802":[7,"上川井町"],"2410803":[7,"川井本町"],"2410804":[7,"川井宿町"],"2410805":[7,"都岡町"],"2410806":[7,"下川井町"],"2410811":[7,"矢指町"],"2410812":[7,"金が谷"],"2410813":[7,"今宿町"],"2410814":[7,"中沢"],"2410815":[7,"中尾"],"2410816":[7,"笹野台"],"2410817":[7,"今宿"],"2410821":[7,"二俣川"],"2410822":[7,"さちが丘"],"2410823":[7,"善部町"],"2410824":[7,"南希望が丘"],"2410825":[7,"中希望が丘"],"2410826":[7,"東希望が丘"],"2410831":[7,"左近山"],"2410832":[7,"桐が作"],"2410833":[7,"南本宿町"],"2410834":[7,"大池町"],"2410835":[7,"柏町"],"2410836":[7,"万騎が原"],"2440000":[14,""],"2440001":[14,"鳥が丘"],"2440002":[14,"矢部町"],"2440003":[14,"戸塚町"],"2440004":[14,"小雀町"],"2440801":[14,"品濃町"],"2440802":[14,"平戸"],"2440803":[14,"平戸町"],"2440804":[14,"前田町"],"2440805":[14,"川上町"],"2440806":[14,"上品濃"],"2440811":[14,"上柏尾町"],"2440812":[14,"柏尾町"],"2440813":[14,"舞岡町"],"2440814":[14,"南舞岡"],"2440815":[14,"下倉田町"],"2440816":[14,"上倉田町"],"2440817":[14,"吉田町"],"2440841":[15,"長沼町"],"2440842":[15,"飯島町"],"2440843":[15,"長尾台町"],"2440844":[15,"田谷町"],"2440845":[15,"金井町"],"2450000":[16,""],"2450001":[16,"池の谷"],"2450002":[16,"緑園"],"2450003":[16,"岡津町"],"2450004":[16,"領家"],"2450005":[16,"白百合"],"2450006":[16,"西が岡"],"2450007":[16,"桂坂"],"2450008":[16,"弥生台"],"2450009":[16,"新橋町"],"2450011":[16,"中田町"],"2450012":[16,"中田北"],"2450013":[16,"中田東"],"2450014":[16,"中田南"],"2450015":[16,"中田西"],"2450016":[16,"和泉町"],"2450017":[16,"下飯田町"],"2450018":[16,"上飯田町"],"2450019":[16,"ゆめが丘"],"2450021":[16,"下和泉"],"2450022":[16,"和泉が丘"],"2450023":[16,"和泉中央南"],"2450024":[16,"和泉中央北"],"2450051":[14,"名瀬町"],"2450052":[14,"秋葉町"],"2450053":[14,"上矢部町"],"2450061":[14,"汲沢"],"2450062":[14,"汲沢町"],"2450063":[14,"原宿"],"2450064":[14,"影取町"],"2450065":[14,"東俣野町"],"2450066":[14,"俣野町"],"2450067":[14,"深谷町"],"2460000":[17,""],"2460001":[17,"卸本町"],"2460002":[17,"北町"],"2460003":[17,"瀬谷町"],"2460004":[17,"中屋敷"],"2460005":[17,"竹村町"],"2460006":[17,"上瀬谷町"],"2460007":[17,"目黒町"],"2460008":[17,"五貫目町"],"2460011":[17,"東野台"],"2460012":[17,"東野"],"2460013":[17,"相沢"],"2460014":[17,"中央"],"2460015":[17,"本郷"],"2460021":[17,"二ツ橋町"],"2460022":[17,"三ツ境"],"2460023":[17,"阿久和東"],"2460025":[17,"阿久和西"],"2460026":[17,"阿久和南"],"2460031":[17,"瀬谷"],"2460032":[17,"南台"],"2460034":[17,"南瀬谷"],"2460035":[17,"下瀬谷"],"2460036":[17,"北新"],"2460037":[17,"橋戸"],"2460038":[17,"宮沢"],"2470000":[15,""],"2470001":[15,"小菅ケ谷町"],"2470002":[15,"小山台"],"2470003":[15,"鍛冶ケ谷町"],"2470004":[15,"柏陽"],"2470005":[15,"桂町"],"2470006":[15,"笠間"],"2470007":[15,"小菅ケ谷"],"2470008":[15,"本郷台"],"2470009":[15,"鍛冶ケ谷"],"2470011":[15,"元大橋"],"2470012":[15,"若竹町"],"2470013":[15,"上郷町"],"2470014":[15,"公田町"],"2470015":[15,"中野町"],"2470021":[15,"東上郷町"],"2470022":[15,"庄戸"],"2470023":[15,"長倉町"],"2470024":[15,"野七里"],"2470025":[15,"上之町"],"2470026":[15,"犬山町"],"2470027":[15,"尾月"],"2470028":[15,"亀井町"],"2470031":[15,"桂台北"],"2470032":[15,"桂台東"],"2470033":[15,"桂台南"],"2470034":[15,"桂台中"],"2470035":[15,"桂台西"]};   // 郵便番号 → [区のindex, 町名]
+const GEO = {"b":[139.4647825,35.31250175,139.71145665,35.5926605],"kx":0.814596,"s":4976.616,"H":1394.2,"wards":{"鶴見区":{"d":"M763.5,461.7L728.8,450.9L723.8,444.9L729.3,435.6L714.4,435.6L707.6,429.9L708.7,417.4L699.4,408.2L692.1,389.0L691.8,384.1L703.7,382.2L712.9,371.0L720.1,369.5L721.2,361.3L715.2,359.1L713.7,349.0L723.2,353.0L725.7,346.3L740.4,345.3L739.1,320.6L742.2,306.6L737.6,294.7L745.5,290.5L751.6,276.7L767.7,268.2L793.7,277.8L812.6,289.3L817.6,296.9L824.9,288.0L834.1,284.9L834.6,278.4L851.7,276.1L854.7,258.8L865.9,264.1L892.4,262.1L892.8,289.1L887.5,307.2L899.2,318.4L897.9,325.0L907.7,329.8L903.8,337.0L911.7,358.2L910.6,366.5L919.7,364.2L939.8,431.9L947.8,431.2L949.0,447.4L967.4,439.0L1000.0,506.9L938.6,540.5L932.8,520.8L946.6,513.4L945.2,506.1L931.7,513.6L926.0,498.9L920.4,500.3L914.1,503.4L917.5,514.4L916.9,519.9L915.6,512.7L915.0,516.5L910.0,509.5L904.8,484.5L905.7,504.2L901.1,506.6L913.7,534.9L924.6,547.3L924.4,553.7L910.9,566.1L899.1,565.8L898.7,561.7L879.7,568.8L879.7,596.0L854.9,604.2L856.0,614.3L854.7,608.2L847.7,615.4L825.5,621.2L822.7,616.6L823.4,592.7L844.7,584.9L841.4,572.4L837.3,572.5L830.2,558.4L831.9,553.2L850.1,541.9L848.0,538.3L825.8,549.3L814.7,528.0L807.9,526.7L793.9,505.9L796.6,497.3L789.3,497.5L781.5,488.0L781.6,472.5L767.2,468.5L763.5,461.7Z","c":[837.8,439.8]},"神奈川区":{"d":"M417.7,474.8L427.7,465.1L440.1,440.7L475.9,444.5L480.6,439.6L503.6,441.4L510.3,442.6L516.6,454.2L523.2,456.3L527.8,450.1L534.1,462.7L561.8,471.6L573.7,469.1L574.3,464.6L581.1,469.0L584.7,464.7L588.6,471.8L585.7,485.3L595.1,489.3L602.2,500.7L628.9,483.4L634.4,504.0L650.7,513.9L665.1,507.0L658.7,501.3L670.4,499.9L673.3,492.2L690.7,495.5L697.1,485.9L696.7,458.2L705.9,429.8L714.4,435.6L725.0,433.4L729.3,435.6L723.8,444.9L728.8,450.9L754.5,456.2L767.2,468.5L781.6,472.5L781.5,488.0L789.3,497.5L796.6,497.3L793.9,505.9L820.2,539.0L820.8,543.2L815.5,546.3L828.7,573.0L766.7,577.4L756.7,553.1L744.1,558.8L757.2,571.7L757.7,578.1L729.0,580.5L718.3,593.3L711.8,589.2L717.9,594.0L710.7,604.0L713.8,604.4L712.9,612.0L709.0,611.1L711.5,620.9L702.9,618.3L702.7,634.4L683.9,635.5L677.0,624.4L657.8,631.9L642.8,620.4L614.6,617.0L613.6,610.1L607.8,607.5L607.7,600.3L597.8,603.3L592.9,599.9L576.4,608.8L575.5,615.5L566.8,621.4L558.2,617.4L549.3,621.8L545.3,615.8L558.0,579.3L550.2,555.7L536.6,542.9L531.0,555.0L515.3,551.7L484.4,590.0L478.5,592.5L478.4,603.8L466.4,585.4L459.7,560.6L451.0,547.3L442.1,511.0L417.7,474.8Z","c":[633.2,532.6]},"西区":{"d":"M566.5,620.7L592.9,599.9L597.8,603.3L607.7,600.3L607.8,607.5L613.6,610.1L614.5,617.0L642.8,620.4L657.8,631.9L678.6,624.9L683.9,635.5L681.7,637.8L685.7,642.9L687.9,640.8L684.6,645.2L703.8,641.4L701.8,668.4L704.3,667.3L707.8,667.8L701.8,668.7L702.5,673.2L690.6,681.0L682.7,698.3L671.4,686.3L660.5,688.2L666.3,697.8L661.7,705.9L662.2,714.6L658.5,718.1L654.3,714.9L656.9,730.7L645.4,747.3L640.2,744.7L635.4,750.5L630.2,749.6L608.3,738.2L594.7,747.0L566.5,742.8L561.0,733.7L565.1,729.6L562.5,715.0L568.5,710.5L566.6,705.0L580.6,695.1L569.3,688.7L575.0,662.9L570.8,657.1L566.5,620.7Z","c":[635.6,675.3]},"中区":{"d":"M720.0,901.1L704.9,864.2L685.4,866.8L679.7,863.6L662.0,839.0L667.0,827.8L660.7,821.3L687.0,817.1L709.5,796.6L706.4,791.0L695.4,793.7L695.3,776.1L684.1,780.1L671.6,759.8L640.4,776.0L636.0,765.9L645.2,761.0L636.5,747.3L645.4,747.3L656.9,730.7L654.3,714.9L658.5,718.1L662.0,714.9L661.7,705.9L666.3,697.8L660.5,688.2L663.1,685.2L671.4,686.3L681.9,698.5L692.1,682.9L704.2,676.1L713.7,681.2L720.4,671.1L723.3,676.8L718.3,684.4L722.1,686.9L732.6,671.2L738.6,675.1L732.2,673.1L729.9,676.6L736.0,679.1L734.6,681.3L728.3,679.1L732.8,682.9L726.9,690.3L730.6,705.1L727.0,705.0L724.3,714.5L729.2,717.5L732.4,712.7L729.3,709.2L733.0,711.8L745.8,691.3L749.6,693.8L737.7,711.7L741.8,712.7L732.5,719.2L753.8,731.0L757.4,725.3L754.8,729.6L758.0,728.9L758.4,734.2L779.8,703.3L785.5,707.0L780.3,715.2L787.0,717.7L792.5,709.6L797.9,713.2L792.9,721.2L797.9,723.2L809.3,708.9L814.9,712.5L806.1,726.1L779.1,738.1L792.5,753.5L804.3,742.1L796.6,745.3L799.5,742.4L795.2,737.7L800.1,742.8L802.7,740.4L797.1,734.6L792.8,736.6L797.2,734.4L807.9,745.6L833.4,703.5L844.6,705.5L849.4,711.4L826.0,758.6L836.6,765.5L853.4,731.3L861.3,735.4L857.4,743.3L878.6,751.9L856.6,795.6L862.3,798.1L856.5,795.7L853.6,801.6L865.6,807.6L868.5,801.7L863.8,799.1L868.6,801.6L894.2,749.6L901.1,752.9L905.5,747.5L901.4,753.0L915.5,763.3L900.3,808.5L904.6,810.3L900.3,823.1L904.1,810.3L900.3,808.9L894.3,826.1L877.4,827.3L877.9,833.8L875.7,824.3L869.5,821.5L867.8,825.3L878.1,837.3L878.6,845.3L874.7,849.5L859.9,838.5L853.0,841.7L871.9,865.3L864.4,878.2L872.5,881.2L879.4,864.3L882.7,865.6L873.4,881.6L879.6,883.9L886.0,875.3L871.1,895.7L870.2,904.8L830.1,944.5L826.5,942.3L828.3,945.9L818.2,938.4L825.5,942.8L819.1,935.9L828.8,926.4L820.5,920.2L816.1,924.7L820.2,920.0L815.3,916.3L805.1,925.8L787.6,913.5L786.4,919.5L787.2,913.2L782.0,909.3L781.1,913.6L777.5,905.9L776.6,910.3L773.0,902.6L772.1,907.0L772.6,902.3L761.3,894.0L743.8,896.7L753.3,909.4L752.6,910.0L743.4,896.8L720.0,901.1Z","c":[799.4,808.5]},"南区":{"d":"M471.0,890.7L462.4,873.3L462.2,857.8L455.9,848.4L438.2,848.5L428.9,840.6L426.3,830.5L443.5,829.3L442.8,835.1L446.4,830.0L449.0,833.9L442.5,837.5L452.0,836.3L447.2,823.4L450.4,797.4L457.3,791.1L473.1,790.8L502.4,750.9L534.7,761.5L552.3,760.3L559.2,767.5L565.0,761.6L563.1,753.9L574.7,744.2L594.7,747.0L608.3,738.2L637.7,749.6L645.2,761.0L636.0,765.9L640.4,776.0L671.6,759.8L684.1,780.1L695.3,776.1L695.4,793.7L706.4,791.0L709.5,796.6L686.0,817.5L667.4,822.9L658.8,819.7L643.6,827.3L630.5,826.2L631.3,831.4L614.8,832.6L601.7,848.0L592.3,841.6L589.6,851.4L577.1,863.2L579.5,865.2L571.1,898.5L572.5,909.2L576.1,909.8L574.5,916.3L569.2,918.6L559.9,914.5L550.8,903.0L539.5,902.1L538.0,890.8L545.6,882.1L542.1,878.2L531.2,876.8L529.5,884.1L520.5,882.0L513.3,895.3L503.9,899.7L497.2,910.9L471.0,890.7Z","c":[539.3,828.2]},"保土ケ谷区":{"d":"M358.9,471.1L365.3,476.7L377.0,477.3L384.4,484.8L390.2,500.4L400.8,495.6L406.6,479.7L417.7,474.8L442.1,511.0L451.0,547.3L459.7,560.6L466.4,585.4L478.4,603.8L478.5,592.5L516.1,551.2L531.0,555.0L536.6,542.9L553.5,559.7L558.0,579.6L545.2,620.2L558.2,617.4L568.2,623.9L570.8,657.1L575.0,662.9L569.3,688.7L580.6,695.1L566.6,705.0L568.5,710.5L562.5,715.0L565.1,729.6L560.8,731.7L562.3,738.1L574.7,744.2L563.1,753.9L562.5,766.0L551.3,760.1L522.4,758.9L512.9,751.3L502.8,750.8L487.7,767.6L478.0,786.2L467.8,793.3L455.7,792.0L447.3,804.4L434.5,770.5L393.9,782.1L380.2,770.0L377.8,751.6L368.5,744.3L352.8,745.4L352.1,736.5L341.8,732.9L340.6,723.0L332.8,722.7L325.9,714.0L326.4,705.9L351.8,691.5L392.3,693.3L399.5,683.3L411.9,682.2L411.0,666.2L421.9,659.6L419.7,639.7L412.5,643.2L402.4,632.9L394.7,632.7L377.0,613.7L379.6,591.3L388.4,592.2L395.9,578.4L400.1,580.6L398.3,571.3L389.0,571.6L392.9,561.2L399.9,560.8L404.2,554.5L414.2,556.3L404.0,537.7L372.0,536.8L347.1,500.7L348.5,482.8L356.1,478.9L358.9,471.1Z","c":[487.4,637.3]},"磯子区":{"d":"M572.5,909.2L579.5,865.2L577.1,863.2L589.6,851.4L592.2,841.7L601.7,848.0L615.5,832.3L631.3,831.4L630.5,826.2L643.6,827.3L658.8,819.7L667.0,827.8L662.0,839.0L673.4,856.0L685.4,866.8L705.0,864.4L708.5,883.6L712.7,884.9L720.0,901.1L695.4,912.4L699.0,915.6L694.9,912.6L690.3,914.7L693.4,917.6L685.2,917.1L688.4,920.0L682.5,918.4L668.6,892.3L675.0,907.7L660.5,913.3L673.0,934.0L718.4,924.1L729.6,931.4L732.5,944.0L682.5,958.0L684.3,955.7L653.7,950.7L638.1,978.3L641.2,980.1L641.2,980.3L637.3,982.0L647.2,1000.0L669.0,989.1L666.7,984.7L676.6,979.1L667.5,984.7L669.3,988.9L675.1,985.9L679.8,992.1L695.1,983.5L685.4,989.4L691.7,997.9L700.2,993.4L692.0,998.5L696.1,1007.3L703.9,1003.0L704.4,1004.1L659.4,1027.4L666.9,1038.5L664.4,1046.5L639.1,1060.2L633.8,1081.4L636.7,1093.2L625.8,1099.5L618.8,1120.5L607.4,1125.9L604.3,1136.2L600.3,1132.5L600.4,1141.1L593.1,1143.0L591.0,1136.7L588.2,1138.6L589.7,1152.0L578.8,1151.4L576.3,1155.1L579.3,1158.9L568.4,1170.6L559.4,1171.2L553.4,1180.7L540.9,1175.8L526.1,1181.0L513.0,1179.5L507.7,1184.1L503.8,1175.6L515.3,1168.4L518.7,1155.4L513.7,1136.5L521.5,1134.0L534.7,1119.1L522.0,1095.6L510.9,1090.0L503.5,1072.0L507.9,1065.8L518.1,1065.7L517.8,1056.9L514.4,1050.1L505.1,1047.2L499.3,1030.4L501.4,1023.8L515.9,1028.2L517.3,1032.8L521.1,1026.2L539.0,1017.2L553.4,1018.6L554.8,1027.5L574.2,1025.2L559.1,992.5L565.7,983.3L557.3,979.5L559.6,977.3L554.2,969.1L548.4,973.2L537.5,951.6L557.5,945.7L562.0,937.4L578.9,946.7L584.7,941.1L584.4,928.9L577.9,926.7L573.9,916.9L576.1,909.8L572.5,909.2Z","c":[627.6,1001.8]},"金沢区":{"d":"M649.5,1361.4L621.4,1371.5L601.0,1371.9L588.5,1384.6L586.4,1394.2L565.2,1383.3L562.1,1371.3L543.4,1378.1L532.8,1374.7L529.2,1360.5L520.4,1354.9L519.9,1337.5L512.0,1330.9L511.1,1319.6L502.4,1306.9L504.5,1282.0L503.0,1275.4L498.9,1274.7L504.5,1245.9L502.7,1208.5L510.7,1201.9L512.9,1193.0L508.7,1184.1L512.4,1179.6L526.1,1181.0L540.9,1175.8L553.4,1180.7L559.4,1171.2L568.4,1170.6L579.3,1158.9L576.3,1155.1L578.8,1151.4L589.7,1152.0L588.2,1138.6L591.0,1136.7L593.1,1143.0L600.4,1141.1L600.3,1132.5L604.3,1136.2L607.4,1125.9L618.8,1120.5L625.8,1099.5L636.7,1093.2L633.8,1081.4L636.0,1066.9L643.5,1054.6L663.5,1047.8L666.9,1038.5L679.3,1042.4L680.4,1047.4L681.7,1043.1L720.5,1022.8L733.3,1005.9L764.0,1022.2L748.5,1037.9L755.2,1044.6L748.5,1051.3L741.7,1050.1L742.3,1059.9L734.4,1067.8L726.7,1060.3L723.5,1063.5L753.0,1092.8L765.4,1085.9L784.4,1065.6L767.3,1084.4L777.2,1094.7L777.3,1125.3L754.7,1125.9L754.8,1158.7L770.5,1189.4L778.9,1190.2L779.0,1247.8L717.4,1263.2L709.9,1255.2L702.3,1255.9L685.2,1277.4L692.2,1282.2L691.6,1286.6L698.6,1285.3L693.4,1287.3L690.6,1286.6L689.8,1293.9L699.9,1291.0L699.9,1285.7L700.0,1291.6L688.9,1294.5L667.1,1309.9L643.0,1295.1L638.7,1297.5L643.6,1306.8L676.3,1331.0L672.3,1340.4L668.3,1340.0L649.5,1361.4Z","c":[644.8,1200.2]},"港北区":{"d":"M561.8,471.6L534.1,462.7L527.8,450.1L523.2,456.3L516.6,454.2L510.3,442.6L478.7,440.3L477.3,434.8L484.4,426.0L495.4,419.6L481.7,404.5L488.2,393.3L496.4,400.0L516.2,393.0L534.6,374.3L559.9,377.4L556.5,366.2L562.4,355.9L560.5,335.4L551.1,319.3L544.4,318.4L544.7,298.3L532.2,296.3L527.3,280.1L533.2,279.2L542.4,256.7L557.2,257.2L559.5,231.1L569.8,222.1L568.5,210.4L575.4,200.4L591.0,202.1L591.8,175.1L600.8,171.1L602.0,157.7L619.3,161.4L630.6,153.1L647.9,156.2L664.0,149.3L722.2,170.7L744.1,163.6L759.8,178.1L784.3,188.7L778.9,219.9L768.6,248.9L767.8,260.3L773.3,267.9L752.5,275.9L745.5,290.5L737.1,295.9L742.2,306.6L739.1,320.6L740.4,345.3L725.7,346.3L723.2,353.0L713.7,349.0L715.2,359.1L721.2,361.3L720.1,369.5L712.9,371.0L703.7,382.2L691.8,384.1L699.4,408.2L708.9,419.6L696.7,458.2L697.1,485.9L690.7,495.5L673.3,492.2L670.4,499.9L658.7,501.3L665.1,507.0L650.7,513.9L634.4,504.0L628.9,483.4L602.2,500.7L595.1,489.3L585.7,485.3L588.6,471.8L584.7,464.7L581.1,469.0L574.3,464.6L573.7,469.1L561.8,471.6Z","c":[649.3,330.7]},"戸塚区":{"d":"M153.3,1120.3L134.5,1146.6L124.1,1169.3L84.9,1160.3L88.5,1142.9L97.9,1124.9L99.8,1102.4L117.0,1083.3L110.8,1062.7L84.1,1044.3L78.1,1009.9L98.7,1016.5L116.7,1003.2L115.0,998.8L128.5,975.7L142.5,991.1L164.7,987.3L171.7,976.2L171.1,962.6L180.2,957.1L189.5,934.6L220.9,932.5L224.7,923.5L223.0,897.0L240.9,874.3L249.4,850.3L254.9,848.6L256.6,819.0L262.4,813.0L247.2,771.1L249.0,764.7L263.1,759.7L267.4,750.4L261.3,740.4L247.9,737.0L251.5,727.1L266.7,721.9L268.1,717.6L282.1,723.6L290.8,743.4L297.3,744.1L300.7,737.4L308.7,737.9L313.8,732.5L323.3,735.2L329.3,722.1L340.6,723.0L341.8,732.9L352.1,736.5L352.8,745.4L368.5,744.3L378.2,752.1L380.2,770.0L393.9,782.1L434.6,770.7L447.8,805.1L447.2,823.4L452.0,836.3L442.5,837.5L448.9,834.2L447.1,830.2L443.3,835.2L443.5,829.3L426.5,830.0L428.9,840.6L440.4,850.1L430.4,863.2L421.3,859.1L419.9,863.1L424.4,864.8L426.7,874.9L411.9,872.0L400.4,862.6L382.1,862.7L372.4,857.9L379.9,879.4L361.2,885.5L360.7,903.3L367.1,914.9L373.1,916.5L370.2,937.0L375.7,960.3L389.2,972.9L380.8,986.1L380.1,1000.6L369.9,1008.7L357.8,1037.5L342.8,1050.8L335.9,1070.4L309.0,1063.3L287.4,1043.3L274.0,1042.5L275.1,1063.1L270.7,1074.0L247.7,1062.0L235.3,1061.9L232.1,1053.7L222.4,1053.2L218.9,1058.7L220.6,1066.7L231.5,1077.8L235.8,1089.0L219.0,1083.6L208.9,1092.0L220.6,1110.9L216.4,1117.1L221.9,1135.1L218.7,1150.1L198.8,1145.6L153.3,1120.3Z","c":[278.3,943.3]},"港南区":{"d":"M357.8,1037.5L369.9,1008.7L380.1,1000.6L380.8,986.1L389.2,972.9L375.7,960.3L370.2,937.0L373.1,916.5L367.1,914.9L360.7,903.3L361.2,885.5L379.9,879.4L372.4,857.9L382.1,862.7L400.4,862.6L411.9,872.0L426.7,874.9L424.4,864.8L419.9,863.1L421.3,859.1L430.4,863.2L440.2,849.7L454.9,847.3L462.2,857.8L462.8,874.5L473.2,895.5L489.3,901.6L488.0,906.0L492.7,909.1L497.2,910.9L503.9,899.7L513.1,895.6L520.5,882.0L529.5,884.1L531.2,876.8L542.1,878.2L545.6,882.1L538.0,890.8L539.5,902.1L550.8,903.0L566.0,918.4L573.9,916.6L577.9,926.7L584.4,928.9L584.7,941.1L579.5,946.5L562.0,937.4L557.5,945.7L537.5,951.6L548.4,973.2L554.2,969.1L559.6,977.3L557.3,979.5L565.7,983.3L559.1,992.5L574.0,1025.7L554.8,1027.5L553.4,1018.6L539.0,1017.2L521.1,1026.2L517.3,1032.8L515.9,1028.2L501.4,1023.8L499.3,1032.1L505.1,1047.2L515.1,1051.0L518.1,1065.7L507.9,1065.8L503.5,1072.0L510.9,1090.0L522.0,1095.6L534.7,1119.1L521.5,1134.0L513.7,1136.5L512.6,1143.7L483.7,1133.4L478.1,1126.9L470.8,1127.9L459.1,1116.4L461.2,1112.1L457.9,1109.4L442.6,1121.1L440.5,1111.5L435.7,1112.6L436.0,1102.2L419.3,1093.4L412.5,1096.3L398.4,1091.9L392.4,1105.0L385.3,1108.6L382.8,1102.4L385.6,1083.8L382.3,1079.6L388.2,1059.5L383.2,1051.1L374.4,1056.3L373.4,1038.6L366.0,1033.9L357.8,1037.5Z","c":[471.9,995.0]},"旭区":{"d":"M113.8,535.6L95.5,510.0L97.3,497.2L92.3,472.3L104.1,471.3L102.8,465.8L91.2,466.0L91.1,462.2L100.2,434.0L113.8,423.6L136.3,420.8L138.1,416.4L154.2,416.0L160.8,420.6L166.0,432.1L167.2,451.4L198.5,467.5L223.8,451.5L233.6,455.5L243.9,439.4L264.4,446.1L274.7,439.5L269.2,444.7L269.7,458.2L279.6,462.8L305.2,458.5L316.2,473.6L330.3,465.9L355.6,473.9L358.9,471.1L356.1,478.9L348.5,482.8L347.1,500.7L372.0,536.8L404.0,537.7L414.2,556.3L404.2,554.5L399.9,560.8L392.9,561.2L389.0,571.6L398.3,571.3L400.1,580.6L395.9,578.4L388.4,592.2L379.6,591.3L377.0,613.7L394.7,632.7L402.4,632.9L412.5,643.2L419.7,639.7L421.9,659.6L411.0,666.2L411.9,682.2L399.5,683.3L392.3,693.3L352.1,691.4L341.7,700.5L329.5,703.2L325.5,713.1L332.8,722.7L326.8,723.7L323.3,735.2L313.8,732.5L308.7,737.9L300.7,737.4L297.3,744.1L290.8,743.4L282.1,723.6L259.3,712.8L256.7,717.2L242.7,711.6L239.5,720.6L218.9,713.3L208.6,714.9L195.5,729.9L187.8,731.6L170.7,696.0L175.1,673.3L162.6,655.8L164.3,625.2L150.5,608.7L147.1,584.8L152.2,566.5L138.6,564.1L132.5,549.1L113.8,535.6Z","c":[271.7,580.1]},"緑区":{"d":"M224.9,451.2L198.5,467.5L167.8,452.1L166.0,432.1L154.2,416.0L138.1,416.4L136.3,420.8L105.0,428.1L95.6,448.2L65.8,434.2L49.4,404.4L75.0,365.8L87.6,362.0L84.8,350.6L92.0,341.1L88.2,329.3L93.3,322.4L85.1,306.2L89.3,284.3L123.2,267.9L146.6,287.8L175.1,285.9L192.7,311.4L220.4,309.7L233.0,324.5L239.3,314.9L240.3,302.8L279.2,278.9L297.7,285.8L310.3,279.8L324.6,300.5L326.0,318.5L334.2,332.7L333.7,346.2L343.9,364.9L350.6,368.3L352.6,375.2L349.3,387.3L359.6,406.1L381.5,407.8L403.3,397.0L416.4,398.1L432.3,385.8L437.9,382.9L439.4,387.8L447.9,381.0L466.9,392.1L488.5,395.8L481.7,404.5L495.4,419.6L477.3,434.8L476.1,444.4L440.1,440.7L427.7,465.1L406.6,479.7L400.8,495.6L390.2,500.4L382.3,482.5L373.3,474.9L365.3,476.7L360.5,470.4L355.6,473.9L330.3,465.9L316.2,473.6L306.6,458.8L280.0,462.9L270.2,459.2L269.2,444.7L274.7,439.5L264.4,446.1L243.9,439.4L233.6,455.5L224.9,451.2Z","c":[207.3,384.0]},"瀬谷区":{"d":"M0.2,472.4L11.9,449.3L47.0,454.4L81.4,441.0L95.6,448.2L91.2,466.0L100.7,464.9L104.1,471.3L92.3,472.3L97.3,497.2L96.2,514.0L113.8,535.6L132.5,549.1L138.6,564.1L152.2,566.5L147.1,584.8L150.5,608.7L164.3,625.2L162.6,655.8L175.1,673.3L170.7,696.0L178.3,706.5L188.5,740.3L188.5,747.3L180.1,754.6L189.6,760.9L184.4,771.0L165.5,773.3L159.3,785.0L149.5,784.6L123.2,767.8L121.7,743.7L106.7,745.7L97.4,741.9L80.5,746.4L78.8,720.2L56.3,710.3L38.2,675.5L29.5,647.4L39.4,611.1L28.3,598.9L21.3,569.2L24.7,554.4L18.7,532.0L25.1,515.9L24.3,500.4L16.5,488.3L1.7,479.5L0.2,472.4Z","c":[95.5,613.0]},"栄区":{"d":"M208.9,1092.0L219.0,1083.6L235.8,1089.0L231.5,1077.8L220.6,1066.7L218.9,1058.7L222.4,1053.2L232.1,1053.7L235.3,1061.9L247.7,1062.0L270.7,1074.0L275.1,1063.1L274.0,1042.5L287.4,1043.3L309.0,1063.3L334.0,1071.4L344.9,1048.0L366.0,1033.9L373.4,1038.6L374.4,1056.3L383.2,1051.1L388.4,1060.0L382.3,1079.6L385.6,1083.8L382.8,1102.4L385.3,1108.6L392.4,1105.0L398.4,1091.9L412.5,1096.3L419.3,1093.4L436.0,1102.2L435.7,1112.6L440.5,1111.5L442.6,1121.1L457.9,1109.4L461.2,1112.1L459.1,1116.4L470.8,1127.9L478.1,1126.9L483.7,1133.4L505.0,1138.5L518.2,1148.5L515.3,1168.4L503.8,1175.6L512.8,1193.8L510.0,1202.9L502.7,1208.5L504.5,1245.9L498.9,1274.7L483.1,1276.0L474.2,1282.8L464.5,1275.9L450.6,1277.9L441.2,1272.7L438.5,1245.7L426.2,1221.3L390.7,1226.6L376.4,1222.0L361.7,1197.9L339.3,1180.6L334.4,1168.2L341.4,1156.4L331.2,1144.2L321.5,1143.8L313.4,1172.7L294.7,1171.8L289.7,1183.4L266.8,1187.0L267.9,1173.0L262.0,1166.0L256.1,1173.8L247.2,1173.8L229.7,1149.9L218.7,1150.1L221.9,1135.1L216.4,1117.1L220.6,1110.9L208.9,1092.0Z","c":[429.7,1158.4]},"泉区":{"d":"M40.7,949.3L47.2,934.2L45.7,885.4L53.0,876.1L53.7,859.6L48.4,851.5L32.5,843.2L37.3,806.8L32.5,798.6L33.9,780.8L40.9,774.8L42.9,761.2L64.4,716.8L78.8,720.2L80.5,746.4L97.4,741.9L106.7,745.7L120.9,743.2L123.2,767.8L157.3,785.6L164.6,773.8L184.4,771.0L189.6,760.9L180.1,754.6L188.7,747.0L185.0,731.2L195.5,729.9L207.8,715.3L218.9,713.3L239.5,720.6L242.9,711.5L268.0,716.6L266.7,721.9L251.5,727.1L247.9,737.0L261.3,740.4L267.4,750.6L263.1,759.7L249.0,764.7L247.2,770.9L262.4,812.5L256.6,819.0L256.2,845.0L242.0,864.2L240.9,874.3L223.0,897.0L224.7,923.5L220.2,933.5L189.5,934.6L180.2,957.1L171.1,962.6L171.7,976.2L164.7,987.3L142.5,991.1L128.5,975.7L115.0,998.8L116.7,1003.2L96.1,1017.1L78.1,1009.9L79.0,1021.7L56.7,999.7L51.9,963.5L40.7,949.3Z","c":[147.4,866.7]},"青葉区":{"d":"M14.1,146.9L19.7,136.2L20.9,113.3L36.9,114.7L46.7,104.5L69.9,103.4L82.1,112.7L87.7,118.0L86.3,125.3L91.5,127.4L98.0,152.1L106.4,155.4L121.2,138.4L127.6,139.4L134.2,123.7L146.1,120.1L145.2,110.6L168.9,104.8L173.5,87.2L171.2,83.8L180.4,86.6L180.2,101.9L195.6,115.8L194.6,126.7L228.5,109.0L241.2,95.0L236.1,89.7L245.1,80.5L243.6,68.2L251.4,68.4L251.5,58.6L261.0,50.9L250.5,32.4L249.8,26.9L257.8,23.7L256.4,13.2L248.0,5.2L250.5,0.8L267.9,0.0L287.7,6.7L306.5,4.8L315.9,13.7L330.3,14.2L343.4,21.9L356.4,20.3L369.3,26.5L374.1,36.7L390.3,45.8L398.0,62.8L407.6,69.2L417.9,105.6L403.5,129.7L413.8,130.7L395.2,147.6L392.0,159.4L402.7,168.4L392.9,200.4L381.5,201.2L376.6,196.0L353.5,222.1L355.3,246.9L349.7,251.5L354.2,257.6L352.3,263.7L345.3,265.6L345.0,269.4L340.0,264.4L332.6,274.3L323.6,273.3L297.7,285.8L279.2,278.9L240.3,302.8L239.3,314.9L233.0,324.5L220.4,309.7L192.7,311.4L175.1,285.9L146.6,287.8L123.2,267.9L93.5,283.4L80.1,281.5L81.6,271.1L68.3,262.3L63.0,246.4L72.2,219.6L69.2,182.7L47.4,149.8L40.4,164.5L22.8,160.5L14.1,146.9Z","c":[225.3,162.1]},"都筑区":{"d":"M417.9,105.6L433.8,104.8L454.0,120.2L469.9,116.9L530.4,130.5L546.4,124.6L551.7,135.6L594.8,140.7L603.0,157.8L600.8,171.1L591.8,175.1L591.0,202.1L575.4,200.4L568.5,210.4L569.8,222.1L559.5,231.1L557.2,257.2L542.4,256.7L533.2,279.2L527.3,280.1L532.2,296.3L544.7,298.3L544.4,318.4L551.1,319.3L561.8,339.3L563.0,350.9L556.5,365.8L559.9,377.4L557.3,380.1L534.6,374.3L516.2,393.0L497.6,399.9L488.2,393.3L466.9,392.1L446.6,380.9L439.4,387.8L437.9,382.9L432.3,385.8L421.0,396.7L403.3,397.0L382.3,407.6L359.6,406.1L355.7,401.1L349.3,387.3L352.6,375.2L350.6,368.3L343.9,364.9L334.5,348.8L334.2,332.7L326.0,318.5L325.3,302.2L310.3,279.8L323.6,273.3L332.6,274.3L340.0,264.4L345.0,269.4L345.3,265.6L352.3,263.7L354.2,257.6L349.7,251.5L355.3,246.9L353.8,221.6L376.6,196.0L381.5,201.2L392.9,200.4L402.7,168.4L392.0,159.4L395.2,147.6L413.8,130.7L403.5,129.7L417.9,105.6Z","c":[455.2,256.2]}}};   // 区の形（SVGパス）
+const FOOD = [[["ガスト","re","western",1,35.51032,139.68302,162],["バーミヤン","re","chinese",1,35.51039,139.68265,166],["中華料理 天盛楼","re","",0,35.50873,139.68075,169],["一本堂","ba","",0,35.50914,139.68043,198],["魚春","re","",0,35.50914,139.67888,338],["ラーメン 鶴見家","re","",0,35.50732,139.67905,366],["高華園","re","",0,35.50763,139.67879,373],["Chicken'z（チキンズ）鶴見店","re","korean",0,35.5074,139.67854,404]],[["韓国料理 ソウル亭","re","korean",0,35.50616,139.67871,123],["ラーメン 鶴見家","re","",0,35.50732,139.67905,125],["Chicken'z（チキンズ）鶴見店","re","korean",0,35.5074,139.67854,166],["高華園","re","",0,35.50763,139.67879,167],["ESPLAN (エスプラン）","ba","",0,35.50684,139.67807,179],["海春ととや","re","",0,35.50711,139.67729,255],["日高屋","fa","noodle",1,35.50716,139.67675,303],["スターバックス","ca","coffee_shop",1,35.50752,139.67682,309]],[["らぁめん夢","re","ramen",0,35.47607,139.63078,106],["ラーメン星印","re","ramen",0,35.47412,139.62812,227],["ジョナサン","re","italian",1,35.47539,139.62682,263],["MEN YARD FIGHT","fa","ramen",0,35.47596,139.62674,270],["キッチンオリジン","fa","japanese",1,35.47531,139.6267,275],["西海","re","noodles",0,35.47846,139.62973,307],["元祖ニュータンタンメン本舗","re","ramen",0,35.47797,139.63236,349],["中山菜館","re","chinese",0,35.47517,139.6253,403]],[["ドミノ・ピザ","fa","pizza",1,35.48723,139.61371,207],["神奈川カレーハウス","re","indian",0,35.48699,139.61661,396],["焼肉末広","re","",0,35.49149,139.60942,426],["玄","re","japanese",0,35.48971,139.60818,443],["キッチンオリジン","fa","japanese",1,35.49029,139.60777,495]],[["トラットリアビコローレヨコハマ","re","italian",0,35.4617,139.61958,56],["Gastronomia HERiTAGE Yok","re","italian",0,35.46142,139.61965,88],["アナンダ","re","indian",0,35.46133,139.62071,146],["ほっともっと","fa","japanese",1,35.46181,139.62115,156],["ストーブス","re","burger",0,35.46363,139.61924,161],["Mondatta","re","italian",0,35.46299,139.61793,167],["ガスト","re","western",1,35.46081,139.62081,195]],[["Gastronomia HERiTAGE Yok","re","italian",0,35.46142,139.61965,77],["トラットリアビコローレヨコハマ","re","italian",0,35.4617,139.61958,78],["そば/天ぷら 角平","re","soba",0,35.46068,139.62016,147],["Osteria Pesce Volante","re","italian",0,35.46028,139.61765,162],["ガスト","re","western",1,35.46081,139.62081,194],["ほっともっと","fa","japanese",1,35.46181,139.62115,218]],[["すき家","fa","beef_bowl",1,35.4441,139.64228,41],["Moriva Coffee","ca","",0,35.44412,139.64231,42],["Flashback Cafe","re","burger",0,35.44412,139.64243,52],["Lonestar Smoke House","re","barbecue",0,35.44442,139.64262,67],["揚州商人","re","",0,35.4444,139.64269,72],["ら　らとーな","ca","",0,35.44483,139.64249,80],["CRAFT BEER DINING &9","re","",0,35.44506,139.64165,87],["フレッシュネスバーガー","fa","burger",1,35.445,139.64314,137]],[["待春軒","re","soba",0,35.41606,139.66012,84],["茶寮","ca","",0,35.41672,139.65955,136],["雁ケ音茶屋","ca","",0,35.41672,139.6592,138],["茶亭望塔亭","ca","",0,35.41708,139.65895,183],["Marine cafe","ca","",0,35.41307,139.66169,335],["小島屋","re","",0,35.41822,139.66141,348]],[["MEN-YA DAISUKE","re","ramen",0,35.43655,139.62193,130],["旬彩ダイニング　月兎","re","",0,35.43749,139.62302,166],["CAFE CHOCOLAT","ca","",0,35.43696,139.62174,170],["ほっともっと","fa","japanese",0,35.43644,139.62139,171],["和泉屋","re","",0,35.43771,139.62325,190],["Lapin Coffee & Bakery","ca","",0,35.43535,139.6252,195],["オリジン弁当","fa","japanese",1,35.43917,139.62381,357],["モスバーガー","fa","burger",1,35.43492,139.627,365]],[["ゴルカキッチン インドネパールレストラン","re","curry",0,35.42363,139.60133,51],["パティスリー レリッシュ","co","",0,35.42353,139.601,52],["あいわパン","ba","",0,35.42371,139.6015,56],["お好み焼き いなちゃん","re","",0,35.42399,139.60162,56],["本場韓国食堂 どやじ","re","korean",0,35.42346,139.60099,60],["モスバーガー","fa","burger",1,35.42336,139.60105,71],["中華料理 広州亭","re","chinese",0,35.42333,139.60074,78],["不二家","co","",1,35.42323,139.60114,87]],[],[["せんざん","re","",0,35.37877,139.57675,89],["羅生門","re","",0,35.37948,139.5781,192],["サーティワンアイスクリーム","ic","ice_cream",1,35.37597,139.57733,228],["レストランハラペコ","re","italian",0,35.37693,139.57484,229],["コメダ珈琲店","ca","coffee_shop",1,35.37591,139.57712,233],["パッパパスタ","re","italian",0,35.37975,139.5788,254],["熱烈カルビ","re","asian",0,35.38019,139.5784,275],["ルッチョラ","re","italian",0,35.37608,139.57894,277]],[["宅配寿司 銀のさら","fa","",0,35.45565,139.59476,84],["インド・アジアン料理 ヤク＆イエティ ダイニング","re","indian",0,35.45649,139.59418,127],["SAI.","re","japanese",0,35.45722,139.59608,135],["バーミヤン","re","chinese",1,35.45791,139.59608,208],["鮨処 秋田家","re","sushi",0,35.45794,139.59598,209],["ガスト","re","western",1,35.458,139.59591,215],["すぱいす工房 Sido","re","curry",0,35.45813,139.59489,232],["青蓮","re","chinese",0,35.45424,139.59701,248]],[["Nikkodo","ba","",0,35.44911,139.59946,70],["King of Joy","ca","",0,35.44924,139.59955,77],["ほっともっと","fa","japanese",1,35.44915,139.59978,98],["南イタリア料理","re","",0,35.44976,139.60029,157],["ほどが家(家系ラーメン)","re","noodle",0,35.4477,139.59874,167],["レストラン ひまわり","re","",0,35.44985,139.60036,167],["ガスト","re","western",1,35.44714,139.59849,230]],[["夢庵","re","",0,35.47326,139.54453,95],["牛串酒場きじま","re","japanese",0,35.47498,139.5452,154],["花","re","",0,35.47529,139.54498,169],["ミッシェルズカフェ","ca","",0,35.47392,139.54596,178],["ヨコハマスープカレー　しんぺー","re","",0,35.47522,139.54561,199],["一味","re","soba",0,35.47527,139.54609,236],["松屋","fa","beef_bowl",1,35.47488,139.54752,333],["ミスタードーナツ","fa","donut",1,35.47479,139.54789,363]],[["スターバックス","ca","coffee_shop",1,35.46318,139.53198,20],["大戸屋","re","japanese",0,35.46317,139.53188,22],["倉式珈琲店","ca","",0,35.46321,139.53194,24],["星のうどん　庵","fa","noodle",0,35.46316,139.53178,27],["餃子の王将","re","chinese",1,35.46309,139.53147,49],["PAIN PATI","ba","",0,35.46339,139.53271,78],["焼肉家族　ひらた","re","barbecue",0,35.46217,139.53222,94],["相州蕎麦","fa","noodle",0,35.46393,139.53228,106]],[["鮨処 なかの","re","",0,35.40327,139.61894,121],["大武飯店","re","chinese",0,35.40142,139.61708,146],["フードコート コン","fa","",0,35.40106,139.6177,162],["さっぽろ味噌ラーメン 味の時計台","fa","ramen",0,35.40094,139.61734,183],["ぽんぽん","ca","",0,35.40086,139.61751,188],["松屋 磯子店","fa","beef_bowl",1,35.40084,139.6175,190],["蕎麦 辰味","re","noodle",0,35.40078,139.61746,197],["Beck's Coffee Shop","ca","coffee_shop",1,35.39989,139.61775,291]],[["ケンタッキーフライドチキン","fa","chicken",1,35.37813,139.59542,304],["ドトールコーヒーショップ","ca","coffee_shop",1,35.37836,139.59648,365],["横浜むぎや","ba","",0,35.37828,139.59678,372],["らあめん花月嵐","re","ramen",0,35.37895,139.59502,387],["いちのせ","re","japanese",0,35.37849,139.59669,387],["洋光台ラーメン 千客萬來","re","ramen",0,35.37951,139.59513,450],["駅そば","re","japanese",0,35.3795,139.59554,455],["焼肉けやき","re","japanese",0,35.37976,139.59446,474]],[["大村庵","re","soba",0,35.33856,139.62475,66],["博楽","re","chinese",0,35.3386,139.62474,70],["デニーズ","re","western",1,35.33569,139.62374,266],["くら寿司","fa","sushi",1,35.33551,139.62375,285],["マリカ","re","indian",0,35.34102,139.62411,338],["越後屋","re","soba",0,35.33509,139.62607,354],["さつまラーメン金沢店","re","",0,35.33572,139.62827,426],["大公 (九州とんこつ)","re","ramen",0,35.34182,139.62252,461]],[["寿徳庵","re","",0,35.34795,139.62777,305],["駒","re","sushi",0,35.34735,139.62892,311],["シャーロン","co","",0,35.3473,139.62896,315],["ルポ","re","",0,35.34862,139.62643,358]],[["ジャングルレストラン マヤ","re","african",0,35.51872,139.63385,200],["Cafe MIEL Okurayama","ca","lunch,_cafe",0,35.51937,139.63427,264],["はま寿司","fa","sushi",1,35.5154,139.6322,274],["大勇","re","sushi",0,35.51594,139.63174,276],["Maricel","ba","",0,35.51568,139.63159,302],["ロイヤルホスト","re","western",1,35.51971,139.63275,340],["麦楽坊","re","chinese",0,35.51683,139.63031,380],["和","re","japanese",0,35.51496,139.63092,396]],[["一乃蔵","re","yakitori",0,35.53772,139.63508,45],["cafeレストラン ガスト","re","",0,35.537,139.63531,58],["山東厨房","re","chinese",0,35.53697,139.6352,65],["タイタニ","re","thai",0,35.53695,139.63524,66],["Pizza Salvatore Cuomo","re","pizza",0,35.538,139.63509,67],["清正","re","noodle",0,35.53715,139.63483,72],["ちよだ鮨","fa","sushi",1,35.53668,139.63442,134],["マクドナルド","fa","burger",1,35.53669,139.63425,145]],[["横濱家師岡店","re","noodle",0,35.52486,139.64406,86],["スターバックス","ca","coffee_shop",1,35.52571,139.64586,111],["マクドナルド","fa","burger",1,35.52428,139.64607,126],["肉丸商店","fa","",0,35.52389,139.64628,169],["ハンバーグ ガスト","fa","",0,35.5246,139.64105,360],["オークラ","re","chinese",0,35.52406,139.64106,372],["温野菜","re","",0,35.52437,139.64065,400],["キッチン　和","re","",0,35.52939,139.64381,500]],[["松屋","fa","beef_bowl",1,35.51394,139.53942,10],["マクドナルド","fa","burger",1,35.51397,139.53963,12],["銀の杵","co","",0,35.51396,139.53968,17],["エピシェール","ba","",0,35.51435,139.53962,40],["楽山","fa","chinese",0,35.51419,139.53908,43],["らあめん花月嵐","re","ramen",0,35.51407,139.53899,47],["広島風お好み焼 きゃべつ","re","japanese",0,35.51405,139.53884,60],["バウハウス","ca","",0,35.51434,139.53879,75]],[["ソライア","re","",0,35.533,139.49508,7],["松屋","fa","beef_bowl",1,35.53275,139.49526,36],["マルヤ餅菓子店","co","",0,35.53332,139.49514,38],["臥龍","re","chinese",0,35.53283,139.4944,57],["花むら","re","soba",0,35.53289,139.49567,62],["グルメ倶楽部","re","",0,35.53247,139.49528,64],["すし居酒屋 彩","re","",0,35.5328,139.49568,65],["ヴィ・ド・フランス","ba","",1,35.53214,139.49484,97]],[["ドミノ・ピザ","fa","pizza",1,35.55252,139.54295,41],["麺処秋もと","re","noodle",0,35.55249,139.54172,71],["大連餃子","re","chinese",0,35.55242,139.54154,87],["グリルチンチン","re","",0,35.55237,139.54143,98],["肉刺酒場 和亭","re","japanese",0,35.55258,139.54086,149],["ドトールコーヒーショップ","ca","",1,35.55135,139.54165,149],["ひの香","re","barbecue",0,35.55263,139.54085,150],["翁寿し","re","sushi",0,35.55255,139.54081,153]],[["はまけい","fa","yakitori",0,35.56855,139.55348,6],["タリーズコーヒー","ca","coffee_shop",1,35.56839,139.55372,23],["神戸屋","ba","",1,35.56827,139.55365,29],["栄楽","re","chinese",0,35.56823,139.55361,32],["とんかつ 花むら","re","",0,35.56817,139.55356,37],["PAUL","ba","",0,35.5682,139.55324,41],["つけめんTETSU","fa","noodle",0,35.56891,139.55335,48],["権八","re","japanese",0,35.56814,139.55386,52]],[["イタリアーノ　イワイ","re","italian",0,35.54382,139.57098,131],["ウミガメ食堂","re","chinese",0,35.5437,139.57085,145],["炭焼喰人 本店","re","barbecue",0,35.54353,139.5706,167],["魁力屋","re","noodle",0,35.54572,139.57282,183],["焼き鳥べんてん","re","yakitori",0,35.54333,139.57083,186],["韓国家庭料理 伽倻廊","re","korean",0,35.54598,139.57271,189],["スターバックス","ca","coffee_shop",1,35.54414,139.57293,199],["タリーズコーヒー","ca","coffee_shop",1,35.54692,139.56989,236]],[["牛庵 焼肉 すき焼き しゃぶしゃぶ","re","japanese",0,35.5482,139.57619,107],["シャトレーゼ","co","",1,35.5485,139.57655,118],["港北食堂","re","",1,35.54639,139.57631,138],["ハングリータイガー","re","steak_house",0,35.5484,139.57564,159],["アルボルゴ","re","italian",0,35.54585,139.57671,185],["讃岐うどん こんぴら","re","udon",0,35.54922,139.57514,255],["ひげのパン屋","ba","",0,35.55014,139.57679,294],["玉木屋珈琲","ca","",0,35.54536,139.57504,297]],[["麺屋試","re","japanese",0,35.51817,139.56194,320],["壱鵠堂　佐江戸店","re","ramen",0,35.5143,139.55938,365],["サイゼリヤ","re","italian",1,35.51402,139.55953,398],["モスバーガー","fa","burger",1,35.51389,139.55925,407],["そば処味奈登庵 都筑佐江戸店","re","soba",0,35.51403,139.55644,429]],[["餃子の王将","re","chinese",1,35.39971,139.5318,37],["スシロー","fa","sushi",1,35.40007,139.53265,59],["カフェコスモス","ca","",0,35.4002,139.53273,70],["地獄の担々麺 天竜","re","ramen",0,35.4007,139.53241,86],["みず野","re","noodle",0,35.39949,139.53273,87],["イタリアン・トマト・カフェジュニア","re","italian",0,35.40044,139.53282,89],["わたみん家","re","",0,35.40023,139.53295,90],["温野菜","re","",0,35.40025,139.53299,94]],[["RAY","re","",0,35.41683,139.56581,455],["吉野家","fa","beef_bowl",0,35.4141,139.55912,466],["夢弘房","re","",0,35.41676,139.56601,474]],[["焼き肉おくう","re","barbecue",0,35.36373,139.55418,34],["ゆず庵","re","",0,35.36209,139.55293,233],["モスバーガー","fa","burger",1,35.36276,139.55184,240],["御食事処 武","re","japanese",0,35.3625,139.55194,250],["中華めんくい","re","chinese",0,35.36599,139.55667,328],["ドトールコーヒーショップ","ca","coffee_shop",1,35.3667,139.55078,419],["源吉兆庵","co","japanese",0,35.3643,139.5595,500]],[["Cafe Nagomi","ca","",0,35.36407,139.56852,344],["Cow Bell","re","italian",0,35.36375,139.56693,359],["はま寿司","fa","sushi",1,35.36439,139.56861,379],["バーミヤン","re","chinese",1,35.36401,139.56663,398],["焼肉家","re","barbecue",0,35.36358,139.56531,441]],[["麺’ｓバー YABU","re","ramen",0,35.41708,139.48681,149],["ケンタッキーフライドチキン","fa","chicken",1,35.41576,139.48734,256],["マロリーポークステーキ","re","steak_house",0,35.41568,139.48728,266],["珈琲専門店 亜煉路館","ca","coffee_shop",0,35.41574,139.48692,270],["北の宿","re","",0,35.41551,139.4886,282],["モスバーガー","fa","burger",1,35.41542,139.48709,298],["相州そば","fa","udon",0,35.41513,139.48719,327],["讃岐うどん・なかだや","re","udon",0,35.41604,139.49278,485]],[["藤よし","re","japanese",0,35.41885,139.50068,184],["旬香菜館","re","chinese",0,35.41541,139.49975,221],["チャイ立場店","re","indian",0,35.41521,139.49982,238],["梅の花","re","japanese",0,35.41471,139.50214,302],["すき家","fa","beef_bowl",1,35.41425,139.50137,332],["ガスト","re","western",1,35.41404,139.50205,369],["ポッポ","fa","",0,35.41315,139.50018,454]],[["HARE/PAN","ba","",0,35.47067,139.4843,426],["吉野家","fa","beef_bowl",1,35.47067,139.48418,437],["おかしのまちおか","co","",1,35.47066,139.48401,452],["ちよだ鮨","re","sushi",0,35.47065,139.48386,466],["れんげ食堂","re","chinese",0,35.47064,139.48374,477]],[["キッチンオリジン","fa","japanese",1,35.46699,139.49768,92],["和食さと","re","japanese",1,35.46776,139.49815,144],["品珍酒家","re","chinese",0,35.46657,139.50054,185],["めめ","re","taiwanese",0,35.46704,139.50055,195],["銀","re","unagi",0,35.46726,139.50065,212],["ミックル堂","co","",0,35.46704,139.50075,212],["御菓子司 文化堂","co","",0,35.46486,139.50154,330],["丸源ラーメン三ツ境店","re","ramen",1,35.46638,139.49475,340]]]; // 期日前投票所のまわりの飲食店（OpenStreetMap）
+
+/* ===================== UTIL ===================== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const cv=c=>`var(${c})`;
+const candById=id=>CANDS.find(c=>c.id===id);
+const store={get(k,d){try{const v=localStorage.getItem("hama1pyo:"+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem("hama1pyo:"+k,JSON.stringify(v))}catch(e){}}};
+function jstNow(){const d=new Date(Date.now()+9*3600e3);return{date:d.toISOString().slice(0,10),min:d.getUTCHours()*60+d.getUTCMinutes(),ms:Date.now()}}
+const toMin=t=>{const[h,m]=t.split(":").map(Number);return h*60+m};
+const WD="日月火水木金土";
+function fmtDate(iso,opt){const d=new Date(iso+"T00:00:00Z");const s=`${d.getUTCMonth()+1}/${d.getUTCDate()}（${WD[d.getUTCDay()]}）`;return s}
+function dayTags(iso){const t=[];if(iso===ELECTION.notice)t.push("告示");if(iso===ELECTION.day)t.push("投票日");if(iso==="2026-10-12")t.push("祝");return t}
+function toast(msg){const t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>t.hidden=true,2200)}
+async function copy(text){try{await navigator.clipboard.writeText(text);toast("コピーしました")}catch(e){const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");toast("コピーしました")}catch(_){toast("コピーできませんでした。長押しで選択してください")}ta.remove()}}
+const gmap=(q)=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
+
+/* ===================== COUNTDOWN ===================== */
+function renderCount(){
+  const n=jstNow();const end=Date.parse("2026-10-18T20:00:00+09:00");const left=end-n.ms;
+  const days=Math.ceil((Date.parse(ELECTION.day+"T00:00:00+09:00")-Date.parse(n.date+"T00:00:00+09:00"))/864e5);
+  let html;
+  if(left<=0) html=`<div class="sub">投票は締め切られました</div><div class="big">開票</div><div class="sub">結果を見届けよう</div>`;
+  else if(days<=0) html=`<div class="sub">今日が投票日</div><div class="big">20:00<small>まで</small></div><div class="sub">投票所は7:00から開いています</div>`;
+  else html=`<div class="sub">投票日 10/18（日）まで</div><div class="big tnum">${days}<small>日</small></div>`;
+  if(n.date>=ELECTION.earlyFrom&&n.date<=ELECTION.earlyTo) html+=`<span class="live">期日前投票 受付中（〜10/17）</span>`;
+  $("#count").innerHTML=html;
+}
+
+/* ===================== MAP ===================== */
+function proj(lat,lng){const[minx,miny,maxx,maxy]=GEO.b;return[(lng-minx)*GEO.kx*GEO.s,(maxy-lat)*GEO.s]}
+function wardCenter(w){return GEO.wards[w]?.c||[500,700]}
+function drawMap(el,{hi=[],pins=[],cap="",onPin,line=null}={}){
+  let svg=`<svg viewBox="-10 -10 1020 ${GEO.H+20}" role="img" aria-label="横浜市18区の地図">`;
+  for(const w of WARDS){const g=GEO.wards[w];if(!g)continue;svg+=`<path class="ward${hi.includes(w)?" hi":""}" d="${g.d}"><title>${w}</title></path>`}
+  for(const w of WARDS){const c=GEO.wards[w]?.c;if(c)svg+=`<text class="wl" x="${c[0]}" y="${c[1]}">${w.replace("区","")}</text>`}
+  pins.forEach((p,i)=>{const[x,y]=p.xy||proj(p.lat,p.lng);svg+=`<circle class="pin${p.ring?" ring":""}" data-i="${i}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${p.r||13}" style="fill:${p.color};${p.ring?"stroke:"+p.color:""}" tabindex="0"><title>${esc(p.label)}</title></circle>`});
+  if(line)svg+=`<polyline class="routeline" points="${line.map(p=>p[0].toFixed(0)+","+p[1].toFixed(0)).join(" ")}"/>`+line.map((p,i)=>`<g class="rtno" transform="translate(${p[0].toFixed(0)},${(p[1]-30).toFixed(0)})"><rect x="-15" y="-17" width="30" height="30" rx="6"/><text y="6">${i+1}</text></g>`).join("");
+  svg+=`</svg><div class="mapcap">${cap}</div>`;
+  el.innerHTML=svg;
+  const capEl=el.querySelector(".mapcap");
+  el.querySelectorAll(".pin").forEach(c=>{const f=()=>{el.querySelectorAll(".pin.sel").forEach(x=>x.classList.remove("sel"));c.classList.add("sel");const p=pins[+c.dataset.i];capEl.innerHTML=p.html||esc(p.label);onPin&&onPin(p)};c.addEventListener("click",f);c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}})});
+}
+
+/* ===================== 1. QUIZ ===================== */
+let quiz=store.get("quiz3",{i:0,ans:Array(QS.length).fill(undefined),imp:Array(QS.length).fill(false),done:false});
+function scoreAll(){
+  const K=1; // 情報の少ない候補を50%に寄せる強さ
+  return CANDS.map(c=>{let s=0,w=0,n=0;QS.forEach((q,i)=>{const u=quiz.ans[i];const p=q.pos[c.id];if(u==null||!p||p[0]==null)return;const wt=p[1]*(quiz.imp[i]?2:1);s+=wt*(1-Math.abs(u-p[0])/4);w+=wt;n++});
+    return{c,pct:Math.round(100*(s+K*.5)/(w+K)),n,raw:w?Math.round(100*s/w):null}}).sort((a,b)=>b.pct-a.pct||a.c.kana.localeCompare(b.c.kana,"ja"));
+}
+function renderQuiz(){
+  const el=$("#quizBody");
+  if(quiz.done){renderResults(el);return}
+  const i=quiz.i,q=QS[i];const answered=quiz.ans.filter(a=>a!==undefined).length;
+  el.innerHTML=`<div class="qwrap">
+   <div class="qhead"><div class="progress" aria-hidden="true"><i style="width:${answered/QS.length*100}%"></i></div><span class="small muted tnum">${i+1} / ${QS.length}</span></div>
+   <div class="qcard"><div class="qn">Q${i+1}</div><h3>${esc(q.q)}</h3><p class="bg">${esc(q.bg)}</p>
+    <div class="scale" role="group" aria-label="回答">${SCALE.map(([v,l])=>`<button type="button" data-v="${v}" aria-pressed="${quiz.ans[i]!==undefined&&quiz.ans[i]===v}">${l}</button>`).join("")}</div>
+    <div class="qfoot"><label class="imp"><input type="checkbox" id="impChk" ${quiz.imp[i]?"checked":""}>この争点を特に重視する（2倍で計算）</label>
+     <div class="row"><button class="btn ghost" type="button" id="qPrev" ${i===0?"disabled":""}>戻る</button>${answered===QS.length?`<button class="btn" type="button" id="qShow">結果を見る</button>`:""}</div></div>
+   </div></div>`;
+  el.querySelectorAll(".scale button").forEach(b=>b.onclick=()=>{const v=b.dataset.v==="null"?null:+b.dataset.v;quiz.ans[i]=v;
+    if(i<QS.length-1)quiz.i++;else quiz.done=true;store.set("quiz3",quiz);renderQuiz();$("#quiz").scrollIntoView({block:"start",behavior:"smooth"})});
+  $("#impChk").onchange=e=>{quiz.imp[i]=e.target.checked;store.set("quiz3",quiz)};
+  $("#qPrev").onclick=()=>{quiz.i=Math.max(0,i-1);store.set("quiz3",quiz);renderQuiz()};
+  const sh=$("#qShow");if(sh)sh.onclick=()=>{quiz.done=true;store.set("quiz3",quiz);renderQuiz()};
+}
+function renderResults(el){
+  const r=scoreAll();const known=quiz.ans.filter(a=>a!=null).length;
+  if(known===0){el.innerHTML=`<div class="card"><p>すべて「わからない」でした。気になる争点から、候補者の公約を見比べてみましょう。</p><button class="btn" id="qRe" type="button">もう一度</button></div>`;$("#qRe").onclick=reset;return}
+  const top=r[0];const close=r.filter(x=>top.pct-x.pct<=3);
+  el.innerHTML=`<div style="display:grid;gap:16px">
+   <div class="top"><div class="label">あなたと考えが近いのは</div>
+    <h3>${close.map(x=>esc(x.c.name)).join("・")}</h3>
+    <div class="small muted">${close.length>1?"僅差で並んでいます。公約を見比べて決めてください。":esc(top.c.slogan)}</div></div>
+   <div class="card results">${r.map(x=>`<div class="res"><div class="nm">${esc(x.c.name)}<small>判定材料 ${x.n}問</small></div>
+     <div class="bar" role="img" aria-label="一致度${x.pct}%"><i style="width:${x.pct}%;background:${cv(x.c.color)}"></i></div><div class="pc tnum">${x.pct}%</div></div>`).join("")}
+    <p class="note" style="margin:6px 0 0">一致度は、あなたの答えと各候補の立場の近さです（そう思う〜そう思わないの4段階の差）。立場が公開資料から読み取れない問いは計算に入れず、判定材料が少ない候補ほど50%に近づけて表示しています。「推定」の立場は半分の重みで数えています。</p>
+   </div>
+   <details class="card"><summary>争点ごとの比較と根拠を見る</summary>
+    <div class="tbl" style="margin-top:10px"><table><thead><tr><th>争点</th><th>あなた</th>${CANDS.map(c=>`<th>${esc(c.name.split(" ")[0])}</th>`).join("")}</tr></thead><tbody>
+    ${QS.map((q,i)=>`<tr><td>Q${i+1} ${esc(q.q)}</td><td>${lbl(quiz.ans[i])}${quiz.imp[i]?"<br><span class='chip mark'>重視</span>":""}</td>${CANDS.map(c=>{const p=q.pos[c.id];return`<td>${p[0]==null?"<span class='muted'>不明</span>":lbl(p[0])}${p[1]===.5?" <span class='chip'>推定</span>":""}<br><span class="muted">${esc(p[2])}</span></td>`}).join("")}</tr>`).join("")}
+    </tbody></table></div>
+    <div class="row small" style="margin-top:8px">政策の出典：${CANDS.map(c=>`<a href="${c.policy}" target="_blank" rel="noopener">${esc(c.name.split(" ")[0])}</a>`).join("　")}</div>
+   </details>
+   <div class="card small" style="display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center"><span>結果が気になったら、<b>AIのノートブック</b>で各候補の主張を詳しく聞いてみましょう。</span><a href="${NOTEBOOK_URL}" target="_blank" rel="noopener">ノートブックを開く ↗</a></div>
+   <div class="row"><button class="btn" type="button" id="qGo">投票プランを作る</button><button class="btn ghost" type="button" id="qRe">もう一度診断する</button></div>
+   <div class="cands">${CANDS.map(candCard).join("")}</div>
+  </div>`;
+  $("#qRe").onclick=reset;$("#qGo").onclick=()=>go("plan");
+}
+function lbl(v){return v==null?"<span class='muted'>—</span>":({2:"そう思う",1:"ややそう思う",0:"中間",[-1]:"ややそう思わない",[-2]:"そう思わない"})[v]}
+function reset(){quiz={i:0,ans:Array(QS.length).fill(undefined),imp:Array(QS.length).fill(false),done:false};store.set("quiz3",quiz);renderQuiz()}
+function candCard(c){const L=c.links,a=(u,t)=>u?`<a href="${u}" target="_blank" rel="noopener">${t}</a>`:"";
+  return`<div class="cand"><h3><span class="dot" style="background:${cv(c.color)}"></span>${esc(c.name)}<span class="small muted" style="font-weight:400">${c.age}歳</span></h3>
+  <div class="muted">${esc(c.tag)}</div><div>${esc(c.bio)}</div><div>「${esc(c.slogan)}」</div>
+  <div class="lk">${a(L.site,"公式サイト")}${a(L.sched,"演説予定")}${a(L.x,"X")}${a(L.ig,"Instagram")}${a(L.th,"Threads")}${a(L.yt,"YouTube")}${a(c.policy,"政策")}</div></div>`}
+
+/* ===================== 2. RALLY（演説：自動収集フィード） ===================== */
+// フィードの形：{updatedAt, sources[], rows:[{id,c,d,t,e,p,w,lat,lng,s:"s"予定|"r"実施,via:"camp"陣営|"map"有志マップ|"news"報道,n,src}]}
+// 読み込み順：①claude.ai版＝共有DB（自動収集タスクが更新・ライブ反映）②GitHub Pages版＝data/rallies.json（GitHub Actionsが30分ごとに更新）③内蔵データ
+let FEED=SEED_FEED, FEED_MODE="seed";
+const VIA={camp:"陣営発表",map:"有志マップ",news:"報道"};
+const MAP_SRC="https://yokohama-rally-map.base44.app/";
+let mine=store.get("mine",[]);let going=new Set(store.get("going",[]));let selDay=null;let candFilter=new Set(CANDS.map(c=>c.id));
+const allRallies=()=>[...(FEED.rows||[]).filter(r=>candById(r.c)).map(r=>({cand:r.c,date:r.d,time:r.t||"",end:r.e||"",place:r.p,ward:r.w||"",lat:r.lat,lng:r.lng,status:r.s,via:r.via,note:r.n||"",src:r.src||(r.via==="map"?MAP_SRC:""),id:r.id,kind:"live"})),
+  ...mine.map((r,i)=>({...r,kind:"mine",idx:i,status:"s"}))];
+const isGoing=r=>r.kind==="mine"||going.has(r.id);
+function rallyPins(list){const n=jstNow();return list.filter(r=>(r.lat!=null||GEO.wards[r.ward])&&candFilter.has(r.cand)&&(selDay?r.date===selDay:r.date>=n.date)).map(r=>{const c=candById(r.cand);let xy=null;if(r.lat==null){const[x,y]=wardCenter(r.ward);const j=(r.idx||0)%5;xy=[x+(j-2)*14,y+18+(j%2)*12]}
+  return{lat:r.lat,lng:r.lng,xy,color:cv(c.color),ring:r.kind==="mine"||r.status==="r",r:r.status==="r"?9:13,label:`${c.name} ${fmtDate(r.date)} ${r.time} ${r.place}`,
+   html:`<b>${esc(c.name)}</b>　${fmtDate(r.date)} ${esc(r.time)}${r.end?"〜"+esc(r.end):""}　${esc(r.place)}${r.ward?"（"+esc(r.ward)+"）":""}　<a href="${gmap(r.place.replace(/（.*?）/g,"")+" "+(r.ward?"横浜市"+r.ward:"横浜"))}" target="_blank" rel="noopener">地図で開く</a>`}})}
+function evRow(r){const c=candById(r.cand);const tag=r.kind==="mine"?"<span class='chip mark'>自分で登録</span>":`<span class='chip'>${VIA[r.via]||"情報"}</span>${r.status==="r"?"<span class='chip off'>実施済み</span>":""}`;
+  const btn=r.kind==="mine"?`<button class="x" type="button" data-del="${r.idx}">削除</button>`:(r.status==="s"?`<button class="go${going.has(r.id)?" on":""}" type="button" data-going="${esc(r.id)}" aria-pressed="${going.has(r.id)}">${going.has(r.id)?"行く！":"聞きに行く"}</button>`:"<span></span>");
+  return`<div class="ev${r.status==="r"?" done":""}"><span class="t tnum">${esc(r.time||"—")}${r.end?`<small>〜${esc(r.end)}</small>`:""}</span><div><span class="row" style="gap:6px"><span class="dot" style="background:${cv(c.color)}"></span><b>${esc(c.name)}</b>${tag}</span><div class="small">${esc(r.place)}${r.ward?"（"+esc(r.ward)+"）":""}${r.note?"・"+esc(r.note):""}　<a href="${gmap(r.place.replace(/（.*?）/g,"")+" "+(r.ward?"横浜市"+r.ward:"横浜"))}" target="_blank" rel="noopener">地図</a>${r.src?`　<a href="${esc(r.src)}" target="_blank" rel="noopener">情報元</a>`:""}</div></div>${btn}</div>`}
+function bindEv(root){
+  root.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{mine.splice(+b.dataset.del,1);store.set("mine",mine);renderRally();toast("削除しました")});
+  root.querySelectorAll("[data-going]").forEach(b=>b.onclick=()=>{const id=b.dataset.going;going.has(id)?going.delete(id):going.add(id);store.set("going",[...going]);renderRally();if(going.has(id))toast("聞きに行く予定に入れました")});
+  root.querySelectorAll("[data-go]").forEach(a=>a.onclick=e=>{e.preventDefault();go(a.dataset.go)});
+}
+function renderStatus(){
+  const u=FEED.updatedAt?new Date(FEED.updatedAt):null;const f=u?`${u.toLocaleString("ja-JP",{timeZone:"Asia/Tokyo",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"})}`:"—";
+  const mode={db:"自動収集・ライブ更新中",json:"自動収集（30分ごと）",seed:"内蔵データ"}[FEED_MODE];
+  $("#feedStatus").innerHTML=`<span class="live-dot${FEED_MODE==="seed"?" off":""}"></span><b>${mode}</b>　最終更新 ${f}　<span class="muted">出典：${(FEED.sources||[]).map(esc).join("／")}</span>`;
+}
+function renderUpnext(){
+  const n=jstNow();const nowT=`${String(Math.floor(n.min/60)).padStart(2,"0")}:${String(n.min%60).padStart(2,"0")}`;
+  const list=allRallies().filter(r=>r.status==="s"&&candFilter.has(r.cand)&&(r.date>n.date||(r.date===n.date&&(!r.time||(r.end||r.time)>=nowT)))).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,6);
+  const el=$("#upnext");
+  el.innerHTML=`<div class="row" style="justify-content:space-between"><b>これからの演説</b><span class="small muted">直近${list.length}件</span></div>`+(list.length?`<div class="evlist">${list.map(r=>`<div class="up-d small muted">${fmtDate(r.date)}</div>`+evRow(r)).join("")}</div>`:`<p class="small muted" style="margin:0">いま分かっている予定はありません。各陣営の発表は前日夜〜当日朝に出ることが多いので、また見に来てください。</p>`);
+  bindEv(el);
+}
+function renderCal(){
+  const n=jstNow();const list=allRallies();const cal=$("#cal");
+  let h=WD.split("").map(d=>`<div class="dh">${d}</div>`).join("");
+  for(let d=4;d<=18;d++){const iso=`2026-10-${String(d).padStart(2,"0")}`;const ev=list.filter(r=>r.date===iso&&candFilter.has(r.cand));const has=ev.some(isGoing);
+    const tags=[...dayTags(iso)];if(iso>=ELECTION.earlyFrom&&iso<=ELECTION.earlyTo)tags.push("期");
+    h+=`<button type="button" class="day${iso<n.date?" past":""}${iso===n.date?" today":""}${iso===selDay?" sel":""}${has?" ev":""}" data-d="${iso}" aria-label="10月${d}日 ${tags.join(" ")} 演説${ev.length}件"><span class="dn tnum">${d}</span><span class="tg">${tags.join("・")}</span><span class="dots">${ev.slice(0,12).map(r=>`<span class="dot" style="background:${cv(candById(r.cand).color)}"></span>`).join("")}</span></button>`}
+  cal.innerHTML=h;
+  cal.querySelectorAll(".day").forEach(b=>b.onclick=()=>{selDay=selDay===b.dataset.d?null:b.dataset.d;renderRally()});
+  const di=$("#dayInfo");const day=selDay||n.date;
+  const ev=list.filter(r=>r.date===day&&candFilter.has(r.cand)).sort((a,b)=>(a.time||"99").localeCompare(b.time||"99"));
+  let extra="";if(day===ELECTION.day)extra=`<p class="small"><span class="chip mark">投票日</span> 7:00〜20:00。当日は入場整理券に書かれた投票所へ。</p>`;
+  else if(day>=ELECTION.earlyFrom&&day<=ELECTION.earlyTo)extra=`<p class="small"><span class="chip">期日前投票できる日</span> 区役所は8:30〜20:00。<a href="#place" data-go="place">投票所を調べる</a></p>`;
+  if(day>="2026-10-18")extra+=`<p class="small muted">選挙運動は10/17（土）まで。投票日当日の演説はありません。</p>`;
+  di.innerHTML=`<b>${fmtDate(day)}の演説 ${ev.length}件</b>${extra}<div class="evlist" style="margin-top:6px">${ev.length?ev.map(evRow).join(""):`<p class="small muted" style="margin:0">この日の演説情報はまだありません。</p>`}</div>`;
+  bindEv(di);
+}
+/* ===================== 2b. はしごプラン（演説めぐりの乗り換え案内） ===================== */
+let routeDay=null;let routeFrom=store.get("routeFrom","");let routeVote=store.get("routeVote",true);
+const enc=encodeURIComponent;
+function distKm(a,b){if(a.lat==null||b.lat==null)return null;const R=x=>x*Math.PI/180;const dx=R(b.lng-a.lng)*Math.cos(R((a.lat+b.lat)/2)),dy=R(b.lat-a.lat);return 6371*Math.hypot(dx,dy)}
+// 直線距離からのざっくり目安（実際の時間はGoogleマップで確認）
+function estTravel(d){if(d==null)return{mode:"移動",min:30,tm:"transit"};if(d<0.9)return{mode:"徒歩",min:Math.max(3,Math.round(d*1000/75)),tm:"walking"};return{mode:"電車・バス",min:Math.round(14+d*1.9),tm:"transit"}}
+const toM=t=>t?toMin(t):null, fromM=m=>`${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`;
+const qOf=s=>s.q||`${(s.place||"").replace(/（.*?）/g,"").trim()} 横浜市${s.ward||""}`;
+const gDir=(o,d,mode)=>`https://www.google.com/maps/dir/?api=1${o?`&origin=${enc(o)}`:""}&destination=${enc(d)}&travelmode=${mode}`;
+function routeStops(day){
+  let ev=allRallies().filter(r=>r.date===day&&isGoing(r)).map(r=>({...r,kind2:"rally",start:toM(r.time),stay:r.end?Math.max(15,toM(r.end)-toM(r.time)):30})).sort((a,b)=>(a.start??9999)-(b.start??9999));
+  // 期日前投票を組み込む（その日が期日前期間で、区が分かっていれば）
+  if(routeVote&&myWard&&day>=ELECTION.earlyFrom&&day<=ELECTION.earlyTo&&ev.length){
+    const sites=EARLY.filter(p=>p.ward===myWard&&day>=p.from);
+    if(sites.length){
+      // いちばん大きな空き時間に入れる（なければ最初の演説の前）
+      let best={i:0,gap:-1};for(let i=0;i<=ev.length;i++){const s=i?((ev[i-1].start??0)+ev[i-1].stay):toMin(sites[0].open);const e=i<ev.length?(ev[i].start??1440):toMin("20:00");if(e-s>best.gap)best={i,gap:e-s}}
+      const prev=ev[best.i-1]||ev[0];const site=sites.slice().sort((a,b)=>(distKm(a,prev)??99)-(distKm(b,prev)??99))[0];
+      ev.splice(best.i,0,{kind2:"vote",place:site.name.split(" ")[0],ward:site.ward,lat:site.lat,lng:site.lng,q:site.addr,open:toMin(site.open),stay:20,start:null});
+    }
+  }
+  return ev;
+}
+function renderRoute(){
+  const box=$("#routeBox");const n=jstNow();
+  const days=[...new Set(allRallies().filter(r=>isGoing(r)&&r.date>=n.date&&r.date<=ELECTION.earlyTo).map(r=>r.date))].sort();
+  if(!routeDay||!days.includes(routeDay))routeDay=days[0]||null;
+  let h=`<div class="row" style="justify-content:space-between"><div><div class="label">演説はしごプラン</div><h3 class="food-h">選んだ演説を、効率よく回る</h3></div></div>`;
+  if(!routeDay){box.innerHTML=h+`<p class="small muted" style="margin:0">演説の「聞きに行く」を押すと、その日の回り方と乗り換え案内（Googleマップ）をここに作ります。期日前投票も途中に組み込めます。</p>`;return}
+  const stops=routeStops(routeDay);
+  h+=`<div class="opts" role="group" aria-label="日付">${days.map(d=>`<button type="button" data-rday="${d}" aria-pressed="${d===routeDay}">${fmtDate(d)}</button>`).join("")}</div>
+   <form class="add routeform" id="routeForm"><label>出発地（駅名・住所）<input id="rFrom" type="text" value="${esc(routeFrom)}" placeholder="例：新横浜駅" maxlength="60"></label><label class="imp" style="align-self:end;padding-bottom:6px"><input type="checkbox" id="rVote" ${routeVote?"checked":""} ${myWard?"":"disabled"}>期日前投票も寄る${myWard?"":"（区を設定すると選べます）"}</label></form>`;
+  // タイムライン
+  let clock=null;let prev=routeFrom?{q:routeFrom,place:routeFrom}:null;let legs="";const pts=[];
+  stops.forEach((s,i)=>{
+    const d=prev?distKm(prev,s):null;const tr=prev?estTravel(d):null;
+    let arrive=clock!=null&&tr?clock+tr.min:null;
+    let warn="";let startAt=s.start;
+    if(s.kind2==="vote"){startAt=Math.max(arrive??s.open,s.open);if(startAt+s.stay>toMin("20:00"))warn="受付終了（20:00）に間に合わないかも"}
+    else if(arrive!=null&&s.start!=null&&arrive>s.start)warn=`開始に約${arrive-s.start}分遅れそう`;
+    if(prev){const lv=s.start!=null?Math.max(clock??0,s.start-tr.min-5):clock;const leaveAt=lv!=null&&lv>0?fromM(lv):"";
+      legs+=`<div class="leg"><span class="leg-line"></span><div class="small"><b>${tr.mode} 約${tr.min}分</b>${d!=null?`<span class="muted">（直線${d<1?Math.round(d*1000)+"m":d.toFixed(1)+"km"}）</span>`:""}${leaveAt?`　<span class="muted">${leaveAt}ごろ出発</span>`:""}<br><a href="${gDir(qOf(prev),qOf(s),tr.tm)}" target="_blank" rel="noopener">Googleマップで乗り換え案内 ↗</a>${tr.tm==="transit"&&s.start!=null?`<span class="muted">（${fromM(s.start)}までに着く便を選んでください）</span>`:""}</div></div>`}
+    const c=s.kind2==="rally"?candById(s.cand):null;
+    legs+=`<div class="stop${s.kind2==="vote"?" vote":""}"><span class="st-t tnum">${startAt!=null?fromM(startAt):"—"}</span><span class="st-dot" style="background:${s.kind2==="vote"?"var(--mark)":cv(c.color)}"></span><div><b>${s.kind2==="vote"?"期日前投票":esc(c.name)}</b>　<span class="small">${esc(s.place)}${s.ward?"（"+esc(s.ward)+"）":""}</span>${s.kind2==="vote"?`<div class="small muted">${fromM(s.open)}〜20:00・所要20分ほど・入場整理券がなくても投票できます</div>`:""}${warn?`<div class="small warnt">⚠ ${warn}</div>`:""}</div></div>`;
+    clock=(startAt??arrive??0)+s.stay;prev=s;if(s.lat!=null)pts.push(s);
+  });
+  const all=[routeFrom,...stops.map(qOf)].filter(Boolean);
+  const overview=all.length>=2?`https://www.google.com/maps/dir/${all.map(enc).join("/")}/`:"";
+  h+=`<div class="timeline">${legs}</div>
+   <div class="row">${overview?`<a class="btn ghost" href="${overview}" target="_blank" rel="noopener">全体のルートをGoogleマップで見る ↗</a>`:""}<button class="btn ghost" type="button" id="routeCopy">プランをコピー</button></div>
+   <p class="note">移動時間は直線距離からの目安です。電車・バスの乗り換えは区間ごとのリンクで確認してください（Googleマップの仕様で、乗り換え案内は1区間ずつになります）。演説は予定が変わることがあります。</p>`;
+  box.innerHTML=h;
+  box.querySelectorAll("[data-rday]").forEach(b=>b.onclick=()=>{routeDay=b.dataset.rday;renderRoute();drawRallyMap()});
+  $("#rFrom").onchange=e=>{routeFrom=e.target.value.trim();store.set("routeFrom",routeFrom);renderRoute()};
+  $("#routeForm").onsubmit=e=>{e.preventDefault();$("#rFrom").blur()};
+  $("#rVote").onchange=e=>{routeVote=e.target.checked;store.set("routeVote",routeVote);renderRoute();drawRallyMap()};
+  $("#routeCopy").onclick=()=>copy(`【${fmtDate(routeDay)} 演説はしごプラン】\n`+stops.map(s=>`${s.start!=null?fromM(s.start):"—"} ${s.kind2==="vote"?"期日前投票":candById(s.cand).name}／${s.place}`).join("\n")+(overview?`\n${overview}`:""));
+}
+function routeLine(){if(!routeDay)return null;const p=routeStops(routeDay).filter(s=>s.lat!=null).map(s=>proj(s.lat,s.lng));return p.length>=2?p:null}
+function drawRallyMap(){drawMap($("#rallyMap"),{pins:rallyPins(allRallies()),line:routeLine(),cap:selDay?`${fmtDate(selDay)}の演説。塗り＝予定、輪＝実施済み・自分で登録`:(routeLine()?`点線は${fmtDate(routeDay)}のはしごプラン`:"今日以降の演説予定。日付を押すとその日の地図に切り替わります")})}
+
+function renderRally(){
+  renderStatus();renderUpnext();renderCal();renderRoute();drawRallyMap();
+}
+async function loadFeed(){
+  // ① claude.ai 上：共有DBをライブ購読
+  try{if(window.claude&&window.claude.use){const db=await window.claude.use("db");
+    if(db){db.doc("feed/rallies").onSnapshot(s=>{const d=s.exists&&s.data();if(d&&Array.isArray(d.rows)){FEED=d;FEED_MODE="db";renderRally()}},()=>{});return}}}catch(e){}
+  // ② GitHub Pages 上：data/rallies.json を定期取得
+  const pull=async()=>{try{const r=await fetch("data/rallies.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const d=await r.json();if(Array.isArray(d.rows)){FEED=d;FEED_MODE="json";renderRally()}}}catch(e){}};
+  await pull();if(FEED_MODE==="json")setInterval(pull,5*60e3);
+}
+function initRally(){
+  $("#rallyLegend").innerHTML=CANDS.map(c=>`<label><input type="checkbox" data-c="${c.id}" checked><span class="dot" style="background:${cv(c.color)}"></span>${esc(c.name)}</label>`).join("");
+  $("#rallyLegend").querySelectorAll("input").forEach(i=>i.onchange=()=>{i.checked?candFilter.add(i.dataset.c):candFilter.delete(i.dataset.c);renderRally()});
+  $("#fCand").innerHTML=CANDS.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");
+  const n=jstNow();let opts="";for(let d=4;d<=17;d++){const iso=`2026-10-${String(d).padStart(2,"0")}`;opts+=`<option value="${iso}"${iso===(n.date<"2026-10-17"?n.date:"2026-10-17")?" selected":""}>${fmtDate(iso)}</option>`}
+  $("#fDate").innerHTML=opts;
+  $("#fWard").innerHTML=WARDS.map(w=>`<option>${w}</option>`).join("");
+  $("#addForm").addEventListener("submit",e=>{e.preventDefault();const src=$("#fSrc").value.trim();
+    mine.push({cand:$("#fCand").value,date:$("#fDate").value,time:$("#fTime").value,ward:$("#fWard").value,place:$("#fPlace").value.trim(),src:/^https?:\/\//.test(src)?src:""});
+    store.set("mine",mine);selDay=$("#fDate").value;$("#fPlace").value="";$("#fSrc").value="";renderRally();toast("聞きに行く予定に追加しました")});
+  $("#candLinks").innerHTML=CANDS.map(candCard).join("");
+  renderRally();loadFeed();setInterval(()=>{renderUpnext()},60e3);
+}
+
+/* ===================== 3. PLACE ===================== */
+let myWard=store.get("ward",null),myTown=store.get("town","");
+function earlyStatus(p){const n=jstNow();if(n.date<p.from)return["wait",`${fmtDate(p.from)}から`];if(n.date>p.to)return["off","期日前投票は終了"];
+  const m=n.min;if(m<toMin(p.open))return["wait",`今日 ${p.open.replace(/^0/,"")}から`];if(m>=toMin(p.close))return["wait","今日の受付は終了"];return["ok","いま投票できます"]}
+/* ===================== 3b. 投票ついでのごはん ===================== */
+// FOOD[i] は EARLY[i] の期日前投票所から半径500m以内の飲食店（OpenStreetMap より）。[名前, 種類, 料理, チェーン, 緯度, 経度, 距離m]
+const KIND={re:"レストラン",ca:"カフェ",fa:"ファストフード",ba:"パン",co:"和洋菓子",ic:"アイス"};
+const KCOL={re:"--c3",ca:"--c2",fa:"--c4",ba:"--c1",co:"--c1",ic:"--c1"};
+const CUI={ramen:"ラーメン",noodle:"麺",noodles:"麺",soba:"そば",udon:"うどん",chinese:"中華",italian:"イタリアン",japanese:"和食",sushi:"寿司",korean:"韓国料理",indian:"インド・カレー",curry:"カレー",burger:"バーガー",coffee_shop:"コーヒー",barbecue:"焼肉",western:"洋食",pizza:"ピザ",beef_bowl:"牛丼",yakitori:"焼き鳥",thai:"タイ料理",african:"アフリカ料理",steak_house:"ステーキ",chicken:"チキン",donut:"ドーナツ",ice_cream:"アイス",asian:"アジア料理","lunch,_cafe":"カフェ",taiwanese:"台湾料理",unagi:"うなぎ"};
+let foodSite=null, foodSel=null;
+const walk=m=>Math.max(1,Math.round(m/80));
+function radarSVG(site,items){
+  const R=520,lat0=site.lat,k=Math.cos(lat0*Math.PI/180)*111320;
+  const xy=f=>[(f[5]-site.lng)*k,-(f[4]-lat0)*110540];
+  let s=`<svg viewBox="${-R} ${-R} ${2*R} ${2*R}" role="img" aria-label="${esc(site.name)}周辺のごはんマップ">`;
+  s+=`<rect x="${-R}" y="${-R}" width="${2*R}" height="${2*R}" class="rd-bg"/>`;
+  [[500,"徒歩6分"],[250,"3分"],[100,"1分"]].forEach(([r,l])=>{s+=`<circle r="${r}" class="rd-ring"/><text x="8" y="${-r+34}" class="rd-l">${r}m・${l}</text>`});
+  s+=`<line x1="${-R}" y1="0" x2="${R}" y2="0" class="rd-ax"/><line x1="0" y1="${-R}" x2="0" y2="${R}" class="rd-ax"/><text x="${R-40}" y="${-R+52}" class="rd-n">N↑</text>`;
+  items.forEach((f,i)=>{const[x,y]=xy(f);const on=foodSel===i;s+=`<g class="rd-pin${on?" on":""}" data-fi="${i}" tabindex="0" transform="translate(${x.toFixed(0)},${y.toFixed(0)})"><circle r="${on?44:36}" style="fill:${cv(KCOL[f[1]]||"--c3")}"/><text y="12" class="rd-num">${i+1}</text><title>${esc(f[0])}</title></g>`});
+  s+=`<g class="rd-c"><rect x="-26" y="-26" width="52" height="52" rx="8"/><text y="12">票</text></g></svg>`;
+  return s;
+}
+function renderFood(){
+  const box=$("#foodBox");if(!box)return;
+  if(foodSite==null){const i=EARLY.findIndex(p=>p.ward===(myWard||"中区"));foodSite=i<0?6:i}
+  const site=EARLY[foodSite],items=FOOD[foodSite]||[];
+  const opts=WARDS.map(w=>`<optgroup label="${w}">${EARLY.map((p,i)=>p.ward===w?`<option value="${i}"${i===foodSite?" selected":""}>${esc(p.name.split(" ")[0])}</option>`:"").join("")}</optgroup>`).join("");
+  box.innerHTML=`<div class="row" style="justify-content:space-between;gap:10px"><div><div class="label">投票ついでに</div><h3 class="food-h">${esc(site.name.split(" ")[0])}のまわりのごはん</h3></div>
+    <select class="wardsel" id="foodSiteSel" aria-label="期日前投票所を選ぶ">${opts}</select></div>
+   <div class="split" style="margin-top:10px">
+    <div class="radar">${items.length?radarSVG(site,items):`<div class="rd-empty small muted">この周辺の飲食店データはまだありません。</div>`}
+      <div class="legend small" style="padding:8px 10px">${Object.entries({re:"レストラン",ca:"カフェ",fa:"ファストフード",ba:"パン・菓子"}).map(([k,l])=>`<span class="row" style="gap:5px"><span class="dot" style="background:${cv(KCOL[k])}"></span>${l}</span>`).join("")}<span class="muted">中央の「票」が投票所</span></div></div>
+    <div class="foodlist">${items.map((f,i)=>`<button type="button" class="fd${foodSel===i?" on":""}" data-fi="${i}"><span class="fn" style="background:${cv(KCOL[f[1]]||"--c3")}">${i+1}</span><span class="fb"><b>${esc(f[0])}</b><span class="small muted">${[CUI[f[2]]||KIND[f[1]]||"",f[3]?"チェーン":""].filter(Boolean).join("・")}</span></span><span class="fd-m tnum small">${f[6]}m<br><span class="muted">徒歩${walk(f[6])}分</span></span></button>`).join("")}
+     <div class="row small" style="margin-top:8px;gap:12px"><a href="https://www.google.com/maps/search/${encodeURIComponent("ランチ")}/@${site.lat},${site.lng},17z" target="_blank" rel="noopener">Googleマップでもっと探す ↗</a>${foodSel!=null&&items[foodSel]?`<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(items[foodSel][0]+" "+site.ward)}" target="_blank" rel="noopener">「${esc(items[foodSel][0])}」を地図で開く ↗</a>`:""}</div>
+     <p class="note" style="margin-top:8px">店舗データは OpenStreetMap（© OpenStreetMap contributors）より。閉店・移転している場合もあるので、営業時間はお店の情報で確認してください。位置は投票所からの直線距離です。</p></div>
+   </div>`;
+  $("#foodSiteSel").onchange=e=>{foodSite=+e.target.value;foodSel=null;renderFood()};
+  box.querySelectorAll("[data-fi]").forEach(b=>{const f=()=>{foodSel=foodSel===+b.dataset.fi?null:+b.dataset.fi;renderFood()};b.addEventListener("click",f);b.addEventListener("keydown",e=>{if(e.key==="Enter"&&b.tagName!=="BUTTON")f()})});
+}
+function showFood(i){foodSite=i;foodSel=null;renderFood();$("#foodBox").scrollIntoView({behavior:"smooth",block:"start"})}
+
+function renderPlace(){
+  const out=$("#placeOut");
+  if(!myWard){out.innerHTML=`<div class="label">例）中区（231-0017 港町）の場合</div><p class="small muted">郵便番号を入れると、あなたの区の期日前投票所と当日の投票所の調べ方を表示します。</p>`;
+    drawMap($("#placeMap"),{pins:EARLY.map(p=>({lat:p.lat,lng:p.lng,color:cv("--sea"),r:9,label:p.name,html:`<b>${esc(p.name)}</b>（${esc(p.ward)}）`})),cap:"市内38か所の期日前投票所"});renderFood();return}
+  const list=EARLY.filter(p=>p.ward===myWard);
+  out.innerHTML=`<div class="label">あなたの区</div><div class="big-ward">${esc(myWard)}</div>${myTown?`<div class="small muted">${esc(myTown)}</div>`:""}
+   <h3 style="font-size:16px;margin-top:14px">期日前投票所（${fmtDate(ELECTION.earlyFrom)}〜${fmtDate(ELECTION.earlyTo)}）</h3>
+   ${list.map(p=>{const[s,t]=earlyStatus(p);return`<div class="place"><div class="row" style="justify-content:space-between"><h3>${esc(p.name)}</h3><span class="chip ${s}">${t}</span></div>
+     <div class="meta"><span class="tnum">${p.from!==ELECTION.earlyFrom?fmtDate(p.from)+"〜"+fmtDate(p.to)+"のみ　":""}${p.open.replace(/^0/,"")}〜${p.close}</span><span>${esc(p.addr)}</span></div>
+     <div class="row small"><a href="${gmap(p.name.split(" ")[0]+" "+p.addr)}" target="_blank" rel="noopener">地図で開く ↗</a>${(FOOD[EARLY.indexOf(p)]||[]).length?`<button type="button" class="linkbtn" data-food="${EARLY.indexOf(p)}">まわりのごはん ${FOOD[EARLY.indexOf(p)].length}件 ↓</button>`:""}</div></div>`}).join("")}
+   <h3 style="font-size:16px;margin-top:14px">投票日 10/18（日）7:00〜20:00</h3>
+   <p class="small" style="margin:4px 0">当日は<strong>決められた投票所</strong>でしか投票できません。入場整理券（はがき）に書かれた投票所を確認するか、区の一覧で住所から探してください。</p>
+   <div class="row"><a class="btn" href="${TOJITSU_BASE+TOJITSU[myWard]}" target="_blank" rel="noopener">${esc(myWard)}の当日投票所一覧 ↗</a><a class="btn ghost" href="${CITY_PAGE}" target="_blank" rel="noopener">混雑状況・選挙公報 ↗</a></div>
+   <div class="row" style="margin-top:12px"><button class="btn ghost" type="button" id="toPlan">この投票所で投票プランを作る</button></div>`;
+  $("#toPlan").onclick=()=>go("plan");
+  out.querySelectorAll("[data-food]").forEach(b=>b.onclick=()=>showFood(+b.dataset.food));
+  foodSite=null;renderFood();
+  drawMap($("#placeMap"),{hi:[myWard],pins:list.map(p=>({lat:p.lat,lng:p.lng,color:cv("--sea"),label:p.name,html:`<b>${esc(p.name)}</b>　${esc(p.addr)}`})),cap:`${esc(myWard)}の期日前投票所 ${list.length}か所`});
+}
+function lookupZip(){
+  const raw=$("#zipIn").value.replace(/[０-９]/g,d=>String.fromCharCode(d.charCodeAt(0)-65248)).replace(/[^0-9]/g,"");const msg=$("#zipMsg");
+  if(raw.length!==7){msg.innerHTML=`<span style="color:var(--warn)">郵便番号は7桁の数字で入力してください（例：231-0017）。</span>`;return}
+  const hit=ZIP[raw];
+  if(!hit){msg.innerHTML=`<span style="color:var(--warn)">${raw.slice(0,3)}-${raw.slice(3)} は横浜市内の郵便番号として見つかりませんでした。番号を確かめるか、区を選んでください。</span>`;return}
+  myWard=WARDS[hit[0]];myTown=hit[1]?`${raw.slice(0,3)}-${raw.slice(3)}　${myWard}${hit[1]}`:`${raw.slice(0,3)}-${raw.slice(3)}`;store.set("ward",myWard);store.set("town",myTown);
+  msg.textContent="";$("#wardSel").value=myWard;renderPlace();renderPlan();
+}
+function initPlace(){
+  $("#wardSel").innerHTML=`<option value="">区を選ぶ</option>`+WARDS.map(w=>`<option${w===myWard?" selected":""}>${w}</option>`).join("");
+  $("#wardSel").onchange=e=>{myWard=e.target.value||null;myTown="";store.set("ward",myWard);store.set("town","");renderPlace();renderPlan()};
+  $("#zipBtn").onclick=lookupZip;$("#zipIn").addEventListener("keydown",e=>{if(e.key==="Enter")lookupZip()});
+  renderPlace();
+}
+
+/* ===================== 4. WARI ===================== */
+function initWari(){
+  const st=s=>s==="now"?`<span class="chip ok">今回実施</span>`:`<span class="chip wait">前回実施・今回は要確認</span>`;
+  $("#wariList").innerHTML=`<div style="display:grid">${WARI.map((w,i)=>`<div class="place" id="wari-${i}"><div class="row" style="justify-content:space-between"><h3>${esc(w.name)}</h3>${st(w.status)}</div>
+    <div><b>${esc(w.benefit)}</b>${w.period?`　<span class="small muted">期間 ${esc(w.period)}</span>`:""}</div><div class="small muted">${esc(w.cond)}</div>
+    <div class="row small">${w.ward?`<span>${esc(w.ward)}</span>`:"<span>市内各店</span>"}<a href="${w.src}" target="_blank" rel="noopener">情報元 ↗</a>${w.ward?`<a href="${gmap(w.name+" 横浜市"+w.ward)}" target="_blank" rel="noopener">地図で開く ↗</a>`:""}</div></div>`).join("")}
+    <div class="place"><b>ほかのお店を探す</b><div class="small">参加店はセンキョ割の公式サイトで随時追加されています。<a href="https://stores.senkyowari.com/prefectures/kanagawa/desc/1/" target="_blank" rel="noopener">神奈川県の参加店舗 ↗</a>　お店として参加したい方は <a href="https://senkyowari.com/" target="_blank" rel="noopener">センキョ割 ↗</a></div></div></div>`;
+  let k=0;const pins=WARI.filter(w=>w.ward).map(w=>{let xy=null;if(w.lat==null){const[x,y]=wardCenter(w.ward);xy=[x+((k++%3)-1)*30,y+30]}
+    return{lat:w.lat,lng:w.lng,xy,ring:!!w.approx,color:w.status==="now"?cv("--good"):cv("--c3"),label:w.name,html:`<b>${esc(w.name)}</b>　${esc(w.benefit)}　${w.approx?"（"+esc(w.ward)+"内・位置はおおよそ）":""}`}});
+  drawMap($("#wariMap"),{pins,cap:"ピンを押すとお店の情報"});
+}
+
+/* ===================== 5. PLAN ===================== */
+let plan=store.get("plan",{date:null,time:null,where:null,who:null,checks:{}});
+function renderPlan(){
+  const n=jstNow();const dates=[];for(let d=5;d<=18;d++){const iso=`2026-10-${String(d).padStart(2,"0")}`;if(iso>=n.date)dates.push(iso)}
+  if(plan.date&&plan.date<n.date)plan.date=null;
+  const opt=(id,items,key)=>{$(id).innerHTML=items.map(([v,l])=>`<button type="button" data-v="${esc(v)}" aria-pressed="${plan[key]===v}">${l}</button>`).join("");
+    $(id).querySelectorAll("button").forEach(b=>b.onclick=()=>{plan[key]=b.dataset.v;store.set("plan",plan);renderPlan()})};
+  opt("#pDate",dates.map(d=>[d,fmtDate(d)+(d===ELECTION.day?" 投票日":d==="2026-10-12"?" 祝":"")]),"date");
+  const isDay=plan.date===ELECTION.day;
+  opt("#pTime",(isDay?["07:00","09:00","11:00","13:00","15:00","17:00","19:00"]:["08:30","10:00","12:00","15:00","18:00","19:30"]).map(t=>[t,t.replace(/^0/,"")]),"time");
+  let wh=[];if(isDay)wh=[["当日","入場整理券に書かれた投票所"]];else if(myWard)wh=EARLY.filter(p=>p.ward===myWard&&(!plan.date||plan.date>=p.from)).map(p=>[p.name,p.name]);
+  if(plan.where&&!wh.some(w=>w[0]===plan.where))plan.where=null;
+  opt("#pWhere",wh,"where");
+  $("#pWhereNote").innerHTML=isDay?"":(myWard?`${esc(myWard)}の期日前投票所`:`<a href="#place" id="toPlace">投票所を調べる</a>で区を設定すると、選べるようになります。`);
+  const tp=$("#toPlace");if(tp)tp.onclick=e=>{e.preventDefault();go("place")};
+  opt("#pWho",[["ひとり","ひとりで"],["家族","家族と"],["友だち","友だちと"],["パートナー","パートナーと"]],"who");
+  const ok=plan.date&&plan.time&&plan.where;
+  const whereTxt=plan.where==="当日"?"入場整理券の投票所":plan.where;
+  $("#planCard").innerHTML=ok?`<div class="label">わたしの投票プラン</div><div class="when tnum">${fmtDate(plan.date)} ${plan.time.replace(/^0/,"")}</div><div class="where">${esc(whereTxt)}</div><div class="small">${plan.who&&plan.who!=="ひとり"?esc(plan.who)+"と行く":"ひとりで行く"}${isDay?"（7:00〜20:00）":"（期日前投票）"}</div>`
+    :`<div class="label">わたしの投票プラン</div><div class="when">日時と場所を選ぼう</div><div class="small">左の項目を選ぶと、ここにプランができます。</div>`;
+  {const fi=EARLY.findIndex(p=>p.name===plan.where);const fl=fi>=0?(FOOD[fi]||[]).slice(0,3):[];const el=$("#planFood");
+   el.hidden=!fl.length;if(fl.length){el.innerHTML=`<b>投票のあとに寄れるごはん</b>${fl.map(f=>`<div class="row small" style="justify-content:space-between"><span>${esc(f[0])}<span class="muted">　${esc(CUI[f[2]]||KIND[f[1]]||"")}</span></span><span class="tnum muted">徒歩${walk(f[6])}分</span></div>`).join("")}<button type="button" class="linkbtn" id="planFoodMore">地図で見る →</button>`;$("#planFoodMore").onclick=()=>{go("place");showFood(fi)}}}
+  const text=ok?`横浜市長選、${fmtDate(plan.date)} ${plan.time.replace(/^0/,"")}に${whereTxt}で投票します。`:"";
+  $("#copyPlan").disabled=!ok;$("#copyPlan").onclick=()=>copy(text+"\n（10/18（日）投票日・期日前投票は10/17まで）");
+  const sp=$("#sharePlan");sp.href=ok?"https://x.com/intent/post?text="+encodeURIComponent(text+" #横浜市長選 #投票に行こう"):"https://x.com/intent/post?text="+encodeURIComponent("横浜市長選、投票に行きます。 #横浜市長選 #投票に行こう");
+  const items=[["card","入場整理券（はがき）を持つ。なくても投票できます"],["oath","期日前投票なら宣誓書を書く（投票所で書けます）"],["cand","投票したい候補を決めておく（記載台で名前を書きます）"],["cert","選挙割を使うなら「投票済証明書」を係員に頼む"],["tell","家族や友だちにも声をかける"]];
+  $("#checklist").innerHTML=`<b>持ちもの・やること</b>`+items.map(([k,l])=>`<label><input type="checkbox" data-k="${k}" ${plan.checks[k]?"checked":""}>${l}</label>`).join("");
+  $("#checklist").querySelectorAll("input").forEach(i=>i.onchange=()=>{plan.checks[i.dataset.k]=i.checked;store.set("plan",plan)});
+}
+
+
+/* ===================== AIノートブック ===================== */
+const NOTEBOOK_URL="https://notebook.google.com/notebook/4c97a2ca-9a88-40bd-ab62-50b3ad83bb3b";
+const AI_QS=["7人の候補の子育て政策を、表にして比べて","住まいや家賃、高層マンションについて、各候補は何と言っている？","山下ふ頭の再開発について、各候補の立場の違いは？","ハラスメント対策や市役所の改革について、各候補の主張を教えて","ネット討論会で意見が分かれたテーマは？","期日前投票はいつ、どこでできる？"];
+function renderAiChips(){const el=$("#aiChips");if(!el)return;el.innerHTML=AI_QS.map((q,i)=>`<button type="button" class="qchip" data-ai="${i}">${esc(q)}</button>`).join("");
+  el.querySelectorAll("[data-ai]").forEach(b=>b.onclick=()=>copy(AI_QS[+b.dataset.ai]))}
+/* ===================== TABS ===================== */
+const TABS=["quiz","rally","place","wari","plan"];
+function go(t,push=true){if(!TABS.includes(t))t="quiz";
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
+  TABS.forEach(id=>$("#"+id).hidden=id!==t);store.set("tab",t);
+  if(push)try{history.replaceState(null,"","#"+t)}catch(e){}
+  if(t==="plan")renderPlan();
+  const nav=document.querySelector("nav.tabs");if(push&&nav.getBoundingClientRect().top<0)nav.scrollIntoView({block:"start"});
+}
+document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>go(b.dataset.tab));
+
+renderCount();setInterval(renderCount,60e3);
+renderAiChips();renderQuiz();initRally();initPlace();initWari();renderPlan();
+go((location.hash||"").slice(1)||store.get("tab","quiz"),false);
+</script>
+
+</body>
+</html>

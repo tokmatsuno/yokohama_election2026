@@ -1,0 +1,19 @@
+{
+ "note": "ここに手動で演説を追加できます（報道などで見つけたもの）。形式は rallies.json の rows と同じ。via は news、src に出典URL。",
+ "rows": [
+  {
+   "id": "n-h01",
+   "c": "harasawa",
+   "d": "2026-10-04",
+   "t": "",
+   "e": "",
+   "p": "横浜地裁前（第一声）",
+   "w": "中区",
+   "lat": 35.4466,
+   "lng": 139.6425,
+   "s": "r",
+   "via": "news",
+   "src": "https://tokyo-sports.co.jp/articles/-/405513"
+  }
+ ]
+}
